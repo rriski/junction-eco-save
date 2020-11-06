@@ -1,7 +1,7 @@
-import { Color } from 'ol/color';
 import styled from 'styled-components';
 
 import { Content } from 'styles/index';
+import { Color } from 'styles/theme';
 
 interface Props {
   title: string;

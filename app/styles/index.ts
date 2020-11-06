@@ -28,7 +28,7 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   background-color: transparent;
   text-align: center;
   transition: color 0.2s 0.1s;
-  color: ${(p) => p.theme.colors[p.color || 'alert']};
+  color: ${(p) => p.theme.colors[p.color || 'primary']};
 
   &:before, &:after {
     content: "";
@@ -42,7 +42,7 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   &:before {
     top: 0;
     left: 0;
-    background-color: ${(p) => p.theme.colors.alert};
+    background-color: ${(p) => p.theme.colors.primary};
     transform: scaleX(0);
     transform-origin: center left;
   }
@@ -50,7 +50,7 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   &:after {
     top: 0;
     left: 0;
-    border: solid 2px ${(p) => p.theme.colors[p.color || 'alert']};
+    border: solid 2px ${(p) => p.theme.colors[p.color || 'primary']};
     z-index: -1;
   }
 
@@ -72,7 +72,7 @@ export const ButtonSoft = styled.button`
   width: 100%;
   padding: ${(p) => p.theme.spacing.default};
   border-radius: 5px;
-  background-color: ${(p) => p.theme.colors.alert};
+  background-color: ${(p) => p.theme.colors.primary};
   color: ${(p) => p.theme.colors.white};
   transition: background-color 0.1s;
 
@@ -87,7 +87,6 @@ export const Divider = styled.div`
   background-color: ${(p) => p.theme.colors.grey};
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
-
 
 export const Card = styled.div`
   padding: ${p => p.theme.spacing.default};
