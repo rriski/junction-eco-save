@@ -36,6 +36,8 @@
     "@prisma/client": "2.10.2",
     "blitz": "0.24.3",
     "final-form": "4.20.1",
+    "next-compose-plugins": "2.2.0",
+    "next-transpile-modules": "4.1.0",
     "ol": "6.4.3",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
