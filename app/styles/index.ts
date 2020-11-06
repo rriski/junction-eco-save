@@ -21,7 +21,7 @@ export const Content = styled(Stack)`
   z-index: 1;
 `
 
-export const Button = styled.button.attrs({ type: 'button' })<{
+export const Button = styled.button.attrs({type: 'button'})<{
   color?: Color;
 }>`
   position: relative;

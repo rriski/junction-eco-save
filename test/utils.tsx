@@ -1,10 +1,10 @@
-import React from "react"
+import React from 'react'
 
-import { render as defaultRender } from "@testing-library/react"
-import { renderHook as defaultRenderHook } from "@testing-library/react-hooks"
-import { RouterContext, BlitzRouter } from "blitz"
+import {render as defaultRender} from '@testing-library/react'
+import {renderHook as defaultRenderHook} from '@testing-library/react-hooks'
+import {RouterContext, BlitzRouter} from 'blitz'
 
-export * from "@testing-library/react"
+export * from '@testing-library/react'
 
 // --------------------------------------------------------------------------------
 // This file customizes the render() and renderHook() test functions provided
@@ -26,16 +26,16 @@ export * from "@testing-library/react"
 //   router: { pathname: '/my-custom-pathname' },
 // });
 // --------------------------------------------------
-export function render(ui: RenderUI, { wrapper, router, ...options }: RenderOptions = {}) {
+export function render(ui: RenderUI, {wrapper, router, ...options}: RenderOptions = {}) {
   if (!wrapper) {
     // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }) => (
-      <RouterContext.Provider value={{ ...mockRouter, ...router }}>
+    wrapper = ({children}) => (
+      <RouterContext.Provider value={{...mockRouter, ...router}}>
         {children}
       </RouterContext.Provider>
     )
   }
-  return defaultRender(ui, { wrapper, ...options })
+  return defaultRender(ui, {wrapper, ...options})
 }
 
 // --------------------------------------------------
@@ -51,24 +51,24 @@ export function render(ui: RenderUI, { wrapper, router, ...options }: RenderOpti
 // --------------------------------------------------
 export function renderHook(
   hook: RenderHook,
-  { wrapper, router, ...options }: RenderHookOptions = {}
+  {wrapper, router, ...options}: RenderHookOptions = {}
 ) {
   if (!wrapper) {
     // Add a default context wrapper if one isn't supplied from the test
-    wrapper = ({ children }) => (
-      <RouterContext.Provider value={{ ...mockRouter, ...router }}>
+    wrapper = ({children}) => (
+      <RouterContext.Provider value={{...mockRouter, ...router}}>
         {children}
       </RouterContext.Provider>
     )
   }
-  return defaultRenderHook(hook, { wrapper, ...options })
+  return defaultRenderHook(hook, {wrapper, ...options})
 }
 
 export const mockRouter: BlitzRouter = {
-  basePath: "",
-  pathname: "/",
-  route: "/",
-  asPath: "/",
+  basePath: '',
+  pathname: '/',
+  route: '/',
+  asPath: '/',
   params: {},
   query: {},
   push: jest.fn(),

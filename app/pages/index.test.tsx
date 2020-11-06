@@ -2,7 +2,7 @@ import React from 'react'
 
 import Home from './index'
 
-import { render } from "test/utils"
+import {render} from 'test/utils'
 
 //jest.mock("app/hooks/useCurrentUser")
 // const mockUseCurrentUser = useCurrentUser as jest.MockedFunction<typeof useCurrentUser>;
@@ -22,7 +22,7 @@ test.skip('renders blitz documentation link', () => {
   });
   */
 
-  const { getByText } = render(<Home />)
+  const {getByText} = render(<Home />)
   const linkElement = getByText(/Documentation/i)
   expect(linkElement).toBeInTheDocument()
 })

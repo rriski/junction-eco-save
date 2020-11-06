@@ -9,7 +9,7 @@ interface Props {
   color?: Color;
 }
 
-const Hero = ({ title, image, color }: Props) => {
+const Hero = ({title, image, color}: Props) => {
   return (
     <Wrapper>
       <Background color={color}>

@@ -1,4 +1,4 @@
-const Controls = ({ children }) => {
+const Controls = ({children}) => {
   return <div>{children}</div>;
 };
 

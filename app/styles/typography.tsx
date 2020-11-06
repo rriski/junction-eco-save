@@ -11,7 +11,7 @@ const BaseText = styled.span<{ color?: Color, weight?: 'normal' | 'bold' | 'ligh
   text-align: ${p => p.align || 'inherit'};
 `;
 
-export const Title = styled(BaseText).attrs({ as: 'h2' })`
+export const Title = styled(BaseText).attrs({as: 'h2'})`
   ${(p) => p.theme.typography.title}
 `;
 
@@ -24,7 +24,7 @@ export const Subtitle = styled(BaseText).attrs({ as: 'h4' })`
   font-weight: 800;
 `;
 
-export const Text = styled(BaseText).attrs({ as: 'p' })`
+export const Text = styled(BaseText).attrs({as: 'p'})`
   ${(p) => p.theme.typography.body}
 `;
 

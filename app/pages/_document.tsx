@@ -1,5 +1,5 @@
-import { Document, Html, DocumentHead, Main, BlitzScript, DocumentContext } from 'blitz'
-import { ServerStyleSheet } from 'styled-components';
+import {Document, Html, DocumentHead, Main, BlitzScript, DocumentContext} from 'blitz'
+import {ServerStyleSheet} from 'styled-components';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

@@ -1,6 +1,6 @@
 import VectorSource from 'ol/source/Vector';
 
-function Vector({ features }) {
+function Vector({features}) {
   return new VectorSource({
     features
   });

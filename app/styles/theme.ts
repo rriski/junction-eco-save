@@ -1,4 +1,4 @@
-import { css as cssFn, ThemedCssFunction } from 'styled-components';
+import {css as cssFn, ThemedCssFunction} from 'styled-components';
 
 // Avoid circular dependency from DefaultTheme redeclaration
 const css = cssFn as ThemedCssFunction<never>;

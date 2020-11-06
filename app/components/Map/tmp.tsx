@@ -1,11 +1,11 @@
 import 'ol/ol.css';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
-import { bbox as bboxStrategy } from 'ol/loadingstrategy';
+import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
+import {bbox as bboxStrategy} from 'ol/loadingstrategy';
 import Map from 'ol/Map';
 import VectorSource from 'ol/source/Vector';
 import XYZ from 'ol/source/XYZ';
-import { Stroke, Style } from 'ol/style';
+import {Stroke, Style} from 'ol/style';
 import View from 'ol/View';
 
 const vectorSource = new VectorSource({

@@ -1,10 +1,17 @@
 import React from 'react'
 
+<<<<<<< HEAD
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import PropertyMap from 'components/PropertyMap';
 import SavedProperties from 'components/SavedProperties';
 import { Page } from 'styles/index'
+=======
+
+import Head from 'components/Head';
+import Hero from 'components/Hero';
+import {Card, Content, Page} from 'styles/index'
+>>>>>>> 3452ce2... Lint stuff
 
 const Index = () => {
   return (

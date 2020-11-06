@@ -15,14 +15,22 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   extends: [
-    'airbnb',
-    'eslint:recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
+<<<<<<< HEAD
     'plugin:react/recommended',
+=======
+    'plugin:react/recommended'
+  ],
+  plugins: [
+    '@typescript-eslint',
+    'prettier',
+    'react',
+    'jsx-a11y',
+>>>>>>> 3452ce2... Lint stuff
   ],
   plugins: ['jsx-a11y', 'prettier', '@typescript-eslint', 'eslint-plugin-react'],
   rules: {
@@ -32,14 +40,16 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/indent': [2, 2],
     'no-trailing-spaces': ['error'],
-    'array-bracket-spacing': ['error'],
     'space-in-parens': ['error'],
+<<<<<<< HEAD
     quotes: [2, 'single', { avoidEscape: true }],
     'object-curly-spacing': ['error'],
+=======
+    'quotes': [2, 'single', { 'avoidEscape': true }],
+>>>>>>> 3452ce2... Lint stuff
     'no-multiple-empty-lines': ['error'],
     'no-multi-spaces': ['error'],
     'jsx-a11y/anchor-is-valid': 'off', // Doesn't play well with Blitz/Next <Link> usage
-    'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/react-in-jsx-scope': 'off', // React is always in scope with Blitz
     'react/display-name': 'off', // React is always in scope with Blitz

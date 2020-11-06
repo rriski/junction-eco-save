@@ -1,4 +1,4 @@
-import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 
 export const styles = {
   'Point': new Style({
