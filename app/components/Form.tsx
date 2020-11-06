@@ -1,8 +1,9 @@
-import React, { ReactNode, PropsWithoutRef } from "react"
+import React, { ReactNode, PropsWithoutRef } from 'react'
 
-import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
-import * as z from "zod"
-export { FORM_ERROR } from "final-form"
+import { Form as FinalForm, FormProps as FinalFormProps } from 'react-final-form'
+import * as z from 'zod'
+
+export { FORM_ERROR } from 'final-form'
 
 type FormProps<S extends z.ZodType<any, any>> = {
   /** All your form fields */
@@ -10,9 +11,9 @@ type FormProps<S extends z.ZodType<any, any>> = {
   /** Text to display in the submit button */
   submitText: string
   schema?: S
-  onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
-  initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
-} & Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit">
+  onSubmit: FinalFormProps<z.infer<S>>['onSubmit']
+  initialValues?: FinalFormProps<z.infer<S>>['initialValues']
+} & Omit<PropsWithoutRef<JSX.IntrinsicElements['form']>, 'onSubmit'>
 
 export function Form<S extends z.ZodType<any, any>>({
   children,
@@ -40,7 +41,7 @@ export function Form<S extends z.ZodType<any, any>>({
           {children}
 
           {submitError && (
-            <div role="alert" style={{ color: "red" }}>
+            <div role="alert" style={{ color: 'red' }}>
               {submitError}
             </div>
           )}
