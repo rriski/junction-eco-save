@@ -14,6 +14,11 @@ const theme = {
     'grey-light': '#ededed',
     'grey-dark': '#545454',
     primary: '#27AF81',
+    magenta: '#E1034F',
+    red: '#F94F59',
+    teel: '#017E8A',
+    'light-green': '#CFEB99',
+    'light-pink': '#FEEAE4',
   },
   spacing: {
     none: '0rem',
@@ -69,8 +74,8 @@ const theme = {
   },
   borderRadius: {
     small: pxToRem(5),
-    default: pxToRem(20),
-    large: pxToRem(40),
+    default: pxToRem(15),
+    large: pxToRem(30),
   }
 };
 

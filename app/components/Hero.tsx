@@ -26,7 +26,8 @@ const Hero = ({ title, image, color }: Props) => {
 const Wrapper = styled.section`
   position: relative;
   width: 100vw;
-  padding: ${p => p.theme.spacing.xxlarge};
+  padding-top: ${p => p.theme.spacing.xxlarge};
+  padding-bottom: ${p => p.theme.spacing.default};
 `;
 
 const Background = styled.div<{ color?: Color }>`

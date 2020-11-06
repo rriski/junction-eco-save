@@ -20,6 +20,7 @@
       "styles/*": ["./app/styles/*"],
       "layouts/*": ["./app/layouts/*"],
       "public/*": ["./public/*"],
+      "types/*": ["./app/types/*"],
     }
   },
   "exclude": ["node_modules"],

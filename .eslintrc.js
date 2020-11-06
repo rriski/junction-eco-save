@@ -22,14 +22,9 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
-  plugins: [
-    'jsx-a11y',
-    'prettier',
-    '@typescript-eslint',
-    'eslint-plugin-react'
-  ],
+  plugins: ['jsx-a11y', 'prettier', '@typescript-eslint', 'eslint-plugin-react'],
   rules: {
     'react/require-default-props': 'off',
     'no-use-before-define': 'off',
@@ -39,10 +34,10 @@ module.exports = {
     'no-trailing-spaces': ['error'],
     'array-bracket-spacing': ['error'],
     'space-in-parens': ['error'],
-    'quotes': [2, 'single', { 'avoidEscape': true }],
+    quotes: [2, 'single', { avoidEscape: true }],
     'object-curly-spacing': ['error'],
     'no-multiple-empty-lines': ['error'],
-    'no-multi-spaces': ['error',],
+    'no-multi-spaces': ['error'],
     'jsx-a11y/anchor-is-valid': 'off', // Doesn't play well with Blitz/Next <Link> usage
     'react/jsx-curly-spacing': ['error', { when: 'never', children: true }],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
@@ -51,6 +46,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [2, { devDependencies: ['**/test.tsx', '**/test.ts'] }],
     'import/no-anonymous-default-export': 'error',
     'import/no-webpack-loader-syntax': 'off',
+    'import/prefer-default-export': 'off',
     'import/order': [
       'error',
       {
@@ -71,4 +67,4 @@ module.exports = {
       },
     ],
   },
-}
+};

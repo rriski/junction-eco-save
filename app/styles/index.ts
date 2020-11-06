@@ -89,7 +89,8 @@ export const Divider = styled.div`
 `;
 
 export const Card = styled.div`
-  padding: ${p => p.theme.spacing.default};
+  padding: ${p => p.theme.spacing.medium};
   border-radius: ${p => p.theme.borderRadius.default};
   background-color: ${p => p.theme.colors.white};
+  box-shadow: ${p => p.theme.shadow.default};
 `
