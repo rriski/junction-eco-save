@@ -8,7 +8,7 @@ const pxToRem = (px: number) => `${px / 16}rem`;
 const theme = {
   rem: pxToRem,
   colors: {
-    black: '#2b2b2b',
+    black: '#555',
     white: '#fff',
     grey: '#858585',
     'grey-light': '#ededed',
@@ -50,19 +50,16 @@ const theme = {
     body: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      font-weight: normal;
       line-height: 1.8;
     `,
     small: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 0.7rem;
-      font-weight: lighter;
       line-height: 1.2;
     `,
     action: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      font-weight: bold;
       line-height: 1.4;
       letter-spacing: 0.2rem;
     `,

@@ -12,6 +12,7 @@ body {
 
 body {
   font-size: 1em;
+  color: #555;
 }
 
 a {
@@ -19,7 +20,9 @@ a {
   text-decoration: none;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
 }

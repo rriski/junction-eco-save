@@ -10,7 +10,7 @@ const Fucker = ({ category, kpi }: KPI) => {
 
       <Text>{category}</Text>
 
-      <Text>{kpi}</Text>
+      <Text weight="bold">{kpi}</Text>
     </PillBadge>
   )
 }
