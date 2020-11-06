@@ -16,7 +16,6 @@ export const Content = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  background-color: red;
   z-index: 1;
 `
 
@@ -88,3 +87,10 @@ export const Divider = styled.div`
   background-color: ${(p) => p.theme.colors.grey};
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
+
+
+export const Card = styled.div`
+  padding: ${p => p.theme.spacing.default};
+  border-radius: ${p => p.theme.borderRadius.default};
+  background-color: ${p => p.theme.colors.white};
+`
