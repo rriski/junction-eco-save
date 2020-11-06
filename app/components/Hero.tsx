@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Color } from 'ol/color';
 import styled from 'styled-components';
 
@@ -50,6 +48,7 @@ const BackgroundImage = styled.img`
 
 const Title = styled.h1`
   ${p => p.theme.typography.title};
+  color: ${p => p.theme.colors.white};
 `
 
 export default Hero;
