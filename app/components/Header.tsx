@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Color } from 'ol/color';
 import styled from 'styled-components';
 

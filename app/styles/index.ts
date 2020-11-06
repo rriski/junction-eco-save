@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-import { Color } from './theme';
-
 import { CONTENT_WIDTH } from 'app/utils/constants';
+import { Color } from 'styles/theme';
 
 export const Page = styled.main`
   width: 100vw;

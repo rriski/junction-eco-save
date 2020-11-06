@@ -31,6 +31,8 @@ module.exports = {
     'eslint-plugin-react'
   ],
   rules: {
+    'react/require-default-props': 'off',
+    'no-use-before-define': 'off',
     'react/jsx-props-no-spreading': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/indent': [2, 2],

@@ -1,4 +1,3 @@
-import { getRenderPixel } from 'ol/render';
 import { css as cssFn, ThemedCssFunction } from 'styled-components';
 
 // Avoid circular dependency from DefaultTheme redeclaration
