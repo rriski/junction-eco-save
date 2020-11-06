@@ -1,10 +1,10 @@
-import { Suspense } from "react"
+import { Suspense } from 'react'
 
-import { Link, BlitzPage, useMutation } from "blitz"
+import { Link, BlitzPage, useMutation } from 'blitz'
 
-import logout from "app/auth/mutations/logout"
-import { useCurrentUser } from "app/hooks/useCurrentUser"
-import Layout from "app/layouts/Layout"
+import logout from 'app/auth/mutations/logout'
+import { useCurrentUser } from 'app/hooks/useCurrentUser'
+import Layout from 'app/layouts/Layout'
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -33,22 +33,22 @@ const UserInfo = () => {
         </div>
       </>
     )
-  } else {
-    return (
-      <>
-        <Link href="/signup">
-          <a className="button small">
-            <strong>Sign Up</strong>
-          </a>
-        </Link>
-        <Link href="/login">
-          <a className="button small">
-            <strong>Login</strong>
-          </a>
-        </Link>
-      </>
-    )
   }
+  return (
+    <>
+      <Link href="/signup">
+        <a className="button small">
+          <strong>Sign Up</strong>
+        </a>
+      </Link>
+      <Link href="/login">
+        <a className="button small">
+          <strong>Login</strong>
+        </a>
+      </Link>
+    </>
+  )
+
 }
 
 const Home: BlitzPage = () => {
@@ -61,7 +61,7 @@ const Home: BlitzPage = () => {
         <p>
           <strong>Congrats!</strong> Your app is ready, including user sign-up and log-in.
         </p>
-        <div className="buttons" style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+        <div className="buttons" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
           <Suspense fallback="Loading...">
             <UserInfo />
           </Suspense>
@@ -89,13 +89,13 @@ const Home: BlitzPage = () => {
             <code>blitz start</code>
           </pre>
           <p>
-            and go to{" "}
+            and go to{' '}
             <Link href="/projects">
               <a>/projects</a>
             </Link>
           </p>
         </div>
-        <div className="buttons" style={{ marginTop: "5rem" }}>
+        <div className="buttons" style={{ marginTop: '5rem' }}>
           <a
             className="button"
             href="https://blitzjs.com/docs/getting-started?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"

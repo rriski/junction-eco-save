@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 
-import { Head } from "blitz"
+import { Head } from 'blitz'
 
 type LayoutProps = {
   title?: string
@@ -11,7 +11,7 @@ const Layout = ({ title, children }: LayoutProps) => {
   return (
     <>
       <Head>
-        <title>{title || "smartPropertyManagement"}</title>
+        <title>{title || 'smartPropertyManagement'}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

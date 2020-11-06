@@ -1,20 +1,20 @@
-import { Ctx } from "blitz"
+import { Ctx } from 'blitz';
 
-import { hashPassword } from "app/auth/auth-utils"
-import { SignupInput, SignupInputType } from "app/auth/validations"
-import db from "db"
+import { hashPassword } from 'app/auth/auth-utils';
+import { SignupInput, SignupInputType } from 'app/auth/validations';
+import db from 'db';
 
 export default async function signup(input: SignupInputType, { session }: Ctx) {
   // This throws an error if input is invalid
-  const { email, password } = SignupInput.parse(input)
+  const { email, password } = SignupInput.parse(input);
 
-  const hashedPassword = await hashPassword(password)
+  const hashedPassword = await hashPassword(password);
   const user = await db.user.create({
-    data: { email: email.toLowerCase(), hashedPassword, role: "user" },
+    data: { email: email.toLowerCase(), hashedPassword, role: 'user' },
     select: { id: true, name: true, email: true, role: true },
-  })
+  });
 
-  await session.create({ userId: user.id, roles: [user.role] })
+  await session.create({ userId: user.id, roles: [user.role] });
 
-  return user
+  return user;
 }
