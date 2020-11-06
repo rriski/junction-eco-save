@@ -1,5 +1,6 @@
 import { AuthenticationError } from "blitz"
 import SecurePassword from "secure-password"
+
 import db from "db"
 
 const SP = new SecurePassword()

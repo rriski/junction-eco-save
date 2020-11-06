@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+
 import { Head } from "blitz"
 
 type LayoutProps = {
