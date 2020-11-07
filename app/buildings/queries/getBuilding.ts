@@ -19,6 +19,7 @@ type energy_consumption_options = {
   [key: string]: energy_data;
 };
 
+// from https://www.hel.fi/hel2/tietokeskus/data/dokumentit/data_atlas.pdf
 const energy_consumption_omakotitalo: energy_consumption_options = {
   '201': {
     heating: 116,
