@@ -8,8 +8,6 @@ export default async function getBuildings(
   { where, orderBy, skip = 0, take }: GetBuildingsInput,
   ctx: Ctx
 ) {
-  ctx.session.authorize();
-
   const buildings = await db.building.findMany({
     where,
     orderBy,
