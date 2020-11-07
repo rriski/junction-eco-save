@@ -14,6 +14,7 @@ const Fucker = ({ category, kpi }: KPI) => {
     </PillBadge>
   );
 };
+
 const PillBadge = styled.div`
   display: grid;
   align-items: center;
@@ -25,11 +26,40 @@ const PillBadge = styled.div`
   grid-template-columns: auto 1fr auto;
 `;
 
-const Indicator = styled.div`
+const Indicator = styled.div<{ what?: 'good' | 'ok' | 'bad' }>`
   width: ${(p) => p.theme.rem(15)};
   height: ${(p) => p.theme.rem(15)};
-  background-color: ${(p) => p.theme.colors.primary};
+  background-color: ${(p) =>
+    p.what === 'good'
+      ? p.theme.colors.primary
+      : p.what === 'ok'
+      ? p.theme.colors.orangeish
+      : p.what === 'bad'
+      ? p.theme.colors.red
+      : p.theme.colors.grey};
   border-radius: 999px;
 `;
 
 export default Fucker;
+
+type FuckerProps = {
+  title: string;
+  value: number;
+  thresholds: { low: number; high: number };
+  unit?: string;
+};
+
+export const AdvancedFucker = ({ title, value, thresholds, unit }: FuckerProps) => {
+  return (
+    <PillBadge>
+      <Indicator what={value < thresholds.low ? 'bad' : value < thresholds.high ? 'ok' : 'good'} />
+
+      <Text>{title}</Text>
+
+      <Text weight="bold">
+        {value}
+        {unit ? ' ' + unit : ''}
+      </Text>
+    </PillBadge>
+  );
+};
