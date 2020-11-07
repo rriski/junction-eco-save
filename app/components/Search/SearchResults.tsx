@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link, useQuery } from 'blitz';
 import styled from 'styled-components';
 
@@ -12,7 +10,7 @@ interface Props {
 
 const SearchResults = ({ query }: Props) => {
   const [buildings, { isLoading }] = useQuery(getBuildings, {
-    where: { location_street_address: { contains: query } },
+    where: { location_street_address: { contains: query, mode: 'insensitive' } },
     take: 5,
   });
 
