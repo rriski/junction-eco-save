@@ -69,14 +69,15 @@ const ErrorCard = styled(Card)`
 `;
 
 const Title = styled.h1`
-  color: ${(p) => p.theme.colors['grey-dark']};
   font-size: ${(p) => p.theme.rem(120)};
   text-align: center;
+  letter-spacing: ${(p) => p.theme.rem(10)};
 `;
 
 const TitleWrapper = styled.div`
   position: relative;
   padding-bottom: 2rem;
+  color: ${(p) => p.theme.colors.red};
 `;
 
 const Hidden = styled.span`
@@ -86,13 +87,13 @@ const Hidden = styled.span`
 const BulbWrapper = styled.div`
   position: absolute;
   top: 42%;
-  left: 50%;
+  left: 49.5%;
   transform: translate(-50%, -50%);
 `;
 
 const Text = styled.p`
   width: 100%;
-  font-size: ${(p) => p.theme.rem(36)};
-  font-weight: bold;
+  font-size: ${(p) => p.theme.rem(25)};
+  font-weight: 600;
   text-align: center;
 `;

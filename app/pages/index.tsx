@@ -6,7 +6,7 @@ import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
 import PropertyMap from 'components/PropertyMap';
 import SavedProperties from 'components/SavedProperties';
-import Search from 'components/Search/Search';
+import Search from 'components/Search';
 import Layout from 'layouts/Layout';
 
 const Index: BlitzPage = () => {
@@ -19,10 +19,6 @@ const Index: BlitzPage = () => {
           color="turquoise"
           icon
         />
-
-        <Suspense fallback="Loading search...">
-          <Search />
-        </Suspense>
 
         <PropertyMap />
 

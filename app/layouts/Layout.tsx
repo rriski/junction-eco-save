@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import Footer from 'components/Footer';
 import Head from 'components/Head';
 import { Page } from 'styles/index';
 
@@ -14,6 +15,8 @@ const Layout = ({ title, children }: LayoutProps) => {
       <Head title={title} />
 
       <Page>{children}</Page>
+
+      <Footer />
     </>
   );
 };
