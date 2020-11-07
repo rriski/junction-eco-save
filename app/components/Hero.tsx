@@ -8,9 +8,10 @@ interface Props {
   title: string;
   image?: string;
   color?: Color;
+  icon?: boolean;
 }
 
-const Hero = ({ title, image, color }: Props) => {
+const Hero = ({ title, image, color, icon }: Props) => {
   return (
     <Wrapper>
       <Background>
@@ -20,7 +21,7 @@ const Hero = ({ title, image, color }: Props) => {
 
       <TitleWrapper>
         <Title>{title}</Title>
-        <SaveIcon />
+        {icon && <SaveIcon />}
       </TitleWrapper>
     </Wrapper>
   );
