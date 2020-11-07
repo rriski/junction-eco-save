@@ -255,7 +255,7 @@ const RenovationItem = styled.li`
 
   &:before {
     position: absolute;
-    left: -1.5rem;
+    left: -3.5rem;
     display: inline-block;
     width: 2.5rem;
     height: 2.5rem;
@@ -281,6 +281,16 @@ const RenovationTitle = styled.h3`
   margin-bottom: 1rem;
   color: #000;
   font-size: 1.5rem;
+
+  & > svg {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    top: -1.25rem;
+    left: -4.25rem;
+    background-color: ${(p) => p.theme.colors.white};
+    border: 0.5rem solid ${(p) => p.theme.colors.white};
+  }
 `;
 
 const ShowBuildingPage: BlitzPage = () => (
