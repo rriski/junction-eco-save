@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import Head from 'components/Head';
+import { Page } from 'styles/index';
 
 type LayoutProps = {
   title?: string;
@@ -12,7 +13,7 @@ const Layout = ({ title, children }: LayoutProps) => {
     <>
       <Head title={title} />
 
-      {children}
+      <Page>{children}</Page>
     </>
   );
 };

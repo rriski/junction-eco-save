@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
-  const mapRef = useRef();
+  const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<Map>();
 
   useEffect(() => {
@@ -24,8 +24,11 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
     };
 
     const mapObject = new Map(options);
-    mapObject.setTarget(mapRef.current);
-    setMap(mapObject);
+
+    if (mapRef.current) {
+      mapObject.setTarget(mapRef.current);
+      setMap(mapObject);
+    }
 
     return () => mapObject.setTarget(undefined);
   }, []);
@@ -46,11 +49,11 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
 };
 
 const MapContainer = styled.div`
-  min-width: 600px;
-  min-height: 500px;
-  margin: 50px;
-  height: 500px;
-  width: '100%';
+  height: 600px;
+  width: 100%;
+  border-radius: ${(p) => p.theme.borderRadius.large};
+  overflow: hidden;
+  box-shadow: ${(p) => p.theme.shadow.default};
 `;
 
 export default MapComponent;

@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
 import { dummieProperty } from 'app/utils/dummies';
 import DetailsCard from 'components/DetailsCard';
-import MapComponent from 'components/Map';
 import { Content } from 'styles/index';
+
+const MapComponent = dynamic(() => import('components/Map'), {
+  ssr: false,
+});
 
 const PropertyMap = () => {
   return (
@@ -26,6 +30,7 @@ const Map = styled(MapComponent)`
   background-color: ${(p) => p.theme.colors['grey-light']};
   border-radius: ${(p) => p.theme.borderRadius.large};
   box-shadow: ${(p) => p.theme.shadow.default};
+  overflow: hidden;
 `;
 
 const Details = styled.div`

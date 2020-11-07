@@ -1,6 +1,5 @@
 import { Suspense, useState } from 'react';
 
-import dynamic from 'next/dynamic';
 import { GeoJSON, WFS } from 'ol/format';
 import { like as likeFilter } from 'ol/format/filter';
 import { fromLonLat } from 'ol/proj';
@@ -10,7 +9,6 @@ import { Controls, FullScreenControl } from 'app/components/Map/Controls';
 import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
 import mapStyles from 'app/components/Map/MapStyles';
 import { OSMSource } from 'app/components/Map/Source';
-import Layout from 'app/layouts/Layout';
 import MapComponent from 'components/Map/MapComponent';
 
 const Map = () => {
@@ -21,13 +19,12 @@ const Map = () => {
 
   const vectorSource = new VectorSource();
 
+  // @ts-ignore
   const featureRequest = new WFS().writeGetFeature({
     srsName: 'EPSG:3857',
     featureTypes: ['avoindata:Kiinteisto_alue'],
     outputFormat: 'application/json',
     filter: likeFilter('kiinteisto', '91-4-61*'),
-    featureNS: 'https://kartta.hel.fi/',
-    featurePrefix: '',
   });
 
   fetch('https://kartta.hel.fi/ws/geoserver/avoindata/wfs', {
@@ -65,3 +62,5 @@ const Map = () => {
     </Suspense>
   );
 };
+
+export default Map;
