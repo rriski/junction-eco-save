@@ -12,7 +12,6 @@ import { Map } from 'components/PropertyMap';
 export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
-  console.log(building);
 
   const title = `${building?.location_street_address}${
     building?.location_street_number ? ' ' + building.location_street_number : ''

@@ -14,7 +14,7 @@ import { Card, DetailGrid, ButtonLink } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
-  buildingId: string;
+  buildingId: string | undefined;
 }
 
 const DetailsCard = ({ buildingId }: Props) => {
@@ -32,8 +32,6 @@ const DetailsCard = ({ buildingId }: Props) => {
     }
   }, [buildingId]);
 
-  console.log(savedProperties, building);
-
   return (
     <Wrapper>
       <Perkele>
@@ -46,7 +44,7 @@ const DetailsCard = ({ buildingId }: Props) => {
 
               <SaveButton
                 onClick={onSave}
-                selected={savedProperties.some((b) => b.building_id === building.building_id)}
+                selected={savedProperties?.some((b) => b.building_id === building.building_id)}
               />
             </Stack>
 
