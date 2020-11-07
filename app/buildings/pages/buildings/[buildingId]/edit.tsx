@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react';
-import Layout from 'app/layouts/Layout';
+
 import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from 'blitz';
-import getBuilding from 'app/buildings/queries/getBuilding';
-import updateBuilding from 'app/buildings/mutations/updateBuilding';
+
 import BuildingForm from 'app/buildings/components/BuildingForm';
+import updateBuilding from 'app/buildings/mutations/updateBuilding';
+import getBuilding from 'app/buildings/queries/getBuilding';
+import Layout from 'app/layouts/Layout';
 
 export const EditBuilding = () => {
   const router = useRouter();

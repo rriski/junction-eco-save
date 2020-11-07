@@ -1,8 +1,10 @@
 import React from 'react';
-import Layout from 'app/layouts/Layout';
+
 import { Link, useRouter, useMutation, BlitzPage } from 'blitz';
-import createBuilding from 'app/buildings/mutations/createBuilding';
+
 import BuildingForm from 'app/buildings/components/BuildingForm';
+import createBuilding from 'app/buildings/mutations/createBuilding';
+import Layout from 'app/layouts/Layout';
 
 const NewBuildingPage: BlitzPage = () => {
   const router = useRouter();

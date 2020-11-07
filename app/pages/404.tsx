@@ -70,8 +70,8 @@ const ErrorCard = styled(Card)`
 
 const Title = styled.h1`
   font-size: ${(p) => p.theme.rem(120)};
-  text-align: center;
   letter-spacing: ${(p) => p.theme.rem(10)};
+  text-align: center;
 `;
 
 const TitleWrapper = styled.div`

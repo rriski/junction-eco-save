@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { useQuery } from 'blitz';
 import styled from 'styled-components';
@@ -6,45 +6,37 @@ import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import { formatBuildingId } from 'app/utils/format';
-import {
-  getSavedBuildings,
-  addBuildingToLocalStorage,
-  removeBuildingFromLocalStorage,
-} from 'app/utils/localStorage';
+import { addBuildingToLocalStorage, removeBuildingFromLocalStorage } from 'app/utils/localStorage';
 import Fucker from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
-import { Card, DetailGrid, ButtonLink } from 'styles/index';
+import { ButtonLink, Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
   buildingId: string | undefined;
+  savedBuildings: Building[];
+  setSavedBuildings: (buildings: Building[]) => void;
 }
 
-const DetailsCard = ({ buildingId }: Props) => {
-  const [properties, setProperties] = useState<Building[]>([]);
-  const isSaved = properties.some((b) => b.building_id === buildingId);
+const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) => {
   const [building] = useQuery(getBuilding, {
     where: { building_id: formatBuildingId(buildingId) },
   });
+  const isSaved = savedBuildings.some((b) => b.building_id === buildingId);
 
-  useEffect(() => {
-    const savedProperties = getSavedBuildings();
-    if (savedProperties) {
-      setProperties(savedProperties);
-    }
-  }, []);
-
-  const onSave = useCallback(() => {
+  const onSaveClick = useCallback(() => {
     if (building) {
-      if (isSaved) {
-        addBuildingToLocalStorage(building);
+      if (!isSaved) {
+        const newSavedBuildings = addBuildingToLocalStorage(building);
+        setSavedBuildings(newSavedBuildings);
       } else {
-        removeBuildingFromLocalStorage(building);
+        const newSavedBuildings = removeBuildingFromLocalStorage(building);
+        setSavedBuildings(newSavedBuildings);
       }
     }
-  }, [buildingId]);
+  }, [building, isSaved]);
 
   return (
     <Wrapper>
@@ -56,7 +48,7 @@ const DetailsCard = ({ buildingId }: Props) => {
                 {building.location_street_address} {building.location_street_number}
               </Subtitle>
 
-              <SaveButton onClick={onSave} selected={isSaved} />
+              <SaveButton onClick={onSaveClick} selected={isSaved} />
             </Stack>
 
             <Text>Helsinki, {building.location_post_number}</Text>
