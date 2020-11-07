@@ -1,0 +1,11 @@
+{
+  "name": "ecoSave",
+  "short_name": "ecoSave",
+  "icons": [{
+      "src": "google-touch-icon.png",
+      "sizes": "512x512"
+  }],
+  "background_color": "#ffffff",
+  "theme_color": "#27AF81",
+  "display": "fullscreen"
+}
