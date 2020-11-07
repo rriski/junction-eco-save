@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { dummieProperty } from 'app/utils/dummies';
 import DetailsCard from 'components/DetailsCard';
+import MapComponent from 'components/Map';
 import { Content } from 'styles/index';
 
 const PropertyMap = () => {
@@ -19,7 +20,7 @@ const Wrapper = styled(Content)`
   padding-right: ${(p) => p.theme.spacing.large};
 `;
 
-const Map = styled.div`
+const Map = styled(MapComponent)`
   width: 100%;
   height: ${(p) => p.theme.rem(600)};
   background-color: ${(p) => p.theme.colors['grey-light']};
