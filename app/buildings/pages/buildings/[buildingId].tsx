@@ -1,13 +1,14 @@
 import React, { Suspense } from 'react';
 
-import { useQuery, useParam, BlitzPage } from 'blitz';
+import { BlitzPage, useParam, useQuery } from 'blitz';
 import styled from 'styled-components';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
 import { calculateRepairDebt } from 'app/utils/buildingScores';
-import Fucker, { AdvancedFucker } from 'components/Fucker';
+import { AdvancedFucker } from 'components/Fucker';
+import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
 import FacadeIcon from 'static/svg/julkisivu.svg';
 import RoofIcon from 'static/svg/kattoremppa.svg';
@@ -283,18 +284,18 @@ const RenovationTitle = styled.h3`
   font-size: 1.5rem;
 
   & > svg {
-    width: 4rem;
-    height: 4rem;
     position: absolute;
     top: -1.25rem;
     left: -4.25rem;
-    background-color: ${(p) => p.theme.colors.white};
+    width: 4rem;
+    height: 4rem;
     border: 0.5rem solid ${(p) => p.theme.colors.white};
+    background-color: ${(p) => p.theme.colors.white};
   }
 `;
 
 const ShowBuildingPage: BlitzPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
     <Building />
   </Suspense>
 );
