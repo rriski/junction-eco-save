@@ -103,11 +103,11 @@ export const Building = () => {
               />
             )}
 
-            {building?.Renovation && (
+            {building?.Renovation?.length !== 0 && (
               <HistoryWrapper>
                 <SubTitle>History</SubTitle>
                 <RenovationList>
-                  {building.Renovation.sort((a, b) => b.end_year - a.end_year).map((reno) => {
+                  {building.Renovation?.sort((a, b) => b.end_year - a.end_year).map((reno) => {
                     const renoYears = `${reno.start_year}${
                       reno.end_year && reno.start_year != reno.end_year ? ` - ${reno.end_year}` : ''
                     }`;
