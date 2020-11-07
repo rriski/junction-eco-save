@@ -81,7 +81,7 @@ const theme = {
     action: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      letter-spacing: 0.2rem;
+      letter-spacing: 0.1rem;
       line-height: 1.4;
     `,
   },

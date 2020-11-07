@@ -51,15 +51,22 @@ export const ListButton = styled.button`
   }
 `;
 
-export const ButtonLink = styled(Link)`
+export const ButtonLink = styled.a`
   ${(p) => p.theme.typography.action}
-  width: 100%;
-  padding: ${(p) => p.theme.spacing.small} ${(p) => p.theme.spacing.default};
+  font-weight: 600;
+  display: block;
+  flex: 1;
+  width: 70%;
+  padding: ${(p) => p.theme.spacing.default} ${(p) => p.theme.spacing.medium};
+  margin-left: auto;
   text-align: center;
   background-color: ${(p) => p.theme.colors.turquoise};
-  border: solid 2px red;
+  color: ${(p) => p.theme.colors.white};
+  border-radius: 999px;
+  box-shadow: ${(p) => p.theme.shadow.default};
+  transition: all 0.1s;
 
   &:hover {
-    background-color: rgba(${(p) => p.theme.colors.turquoise}, 0.9);
+    background-color: ${(p) => p.theme.colors.teal};
   }
 `;
