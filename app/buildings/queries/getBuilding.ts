@@ -13,8 +13,7 @@ type ApiBuilding =
   | (Building & {
       energy_consumption?: energy_data;
       Renovation?: Renovation[];
-    })
-  | null;
+    });
 
 type energy_consumption_options = {
   [key: string]: energy_data;
@@ -83,26 +82,29 @@ const energy_consumption: energy_consumption_options = {
 };
 
 export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx) {
-  const building: ApiBuilding = await db.building.findFirst({
+  const building: ApiBuilding | null = await db.building.findFirst({
     where,
     include: { Renovation: true },
   });
 
-  if (building?.construction_date && (building.area_living || building.area_floors)) {
-    const energy = building.category === "Omakotitalo" ?
-    energy_consumption_omakotitalo[
-      Math.floor(building.construction_date.getFullYear() / 10).toString()
-    ] || {
-      heating: 286,
-      electricity: 8,
-    }
-    : energy_consumption[
-      Math.floor(building.construction_date.getFullYear() / 10).toString()
-    ] || {
-      heating: 130,
-      electricity: 12,
-    };
-    const area = building.area_living || building.area_floors;
+  if (building && (building?.area_living || building?.area_floors)) {
+    const energy = (
+      building.category === "Omakotitalo" ?
+      energy_consumption_omakotitalo :
+      energy_consumption
+    )[
+        Math.floor(building?.construction_date.getFullYear() / 10).toString()
+    ] || (
+      building.category === "Omakotitalo" ?
+      {
+        heating: 286,
+        electricity: 8,
+      } : {
+        heating: 130,
+        electricity: 12,
+      }
+    )
+    const area = building?.area_living || building?.area_floors;
     if (energy && area) {
       building.energy_consumption = {
         electricity: energy.electricity * area,
@@ -124,5 +126,6 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
     "roof": 35
   }
   */
+  console.log(building)
   return building;
 }
