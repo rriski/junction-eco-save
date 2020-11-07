@@ -55,7 +55,10 @@ const energy_consumption: energy_consumption_options = {
 };
 
 export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx) {
-  const building: ApiBuilding = await db.building.findFirst({ where });
+  const building: ApiBuilding = await db.building.findFirst({
+    where,
+    include: { Renovation: true },
+  });
 
   if (building?.construction_date && (building.area_living || building.area_floors)) {
     const energy = energy_consumption[
