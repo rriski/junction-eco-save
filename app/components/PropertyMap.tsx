@@ -5,7 +5,6 @@ import DetailsCard from 'components/DetailsCard';
 import { Content } from 'styles/index';
 
 const PropertyMap = () => {
-
   return (
     <Wrapper>
       <Map />
@@ -14,25 +13,25 @@ const PropertyMap = () => {
         <DetailsCard {...dummieProperty} />
       </Details>
     </Wrapper>
-  )
-}
+  );
+};
 const Wrapper = styled(Content)`
-  padding-right: ${p => p.theme.spacing.large};
-`
+  padding-right: ${(p) => p.theme.spacing.large};
+`;
 
 const Map = styled.div`
   width: 100%;
-  height: ${p => p.theme.rem(600)};
-  background-color: ${p => p.theme.colors['grey-light']};
-  border-radius: ${p => p.theme.borderRadius.large};
-  box-shadow: ${p => p.theme.shadow.default};
-`
+  height: ${(p) => p.theme.rem(600)};
+  background-color: ${(p) => p.theme.colors['grey-light']};
+  border-radius: ${(p) => p.theme.borderRadius.large};
+  box-shadow: ${(p) => p.theme.shadow.default};
+`;
 
 const Details = styled.div`
   position: absolute;
   right: 0;
-  bottom: ${p => p.theme.spacing.large};
-  max-width: ${p => p.theme.rem(500)};
-`
+  bottom: ${(p) => p.theme.spacing.large};
+  max-width: ${(p) => p.theme.rem(500)};
+`;
 
 export default PropertyMap;

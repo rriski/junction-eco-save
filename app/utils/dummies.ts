@@ -6,5 +6,5 @@ export const dummieProperty: Property = {
   city: 'Espoo',
   built: 1996,
   ecosave: 56,
-  lastRenovation: 'March 2002'
-}
+  lastRenovation: 'March 2002',
+};

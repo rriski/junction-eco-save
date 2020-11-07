@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
 import { CONTENT_WIDTH } from 'app/utils/constants';
-<<<<<<< HEAD
-import { Color, Spacing } from 'styles/theme';
-=======
 import { Color } from 'styles/theme';
->>>>>>> 7936303... Stuff
 
 export const Page = styled.main`
   width: 100vw;
@@ -95,17 +91,9 @@ export const Divider = styled.div`
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
 
-<<<<<<< HEAD
 export const Card = styled.div<{ spacing?: Spacing }>`
-  padding: ${p => p.theme.spacing[p.spacing || 'default']};
-  border-radius: ${p => p.theme.borderRadius.default};
-  background-color: ${p => p.theme.colors.white};
-  box-shadow: ${p => p.theme.shadow.default};
-`
-=======
-export const Card = styled.div`
-  padding: ${(p) => p.theme.spacing.default};
+  padding: ${(p) => p.theme.spacing[p.spacing || 'default']};
   border-radius: ${(p) => p.theme.borderRadius.default};
   background-color: ${(p) => p.theme.colors.white};
+  box-shadow: ${(p) => p.theme.shadow.default};
 `;
->>>>>>> 7936303... Stuff
