@@ -4,9 +4,15 @@ import styled from 'styled-components';
 
 import SearchResults from './SearchResults';
 
-import { CONTENT_WIDTH } from 'app/utils/constants';
+import OutsideEventCatcher from 'components/OutsideEventCatcher';
+import { Building } from 'db';
+import { Content } from 'styles/index';
 
-const Search = () => {
+interface Props {
+  onSelect: (building: Building) => void;
+}
+
+const Search = ({ onSelect }: Props) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(false);
@@ -16,40 +22,50 @@ const Search = () => {
     setQuery(query);
   }, []);
 
-  return (
-    <SearchContainer ref={searchRef}>
-      <StyledSearch
-        onChange={onChange}
-        onFocus={() => setActive(true)}
-        onBlur={() => setActive(false)}
-        type="text"
-        placeholder="Search estates"
-        value={query}
-      />
-      <SearchLabel>Search estates</SearchLabel>
+  const handleSelect = (building: Building) => {
+    setQuery(
+      `${building.location_street_address} ${building.location_street_number}, ${building.location_post_number} Helsinki`
+    );
+    onSelect(building);
+  };
 
-      <Suspense fallback="">{active && <SearchResults query={query} />}</Suspense>
-    </SearchContainer>
+  return (
+    <Content>
+      <OutsideEventCatcher onOutsideEvent={() => setActive(false)}>
+        <SearchContainer ref={searchRef}>
+          <StyledSearch
+            onChange={onChange}
+            onFocus={() => setActive(true)}
+            type="text"
+            placeholder="Search estates"
+            value={query}
+          />
+
+          <SearchLabel>Search estates</SearchLabel>
+
+          <Suspense fallback="">
+            {active && !!query.length && <SearchResults onSelect={handleSelect} query={query} />}
+          </Suspense>
+        </SearchContainer>
+      </OutsideEventCatcher>
+    </Content>
   );
 };
 
 const SearchContainer = styled.div`
-  ${(p) => p.theme.typography.action};
+  ${(p) => p.theme.typography.body}
   position: relative;
-  display: block;
-  max-width: ${CONTENT_WIDTH};
+  width: 100%;
+  max-width: ${(p) => p.theme.rem(800)};
   height: 62px;
-  border: 0;
   margin: 0 auto;
-  margin-bottom: ${(p) => p.theme.spacing.small};
   background-color: #ffffff;
-  border-bottom-left-radius: ${(p) => p.theme.borderRadius.large};
-  border-bottom-right-radius: ${(p) => p.theme.borderRadius.large};
-  border-top-left-radius: ${(p) => p.theme.borderRadius.large};
-  border-top-right-radius: 0;
+  border-radius: 999px;
   box-shadow: ${(p) => p.theme.shadow.default};
   color: ${(p) => p.theme.colors.grey};
-  transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out, box-shadow 0.1s ease-in-out;
+  transition-property: opacity, filter, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 
   &:hover {
     box-shadow: ${(p) => p.theme.shadow.strong};
@@ -59,7 +75,7 @@ const SearchContainer = styled.div`
 const StyledSearch = styled.input`
   position: absolute;
   z-index: 3;
-  top: 0;
+  bottom: 0;
   display: block;
   width: 100%;
   height: 45px;
@@ -68,9 +84,8 @@ const StyledSearch = styled.input`
   border: 0;
   background-color: rgba(255, 255, 255, 0);
   box-shadow: none;
-  color: ${(p) => p.theme.colors['teal']};
+  color: ${(p) => p.theme.colors.black};
   font-size: 17px;
-  transition: top 0.1s ease-in-out;
 
   &::placeholder {
     color: rgba(0, 0, 0, 0);
@@ -83,8 +98,8 @@ const StyledSearch = styled.input`
 
   &:focus + label,
   &:not(:placeholder-shown) + label {
-    bottom: 20px;
-    font-size: 13px;
+    bottom: ${(p) => p.theme.rem(25)};
+    font-size: 11px;
     opacity: 0.7;
   }
 
@@ -106,7 +121,7 @@ const SearchLabel = styled.label`
   padding: 0 ${(p) => p.theme.spacing.xlarge};
   border: 0;
   cursor: text;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 `;
 
 export default Search;

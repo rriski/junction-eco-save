@@ -7,6 +7,8 @@ import getBuilding from 'app/buildings/queries/getBuilding';
 import { formatBuildingId } from 'app/utils/format';
 import DetailsCard from 'components/DetailsCard';
 import MapLoader from 'components/Map/MapLoader';
+import Search from 'components/Search';
+import { Building } from 'db';
 import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
@@ -21,19 +23,28 @@ const PropertyMap = () => {
     where: { building_id: buildingId ? formatBuildingId(buildingId) : '' },
   });
 
-  return (
-    <Wrapper>
-      <Map setBuildingId={setBuildingId} />
+  const onSelect = (building: Building) => {
+    setBuildingId(building.building_id);
+  };
 
-      <Details>
-        <DetailsCard building={building} />
-      </Details>
-    </Wrapper>
+  return (
+    <Content>
+      <Search onSelect={onSelect} />
+
+      <Wrapper>
+        <Map setBuildingId={setBuildingId} />
+
+        <Details>
+          <DetailsCard building={building} />
+        </Details>
+      </Wrapper>
+    </Content>
   );
 };
 
 const Wrapper = styled(Content)`
   padding-right: ${(p) => p.theme.spacing.large};
+  z-index: -1;
 `;
 
 const Map = styled(MapComponent)`

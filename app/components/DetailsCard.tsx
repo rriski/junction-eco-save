@@ -7,7 +7,7 @@ import Fucker from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
-import { Card, DetailGrid } from 'styles/index';
+import { Card, DetailGrid, ButtonLink } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
@@ -49,6 +49,8 @@ const DetailsCard = ({ building }: Props) => {
         )}
 
         {building && <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />}
+
+        {building && <ButtonLink href={`/buildings/${building.id}`}>Read more</ButtonLink>}
       </Perkele>
     </Wrapper>
   );

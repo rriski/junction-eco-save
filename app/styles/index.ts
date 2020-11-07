@@ -1,3 +1,4 @@
+import { Link } from 'blitz';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
@@ -34,4 +35,31 @@ export const DetailGrid = styled.div`
   gap: ${(p) => p.theme.spacing.xxsmall} ${(p) => p.theme.spacing.default};
   grid-template-columns: 1fr auto;
   line-height: 1;
+`;
+
+export const ListButton = styled.button`
+  ${(p) => p.theme.typography.body}
+  text-align: left;
+  width: 100%;
+  padding: ${(p) => p.theme.spacing.medium} ${(p) => p.theme.spacing.medium};
+  cursor: pointer;
+  border-bottom: solid 1px ${(p) => p.theme.colors['grey-light']};
+  background: transparent;
+
+  &:hover {
+    background-color: ${(p) => p.theme.colors['light-green']};
+  }
+`;
+
+export const ButtonLink = styled(Link)`
+  ${(p) => p.theme.typography.action}
+  width: 100%;
+  padding: ${(p) => p.theme.spacing.small} ${(p) => p.theme.spacing.default};
+  text-align: center;
+  background-color: ${(p) => p.theme.colors.turquoise};
+  border: solid 2px red;
+
+  &:hover {
+    background-color: rgba(${(p) => p.theme.colors.turquoise}, 0.9);
+  }
 `;
