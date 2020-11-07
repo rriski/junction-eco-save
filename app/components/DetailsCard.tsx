@@ -19,7 +19,7 @@ const DetailsCard = ({ building }: Props) => {
 
   return (
     <Wrapper>
-      <Perkele shouldOpen={!!building}>
+      <Perkele>
         {building && (
           <Card spacing="medium">
             <Stack axis="x" justify="space-between" align="center">

@@ -15,7 +15,7 @@ export const Building = () => {
 
   const title = `${building?.location_street_address}${
     building?.location_street_number ? ' ' + building.location_street_number : ''
-  }, ${building?.location_post_number}`;
+  }, ${building?.location_post_number} Helsinki`;
 
   return (
     <MainLayout>
@@ -26,14 +26,17 @@ export const Building = () => {
       <Content>
         <ContentWrapper>
           <Column className="map-column">
-            <Map setBuildingId={() => {}} />
+            <Map setBuildingId={() => undefined} />
+
             <ImageRow>
               <RowItem>
                 <BuildingImage src="https://cataas.com/cat" />
               </RowItem>
+
               <RowItem>
                 <BuildingImage src="https://cataas.com/cat" />
               </RowItem>
+
               <RowItem>
                 <BuildingImage src="https://cataas.com/cat" />
               </RowItem>
@@ -56,7 +59,9 @@ export const Building = () => {
             </Card>
 
             <Fucker category="Energy efficiency" kpi="33%" />
+
             <Fucker category="Repair debt" kpi="12%" />
+
             <Fucker category="Improvement potential" kpi="69%" />
           </Column>
         </ContentWrapper>
@@ -81,10 +86,7 @@ const Header = styled.header`
   background-size: cover;
 
   display: grid;
-  grid-template-columns:
-    1fr
-    min(${(p) => p.theme.rem(1000)}, 100%)
-    1fr;
+  grid-template-columns: 1fr min(${(p) => p.theme.rem(1000)}, 100%) 1fr;
   align-items: center;
 
   & > * {

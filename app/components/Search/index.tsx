@@ -30,25 +30,23 @@ const Search = ({ onSelect }: Props) => {
   };
 
   return (
-    <Content>
-      <OutsideEventCatcher onOutsideEvent={() => setActive(false)}>
-        <SearchContainer ref={searchRef}>
-          <StyledSearch
-            onChange={onChange}
-            onFocus={() => setActive(true)}
-            type="text"
-            placeholder="Search estates"
-            value={query}
-          />
+    <OutsideEventCatcher onOutsideEvent={() => setActive(false)}>
+      <SearchContainer ref={searchRef}>
+        <StyledSearch
+          onChange={onChange}
+          onFocus={() => setActive(true)}
+          type="text"
+          placeholder="Search estates"
+          value={query}
+        />
 
-          <SearchLabel>Search estates</SearchLabel>
+        <SearchLabel>Search estates</SearchLabel>
 
-          <Suspense fallback="">
-            {active && !!query.length && <SearchResults onSelect={handleSelect} query={query} />}
-          </Suspense>
-        </SearchContainer>
-      </OutsideEventCatcher>
-    </Content>
+        <Suspense fallback="">
+          {active && !!query.length && <SearchResults onSelect={handleSelect} query={query} />}
+        </Suspense>
+      </SearchContainer>
+    </OutsideEventCatcher>
   );
 };
 

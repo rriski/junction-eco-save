@@ -28,8 +28,9 @@
   "dependencies": {
     "@prisma/cli": "2.10.2",
     "@prisma/client": "2.10.2",
-    "blitz": "0.24.3",
     "@svgr/webpack": "5.4.0",
+    "blitz": "0.24.3",
+    "d3-ease": "2.0.0",
     "final-form": "4.20.1",
     "next-transpile-modules": "4.1.0",
     "ol": "6.4.3",
