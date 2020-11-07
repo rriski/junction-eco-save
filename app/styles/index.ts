@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Stack } from 'styled-layout';
 
 import { CONTENT_WIDTH } from 'app/utils/constants';
-import { Color } from 'styles/theme';
+import { Color, Spacing } from 'styles/theme';
 
 export const Page = styled.main`
   width: 100vw;
@@ -9,7 +10,8 @@ export const Page = styled.main`
   overflow: hidden;
 `
 
-export const Content = styled.div`
+export const Content = styled(Stack)`
+  position: relative;
   width: 100%;
   max-width: ${CONTENT_WIDTH};
   padding: ${p => p.theme.spacing.default};
@@ -88,8 +90,8 @@ export const Divider = styled.div`
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
 
-export const Card = styled.div`
-  padding: ${p => p.theme.spacing.medium};
+export const Card = styled.div<{ spacing?: Spacing }>`
+  padding: ${p => p.theme.spacing[p.spacing || 'default']};
   border-radius: ${p => p.theme.borderRadius.default};
   background-color: ${p => p.theme.colors.white};
   box-shadow: ${p => p.theme.shadow.default};

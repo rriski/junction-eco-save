@@ -8,7 +8,7 @@ import { Property } from 'types/index';
 
 const DetailsCard = (property: Property) => (
   <Wrapper>
-    <Card>
+    <Card spacing="medium">
       <Subtitle>{property.address}, {property.postalCode}, {property.city}</Subtitle>
 
       <table>

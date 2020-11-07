@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { dummieProperty } from 'app/utils/dummies';
 import DetailsCard from 'components/DetailsCard';
+import { Content } from 'styles/index';
 
 const PropertyMap = () => {
 
@@ -15,8 +16,7 @@ const PropertyMap = () => {
     </Wrapper>
   )
 }
-const Wrapper = styled.div`
-  position: relative;
+const Wrapper = styled(Content)`
   padding-right: ${p => p.theme.spacing.large};
 `
 
@@ -31,7 +31,7 @@ const Map = styled.div`
 const Details = styled.div`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: ${p => p.theme.spacing.large};
   max-width: ${p => p.theme.rem(500)};
 `
 

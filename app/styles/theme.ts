@@ -19,6 +19,7 @@ const theme = {
     teel: '#017E8A',
     'light-green': '#CFEB99',
     'light-pink': '#FEEAE4',
+    turquoise: '#1FD8AB'
   },
   spacing: {
     none: '0rem',
@@ -40,9 +41,16 @@ const theme = {
       line-height: 1.3;
       letter-spacing: 0.1rem;
     `,
-    subtitle: css`
+    'title-2': css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1.8rem;
+      font-weight: bold;
+      line-height: 1.3;
+      letter-spacing: 0.1rem;
+    `,
+    subtitle: css`
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.4rem;
       font-weight: semibold;
       line-height: 1.5;
       letter-spacing: 0.1rem;
@@ -51,6 +59,11 @@ const theme = {
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
       line-height: 1.8;
+    `,
+    detail: css`
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.2;
     `,
     small: css`
       font-family: 'Open Sans', sans-serif;

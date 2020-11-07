@@ -3,7 +3,8 @@ import React from 'react'
 import Head from 'components/Head';
 import Hero from 'components/Hero';
 import PropertyMap from 'components/PropertyMap';
-import { Content, Page } from 'styles/index'
+import SavedProperties from 'components/SavedProperties';
+import { Page } from 'styles/index'
 
 const Index = () => {
   return (
@@ -12,9 +13,9 @@ const Index = () => {
 
       <Hero title="Turtuli" image="https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70" />
 
-      <Content>
-        <PropertyMap />
-      </Content>
+      <PropertyMap />
+
+      <SavedProperties />
     </Page>
   )
 }
