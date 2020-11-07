@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgres"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// --------------------------------------
+
+model Building {
+  id                      Int       @default(autoincrement()) @id
+  building_id             String    @unique
+  construction_date       DateTime?
+  heating_category        String
+  fuel_category           String
+  construction_material   String
+  area_living             Float?
+  area_floors             Float?
+  floors                  Int?
+  location_street_address String?
+  location_street_number  String?
+  location_post_number    String?
+  type                    String
+}
+
+model Renovation {
+  id                      Int       @default(autoincrement()) @id
+  building_id             Building
+  start_year              Int
+  end_year                Int
+  description             String?
+  category                String?
+}

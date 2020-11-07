@@ -1,0 +1,128 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "SpatialRefSy"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SpatialRefSy",
+      "field": "srid",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SpatialRefSy",
+          "field": "srid"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "SpatialRefSy",
+      "field": "authName",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SpatialRefSy",
+          "field": "authName"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SpatialRefSy",
+          "field": "authName"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"auth_name\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "SpatialRefSy",
+      "field": "authSrid",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "SpatialRefSy",
+          "field": "authSrid"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "SpatialRefSy",
+          "field": "authSrid"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"auth_srid\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "SpatialRefSy",
+      "field": "proj4text",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "SpatialRefSy",
+      "field": "srtext",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "SpatialRefSy"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "SpatialRefSy"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"spatial_ref_sys\""
+    }
+  ]
+}
