@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
 
-import { useQuery, useParam, BlitzPage } from 'blitz';
+import { useQuery, useParam, BlitzPage, NotFoundError } from 'blitz';
 import styled from 'styled-components';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
 import { calculateRepairDebt } from 'app/utils/buildingScores';
-import Fucker, { AdvancedFucker } from 'components/Fucker';
+import { AdvancedFucker } from 'components/Fucker';
 import { Map } from 'components/PropertyMap';
 import FacadeIcon from 'static/svg/julkisivu.svg';
 import RoofIcon from 'static/svg/kattoremppa.svg';
@@ -23,6 +23,7 @@ const getIconFromCategory = (category: 'pipes' | 'facade' | 'roof' | undefined) 
 export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
+  if (!building) throw NotFoundError;
 
   const improvable =
     building?.energy_consumption && building.photovoltaic_potential
