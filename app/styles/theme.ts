@@ -17,6 +17,7 @@ const theme = {
     magenta: '#E1034F',
     red: '#F94F59',
     teal: '#017E8A',
+    orangeish: '#FFCE00',
     'light-green': '#CFEB99',
     'light-pink': '#FEEAE4',
     turquoise: '#1FD8AB',

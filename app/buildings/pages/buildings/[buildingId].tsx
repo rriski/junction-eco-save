@@ -6,13 +6,25 @@ import styled from 'styled-components';
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
-import Fucker from 'components/Fucker';
+import { calculateRepairDebt } from 'app/utils/buildingScores';
+import Fucker, { AdvancedFucker } from 'components/Fucker';
 import { Map } from 'components/PropertyMap';
+import FacadeIcon from 'static/svg/julkisivu.svg';
+import RoofIcon from 'static/svg/kattoremppa.svg';
+import PipesIcon from 'static/svg/putki.svg';
+
+const getIconFromCategory = (category: 'pipes' | 'facade' | 'roof' | undefined) => {
+  if (category === 'pipes') return <PipesIcon />;
+  else if (category === 'facade') return <FacadeIcon />;
+  else if (category === 'roof') return <RoofIcon />;
+  else return null;
+};
 
 export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
-  console.log(building);
+
+  const debts = calculateRepairDebt(building);
 
   const title = `${building?.location_street_address}${
     building?.location_street_number ? ' ' + building.location_street_number : ''
@@ -56,7 +68,21 @@ export const Building = () => {
             </Card>
 
             <Fucker category="Energy efficiency" kpi="33%" />
-            <Fucker category="Repair debt" kpi="12%" />
+            <AdvancedFucker
+              title="Pipe repair debt"
+              value={debts.pipes}
+              thresholds={debts.thresholds.pipes}
+            />
+            <AdvancedFucker
+              title="Facade repair debt"
+              value={debts.facade}
+              thresholds={debts.thresholds.facade}
+            />
+            <AdvancedFucker
+              title="Roof repair debt"
+              value={debts.roof}
+              thresholds={debts.thresholds.roof}
+            />
             <Fucker category="Improvement potential" kpi="69%" />
 
             {building?.Renovation && (
@@ -71,7 +97,7 @@ export const Building = () => {
                       <RenovationItem key={reno.id}>
                         <RenovationTitle>
                           <RenovationYears>{renoYears}</RenovationYears>
-                          {reno.category}
+                          {getIconFromCategory(reno.category)}
                         </RenovationTitle>
                         {reno.description}
                       </RenovationItem>
@@ -209,17 +235,18 @@ const RenovationList = styled.ul`
   margin-left: 1rem;
   margin-top: 2rem;
   border-left: 0.5rem solid ${(p) => p.theme.colors['grey-light']};
-  position: relative;
 `;
 
 const RenovationItem = styled.li`
+  position: relative;
+
   &:before {
     content: '';
     display: inline-block;
     width: 2.5rem;
     height: 2.5rem;
     position: absolute;
-    left: -1.5rem;
+    left: -3.5rem;
     margin-top: -0.6rem;
     border-radius: 999px;
     background-color: ${(p) => p.theme.colors.white};
@@ -241,6 +268,16 @@ const RenovationTitle = styled.h3`
   color: #000;
   font-size: 1.5rem;
   margin-bottom: 1rem;
+
+  & > svg {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    top: -1.25rem;
+    left: -4.25rem;
+    background-color: ${(p) => p.theme.colors.white};
+    border: 0.5rem solid ${(p) => p.theme.colors.white};
+  }
 `;
 
 const ShowBuildingPage: BlitzPage = () => (
