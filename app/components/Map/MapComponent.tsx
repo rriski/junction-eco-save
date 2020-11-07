@@ -54,6 +54,7 @@ const MapContainer = styled.div`
   border-radius: ${(p) => p.theme.borderRadius.large};
   overflow: hidden;
   box-shadow: ${(p) => p.theme.shadow.default};
+  background-color: ${(p) => p.theme.colors['grey-light']};
 `;
 
 export default MapComponent;
