@@ -15,7 +15,6 @@ const Map = () => {
   const [center, setCenter] = useState([24.945831, 60.192059]);
   const [zoom, setZoom] = useState(9);
   const [showLayer1, setShowLayer1] = useState(true);
-  const [showLayer2, setShowLayer2] = useState(true);
 
   const vectorSource = new VectorSource();
 
@@ -38,11 +37,6 @@ const Map = () => {
       const features = new GeoJSON().readFeatures(json);
       vectorSource.addFeatures(features);
     });
-
-  const key = 'LdUm2NwwklDLVjfQM0Qr';
-  const attributions =
-    '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
-    '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 
   return (
     <Suspense fallback="Loading...">

@@ -1,4 +1,4 @@
-const Layers = ({ children }) => {
+const Layers: React.FC = ({ children }) => {
   return <div>{children}</div>;
 };
 
