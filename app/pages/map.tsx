@@ -1,10 +1,7 @@
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState } from 'react';
 
 import { BlitzPage } from 'blitz';
 import dynamic from 'next/dynamic';
-import { GeoJSON, WFS } from 'ol/format';
-import { like as likeFilter } from 'ol/format/filter';
-import { bbox } from 'ol/loadingstrategy';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 import { Stroke, Style } from 'ol/style';
@@ -14,6 +11,7 @@ import { Controls, FullScreenControl } from 'app/components/Map/Controls';
 import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
 import { OSMSource } from 'app/components/Map/Source';
 import Layout from 'app/layouts/Layout';
+import { getFeaturesByFilter } from 'components/Map/Source/helsinkiSource';
 
 const MapPage: BlitzPage = () => {
   const [center, setCenter] = useState([24.945831, 60.192059]);
@@ -22,41 +20,8 @@ const MapPage: BlitzPage = () => {
   const [showLayer2, setShowLayer2] = useState(true);
 
   const vectorSource = new VectorSource();
-  /*
-  const vectorSource = new VectorSource({
-    format: new GeoJSON(),
-    url: (extent: any) => {
-      return (
-        `${'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
-        'version=1.1.0&request=GetFeature&typename=avoindata:Kiinteisto_alue&' +
-        'outputFormat=application/json&srsname=EPSG:3857&' +
-        'bbox='}${
-          extent.join(',')
-        },EPSG:3857`
-      );
-    },
-    strategy: bbox,
-  });
-  */
 
-  const featureRequest = new WFS().writeGetFeature({
-    srsName: 'EPSG:3857',
-    featureTypes: ['avoindata:Kiinteisto_alue'],
-    outputFormat: 'application/json',
-    filter: likeFilter('kiinteisto', '91-4-61*'),
-  });
-
-  fetch('https://kartta.hel.fi/ws/geoserver/avoindata/wfs', {
-    method: 'POST',
-    body: new XMLSerializer().serializeToString(featureRequest),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (json) {
-      const features = new GeoJSON().readFeatures(json);
-      vectorSource.addFeatures(features);
-    });
+  getFeaturesByFilter('avoindata:Kiinteisto_alue', 'kiinteisto', '91-4-61*', vectorSource);
 
   return (
     <Suspense fallback="Loading...">
