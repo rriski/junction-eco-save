@@ -1,4 +1,7 @@
+import { ReactElement, Suspense } from 'react';
+
 import dynamic from 'next/dynamic';
+import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 
 import { dummieProperty } from 'app/utils/dummies';
@@ -13,7 +16,11 @@ const MapComponent = dynamic(() => import('components/Map'), {
 const PropertyMap = () => {
   return (
     <Wrapper>
-      <Map />
+      <ErrorBoundary fallback={(error) => <div>Error: {JSON.stringify(error)}</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Map />
+        </Suspense>
+      </ErrorBoundary>
 
       <Details>
         <DetailsCard {...dummieProperty} />

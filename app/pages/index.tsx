@@ -14,7 +14,6 @@ const Index: BlitzPage = () => {
       />
 
       <PropertyMap />
-
       <SavedProperties />
     </Layout>
   );
