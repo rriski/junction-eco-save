@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Renovation",
+      "field": "description",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Renovation",
+      "field": "category",
+      "arity": "Optional"
+    }
+  ]
+}

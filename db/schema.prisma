@@ -1,20 +1,14 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-// --------------------------------------
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
 model Building {
-  id                      Int       @default(autoincrement()) @id
-  building_id             String    @unique
+  building_id             String       @unique
   construction_date       DateTime?
   heating_category        String
   fuel_category           String
@@ -26,13 +20,32 @@ model Building {
   location_street_number  String?
   location_post_number    String?
   type                    String
+  id                      Int          @id @default(autoincrement())
+  Renovation              Renovation[]
 }
 
 model Renovation {
-  id                      Int       @default(autoincrement()) @id
-  building_id             Building
-  start_year              Int
-  end_year                Int
-  description             String
-  category                String
+  id          Int      @id @default(autoincrement())
+  start_year  Int
+  end_year    Int
+  description String?
+  category    String?
+  buildingId  Int
+  building_id Building @relation(fields: [buildingId], references: [id])
 }
+
+model spatial_ref_sys {
+  srid      Int     @id
+  auth_name String?
+  auth_srid Int?
+  srtext    String?
+  proj4text String?
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+// model BuildingGeometries {
+  // name        String?
+  // This type is currently not supported.
+  // geom        geometry?
+  // building_id String?
+// }
