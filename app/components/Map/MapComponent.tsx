@@ -2,16 +2,18 @@ import { useRef, useState, useEffect } from 'react';
 
 import { View, Map } from 'ol';
 import { Coordinate } from 'ol/coordinate';
+import { Pixel } from 'ol/pixel';
 import styled from 'styled-components';
 
 import MapContext from './MapContext';
 
 interface Props {
+  onClick: (e: Pixel) => void;
   zoom: number;
   center: Coordinate;
 }
 
-const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
+const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<Map>();
 
@@ -24,6 +26,10 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
     };
 
     const mapObject = new Map(options);
+
+    mapObject.on('click', function (e) {
+      onClick(e.pixel);
+    });
 
     if (mapRef.current) {
       mapObject.setTarget(mapRef.current);
