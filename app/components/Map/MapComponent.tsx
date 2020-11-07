@@ -29,6 +29,8 @@ const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
 
     mapObject.on('click', function (e) {
       onClick(e.pixel);
+      const coordinates = map?.getCoordinateFromPixelInternal(e.pixel);
+      map?.getView().setCenter(coordinates);
     });
 
     if (mapRef.current) {

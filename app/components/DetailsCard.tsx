@@ -4,45 +4,52 @@ import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import Fucker from 'components/Fucker';
+import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
 import { Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
-const DetailsCard = (building: Building) => {
+interface Props {
+  building: Building | null;
+}
+
+const DetailsCard = ({ building }: Props) => {
   const [saved, toggleSaved] = useState(false);
 
   return (
     <Wrapper>
-      <Card spacing="medium">
-        <Stack axis="x" justify="space-between" align="center">
-          <Subtitle>
-            {building.location_street_address} {building.location_street_number}
-          </Subtitle>
+      <Perkele shouldOpen={!!building}>
+        {building && (
+          <Card spacing="medium">
+            <Stack axis="x" justify="space-between" align="center">
+              <Subtitle>
+                {building.location_street_address} {building.location_street_number}
+              </Subtitle>
 
-          <SaveButton onClick={() => toggleSaved((x) => !x)} selected={saved} />
-        </Stack>
+              <SaveButton onClick={() => toggleSaved((x) => !x)} selected={saved} />
+            </Stack>
 
-        <Text>Helsinki, {building.location_post_number}</Text>
+            <Text>Helsinki, {building.location_post_number}</Text>
 
-        <Spacer size="small" />
+            <Spacer size="small" />
 
-        <DetailGrid>
-          <Text>Potential</Text>
-          <Text weight="bold" align="right">
-            {building.ecosave} %
-          </Text>
+            <DetailGrid>
+              <Text>Potential</Text>
+              <Text weight="bold" align="right">
+                {building.ecosave} %
+              </Text>
 
-          <Text>Renovated</Text>
-          <Text weight="bold" align="right">
-            {building.lastRenovation}
-          </Text>
-        </DetailGrid>
-      </Card>
+              <Text>Renovated</Text>
+              <Text weight="bold" align="right">
+                {building.lastRenovation}
+              </Text>
+            </DetailGrid>
+          </Card>
+        )}
 
-      <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
-
-      <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
+        {building && <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />}
+      </Perkele>
     </Wrapper>
   );
 };

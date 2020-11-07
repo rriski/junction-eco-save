@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
 import { BlitzPage } from 'blitz';
+import { useRouter } from 'next/router';
 
 import Hero from 'components/Hero';
 import PropertyMap from 'components/PropertyMap';
@@ -8,6 +9,8 @@ import SavedProperties from 'components/SavedProperties';
 import Layout from 'layouts/Layout';
 
 const Index: BlitzPage = () => {
+  const router = useRouter();
+
   return (
     <Suspense fallback="Loading...">
       <Layout title="Boi :D">

@@ -39,6 +39,7 @@
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.2",
     "react-final-form": "6.5.2",
+    "react-spring": "8.0.27",
     "secure-password": "4.0.0",
     "styled-components": "5.2.1",
     "styled-layout": "0.4.0",
