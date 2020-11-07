@@ -46,7 +46,7 @@ const energy_consumption_omakotitalo: energy_consumption_options = {
     heating: 228,
     electricity: 8,
   },
-}
+};
 const energy_consumption: energy_consumption_options = {
   '201': {
     heating: 82,
@@ -89,19 +89,20 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
   });
 
   if (building?.construction_date && (building.area_living || building.area_floors)) {
-    const energy = building.category === "Omakotitalo" ?
-    energy_consumption_omakotitalo[
-      Math.floor(building.construction_date.getFullYear() / 10).toString()
-    ] || {
-      heating: 286,
-      electricity: 8,
-    }
-    : energy_consumption[
-      Math.floor(building.construction_date.getFullYear() / 10).toString()
-    ] || {
-      heating: 130,
-      electricity: 12,
-    };
+    const energy =
+      building.category === 'Omakotitalo'
+        ? energy_consumption_omakotitalo[
+            Math.floor(building.construction_date.getFullYear() / 10).toString()
+          ] || {
+            heating: 286,
+            electricity: 8,
+          }
+        : energy_consumption[
+            Math.floor(building.construction_date.getFullYear() / 10).toString()
+          ] || {
+            heating: 130,
+            electricity: 12,
+          };
     const area = building.area_living || building.area_floors;
     if (energy && area) {
       building.energy_consumption = {
