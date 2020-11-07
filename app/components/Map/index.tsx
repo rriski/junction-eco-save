@@ -1,22 +1,17 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { useQuery } from 'blitz';
-import { Feature } from 'ol';
 import { GeoJSON, WFS } from 'ol/format';
 import { like as likeFilter } from 'ol/format/filter';
-import Geometry from 'ol/geom/Geometry';
 import OLVectorLayer from 'ol/layer/Vector';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
 
-import getBuilding from 'app/buildings/queries/getBuilding';
 import { Controls, FullScreenControl } from 'app/components/Map/Controls';
 import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
 import mapStyles from 'app/components/Map/MapStyles';
 import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
-import { Building } from 'db';
 
 interface Props {
   setBuildingId: (buildingId: string) => void;

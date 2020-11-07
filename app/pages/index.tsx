@@ -10,9 +10,6 @@ import Search from 'components/Search/Search';
 import Layout from 'layouts/Layout';
 
 const Index: BlitzPage = () => {
-  const router = useRouter();
-  console.log(router);
-
   return (
     <Suspense fallback={<DotsLoadingText>Ladataan</DotsLoadingText>}>
       <Layout title="Boi :D">

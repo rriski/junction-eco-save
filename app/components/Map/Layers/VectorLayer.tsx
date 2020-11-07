@@ -8,12 +8,16 @@ import Style from 'ol/style/Style';
 import MapContext from '../MapContext';
 
 interface Props {
-  source: VectorSource;
+  source: VectorSource | undefined;
   style: Style;
   zIndex?: number;
 }
 
-const VectorLayer: React.FC<Props> = forwardRef(({ source, style, zIndex = 0 }, ref) => {
+interface ForwardRefProps {
+  getFeatures: (pixel: Pixel) => any;
+}
+
+const VectorLayer = forwardRef<ForwardRefProps, Props>(({ source, style, zIndex = 0 }, ref) => {
   const { map } = useContext(MapContext);
   const vectorLayer = useRef<OLVectorLayer>();
 

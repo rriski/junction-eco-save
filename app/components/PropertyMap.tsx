@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import { useQuery } from 'blitz';
-import dynamic from 'next/dynamic';
-import { ErrorBoundary } from 'react-error-boundary';
+import { useQuery, dynamic } from 'blitz';
 import styled from 'styled-components';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
@@ -14,6 +12,7 @@ import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
   loading: () => <MapLoader />,
+  ssr: false,
 });
 
 const PropertyMap = () => {
@@ -31,6 +30,7 @@ const PropertyMap = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled(Content)`
   padding-right: ${(p) => p.theme.spacing.large};
 `;
