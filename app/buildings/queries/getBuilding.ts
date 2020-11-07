@@ -1,6 +1,6 @@
 import { Ctx } from 'blitz';
 
-import db, { FindFirstBuildingArgs, Building } from 'db';
+import db, { FindFirstBuildingArgs, Building, Renovation } from 'db';
 
 type GetBuildingInput = Pick<FindFirstBuildingArgs, 'where'>;
 
@@ -12,6 +12,7 @@ type energy_data = {
 type ApiBuilding =
   | (Building & {
       energy_consumption?: energy_data;
+      Renovation?: Renovation[];
     })
   | null;
 
