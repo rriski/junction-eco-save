@@ -12,7 +12,7 @@ interface Props {
 }
 
 const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
-  const mapRef = useRef();
+  const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<Map>();
 
   useEffect(() => {
@@ -24,8 +24,11 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
     };
 
     const mapObject = new Map(options);
-    mapObject.setTarget(mapRef.current);
-    setMap(mapObject);
+
+    if (mapRef.current) {
+      mapObject.setTarget(mapRef.current);
+      setMap(mapObject);
+    }
 
     return () => mapObject.setTarget(undefined);
   }, []);
