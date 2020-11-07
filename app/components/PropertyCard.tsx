@@ -1,25 +1,27 @@
 import styled from 'styled-components';
 
+import { Building } from 'db';
 import { Card, DetailGrid } from 'styles/index';
 import { Text, Subtitle, Detail } from 'styles/typography';
-import { Property } from 'types/index';
 
-const PropertyCard = (property: Property) => (
+interface Props {
+  building: Building;
+}
+
+const PropertyCard = ({ building }: Props) => (
   <Card>
-    <Subtitle>{property.address}</Subtitle>
+    <Subtitle>{building.location_street_address}</Subtitle>
 
-    <Detail>
-      {property.city}, {property.postalCode}
-    </Detail>
+    <Detail>Helsinki, {building.location_post_number}</Detail>
 
     <Divider />
 
     <DetailGrid>
       <Detail>Potential</Detail>
-      <Text align="right">{property.ecosave} %</Text>
+      <Text align="right">10 %</Text>
 
       <Detail>Renovated</Detail>
-      <Text align="right">{property.lastRenovation}</Text>
+      <Text align="right">2001</Text>
     </DetailGrid>
   </Card>
 );

@@ -1,21 +1,31 @@
+import { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
 
-import { dummieProperty } from 'app/utils/dummies';
+import { localStorageGetArray } from 'app/utils/localStorage';
 import PropertyCard from 'components/PropertyCard';
+import { Building } from 'db';
 import { Content } from 'styles/index';
 import { Subtitle } from 'styles/typography';
-import { Property } from 'types/index';
 
 const SavedProperties = () => {
-  const properties = [1, 2, 3, 4, 5, 6, 7, 8].map(() => dummieProperty);
+  const [properties, setProperties] = useState<Building[]>([]);
+
+  useEffect(() => {
+    const savedProperties = localStorageGetArray('savedProperties');
+    if (savedProperties) {
+      console.log(savedProperties);
+      setProperties(savedProperties);
+    }
+  }, []);
 
   return (
     <Content spacing="xxlarge">
       <Subtitle>Saved properties</Subtitle>
 
       <Grid>
-        {properties.map((property: Property) => (
-          <PropertyCard key={property.address} {...property} />
+        {properties.map((building: Building) => (
+          <PropertyCard key={building.id} building={building} />
         ))}
       </Grid>
     </Content>

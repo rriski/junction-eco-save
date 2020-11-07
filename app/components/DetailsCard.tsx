@@ -1,25 +1,42 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 
+import { useQuery } from 'blitz';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
+import getBuilding from 'app/buildings/queries/getBuilding';
+import { formatBuildingId } from 'app/utils/format';
+import { localStorageGetArray, localStorageSetArray } from 'app/utils/localStorage';
 import Fucker from 'components/Fucker';
 import Perkele from 'components/Perkele';
-import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
 import { Card, DetailGrid, ButtonLink } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
-  building: Building | null;
+  buildingId: string;
 }
 
-const DetailsCard = ({ building }: Props) => {
-  const [saved, toggleSaved] = useState(false);
+const DetailsCard = ({ buildingId }: Props) => {
+  const [building] = useQuery(getBuilding, {
+    where: { building_id: formatBuildingId(buildingId) },
+  });
+  let savedProperties = localStorageGetArray('savedProperties');
+
+  const onSave = useCallback(() => {
+    if (building) {
+      if (!savedProperties) {
+        savedProperties = [];
+      }
+      localStorageSetArray('savedProperties', building);
+    }
+  }, [buildingId]);
+
+  console.log(savedProperties, building);
 
   return (
     <Wrapper>
-      <Perkele shouldOpen={!!building}>
+      <Perkele>
         {building && (
           <Card spacing="medium">
             <Stack axis="x" justify="space-between" align="center">
@@ -27,7 +44,10 @@ const DetailsCard = ({ building }: Props) => {
                 {building.location_street_address} {building.location_street_number}
               </Subtitle>
 
-              <SaveButton onClick={() => toggleSaved((x) => !x)} selected={saved} />
+              <SaveButton
+                onClick={onSave}
+                selected={savedProperties.some((b) => b.building_id === building.building_id)}
+              />
             </Stack>
 
             <Text>Helsinki, {building.location_post_number}</Text>

@@ -26,7 +26,6 @@ const OutsideEventCatcher: React.FC<OutsideEventCatcherProps> = ({
 
   const handleClickOutside = (event: any) => {
     if (!ref.current?.contains(event.target)) {
-      console.log('BOI');
       onOutsideEvent();
     }
   };

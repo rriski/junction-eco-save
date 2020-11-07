@@ -14,7 +14,7 @@ import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
 
 interface Props {
-  setBuildingId: (buildingId?: string) => void;
+  setBuildingId: (buildingId: string) => void;
 }
 
 const Map = ({ setBuildingId }: Props) => {
@@ -33,7 +33,7 @@ const Map = ({ setBuildingId }: Props) => {
       srsName: 'EPSG:3857',
       featureTypes: ['avoindata:Kiinteisto_alue'],
       outputFormat: 'application/json',
-      filter: likeFilter('kiinteisto', '91-4-61*'),
+      filter: likeFilter('type', 'building'),
     });
 
     fetch('https://kartta.hel.fi/ws/geoserver/avoindata/wfs', {
