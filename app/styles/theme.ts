@@ -8,12 +8,18 @@ const pxToRem = (px: number) => `${px / 16}rem`;
 const theme = {
   rem: pxToRem,
   colors: {
-    black: '#2b2b2b',
+    black: '#555',
     white: '#fff',
     grey: '#858585',
     'grey-light': '#ededed',
     'grey-dark': '#545454',
     primary: '#27AF81',
+    magenta: '#E1034F',
+    red: '#F94F59',
+    teel: '#017E8A',
+    'light-green': '#CFEB99',
+    'light-pink': '#FEEAE4',
+    turquoise: '#1FD8AB',
   },
   spacing: {
     none: '0rem',
@@ -35,9 +41,16 @@ const theme = {
       line-height: 1.3;
       letter-spacing: 0.1rem;
     `,
-    subtitle: css`
+    'title-2': css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1.8rem;
+      font-weight: bold;
+      line-height: 1.3;
+      letter-spacing: 0.1rem;
+    `,
+    subtitle: css`
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.4rem;
       font-weight: semibold;
       line-height: 1.5;
       letter-spacing: 0.1rem;
@@ -45,19 +58,21 @@ const theme = {
     body: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      font-weight: normal;
       line-height: 1.8;
+    `,
+    detail: css`
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.2;
     `,
     small: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 0.7rem;
-      font-weight: lighter;
       line-height: 1.2;
     `,
     action: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      font-weight: bold;
       line-height: 1.4;
       letter-spacing: 0.2rem;
     `,
@@ -69,9 +84,9 @@ const theme = {
   },
   borderRadius: {
     small: pxToRem(5),
-    default: pxToRem(20),
-    large: pxToRem(40),
-  }
+    default: pxToRem(15),
+    large: pxToRem(30),
+  },
 };
 
 export type Theme = typeof theme;

@@ -1,23 +1,25 @@
 import styled from 'styled-components';
+import { Stack } from 'styled-layout';
 
 import { CONTENT_WIDTH } from 'app/utils/constants';
-import { Color } from 'styles/theme';
+import { Color, Spacing } from 'styles/theme';
 
 export const Page = styled.main`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-`
+`;
 
-export const Content = styled.div`
+export const Content = styled(Stack)`
+  position: relative;
   width: 100%;
   max-width: ${CONTENT_WIDTH};
-  padding: ${p => p.theme.spacing.default};
+  padding: ${(p) => p.theme.spacing.default};
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   z-index: 1;
-`
+`;
 
 export const Button = styled.button.attrs({ type: 'button' })<{
   color?: Color;
@@ -28,10 +30,11 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   background-color: transparent;
   text-align: center;
   transition: color 0.2s 0.1s;
-  color: ${(p) => p.theme.colors[p.color || 'alert']};
+  color: ${(p) => p.theme.colors[p.color || 'primary']};
 
-  &:before, &:after {
-    content: "";
+  &:before,
+  &:after {
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -42,7 +45,7 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   &:before {
     top: 0;
     left: 0;
-    background-color: ${(p) => p.theme.colors.alert};
+    background-color: ${(p) => p.theme.colors.primary};
     transform: scaleX(0);
     transform-origin: center left;
   }
@@ -50,7 +53,7 @@ export const Button = styled.button.attrs({ type: 'button' })<{
   &:after {
     top: 0;
     left: 0;
-    border: solid 2px ${(p) => p.theme.colors[p.color || 'alert']};
+    border: solid 2px ${(p) => p.theme.colors[p.color || 'primary']};
     z-index: -1;
   }
 
@@ -72,7 +75,7 @@ export const ButtonSoft = styled.button`
   width: 100%;
   padding: ${(p) => p.theme.spacing.default};
   border-radius: 5px;
-  background-color: ${(p) => p.theme.colors.alert};
+  background-color: ${(p) => p.theme.colors.primary};
   color: ${(p) => p.theme.colors.white};
   transition: background-color 0.1s;
 
@@ -88,9 +91,17 @@ export const Divider = styled.div`
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
 
+export const Card = styled.div<{ spacing?: Spacing }>`
+  padding: ${(p) => p.theme.spacing[p.spacing || 'default']};
+  border-radius: ${(p) => p.theme.borderRadius.default};
+  background-color: ${(p) => p.theme.colors.white};
+  box-shadow: ${(p) => p.theme.shadow.default};
+`;
 
-export const Card = styled.div`
-  padding: ${p => p.theme.spacing.default};
-  border-radius: ${p => p.theme.borderRadius.default};
-  background-color: ${p => p.theme.colors.white};
-`
+export const DetailGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: ${(p) => p.theme.spacing.xxsmall} ${(p) => p.theme.spacing.default};
+  align-items: center;
+  line-height: 1;
+`;

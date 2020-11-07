@@ -1,7 +1,7 @@
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
 
 export const styles = {
-  'Point': new Style({
+  Point: new Style({
     image: new CircleStyle({
       radius: 10,
       fill: undefined,
@@ -10,7 +10,7 @@ export const styles = {
       }),
     }),
   }),
-  'Polygon': new Style({
+  Polygon: new Style({
     stroke: new Stroke({
       color: 'blue',
       lineDash: [4],
@@ -20,7 +20,7 @@ export const styles = {
       color: 'rgba(0, 0, 255, 0.1)',
     }),
   }),
-  'MultiPolygon': new Style({
+  MultiPolygon: new Style({
     stroke: new Stroke({
       color: 'blue',
       width: 1,

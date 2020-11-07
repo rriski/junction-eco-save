@@ -1,8 +1,8 @@
-import VectorSource from 'ol/source/Vector';
+import VectorSource, { Options } from 'ol/source/Vector';
 
-function Vector({ features }) {
+function Vector({ features }: Options): VectorSource {
   return new VectorSource({
-    features
+    features,
   });
 }
 

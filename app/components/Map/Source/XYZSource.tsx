@@ -1,6 +1,6 @@
-import XYZ from 'ol/source/XYZ';
+import XYZ, { Options } from 'ol/source/XYZ';
 
-function XYZSource({ url, attributions, maxZoom }) {
+function XYZSource({ url, attributions, maxZoom }: Options): XYZ {
   return new XYZ({ url, attributions, maxZoom });
 }
 
