@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { BlitzPage } from 'blitz';
 
 import Hero from 'components/Hero';
+import { DotsLoadingText } from 'components/Loaders/Dots';
 import PropertyMap from 'components/PropertyMap';
 import SavedProperties from 'components/SavedProperties';
 import Search from 'components/Search/Search';
@@ -10,7 +11,7 @@ import Layout from 'layouts/Layout';
 
 const Index: BlitzPage = () => {
   return (
-    <Suspense fallback="Loading...">
+    <Suspense fallback={<DotsLoadingText>Ladataan</DotsLoadingText>}>
       <Layout title="Boi :D">
         <Hero
           title="Timon hieno kartta"

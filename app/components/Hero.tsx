@@ -38,9 +38,9 @@ const TitleWrapper = styled(Content)`
 `;
 
 const BackgroundOverlay = styled.div<{ color: Color }>`
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
   background-color: ${(p) => `${p.theme.colors[p.color]}cc`};
 `;
 
@@ -62,8 +62,8 @@ const BackgroundImage = styled.img`
 
 const Title = styled.h1`
   ${(p) => p.theme.typography.hero};
-  color: ${(p) => p.theme.colors.white};
   margin-right: 2rem;
+  color: ${(p) => p.theme.colors.white};
 `;
 
 export default Hero;
