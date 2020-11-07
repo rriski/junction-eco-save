@@ -6,6 +6,7 @@ import { Spacer, Stack } from 'styled-layout';
 import Fucker from 'components/Fucker';
 import { Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
+import SaveIcon from 'svg/save.svg';
 import { Property } from 'types/index';
 
 const DetailsCard = (property: Property) => {
@@ -51,13 +52,11 @@ const Wrapper = styled(Stack)`
   padding: ${(p) => p.theme.spacing.default};
 `;
 
-const SaveButton = styled.div<{ selected: boolean }>`
-  padding: ${(p) => p.theme.spacing.default};
-  background-color: red;
-  max-width: 10px;
+const SaveButton = styled(SaveIcon)<{ selected: boolean }>`
+  fill: ${(p) => (p.selected ? p.theme.colors.red : 'transparent')};
   color: ${(p) => p.theme.colors[p.selected ? 'red' : 'grey']};
   cursor: pointer;
-  transition: color 0.1s;
+  transition: color 0.1s, fill 0.1s;
 `;
 
 export default DetailsCard;

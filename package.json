@@ -24,6 +24,7 @@
   "dependencies": {
     "@prisma/cli": "2.10.2",
     "@prisma/client": "2.10.2",
+    "@svgr/webpack": "5.4.0",
     "blitz": "0.24.3",
     "final-form": "4.20.1",
     "next": "10.0.1",
