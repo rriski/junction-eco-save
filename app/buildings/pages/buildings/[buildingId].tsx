@@ -24,6 +24,13 @@ export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
 
+  const improvable =
+    building?.energy_consumption && building.photovoltaic_potential
+      ? Math.floor(
+          (building.photovoltaic_potential / building.energy_consumption.electricity) * 1000
+        ) / 10
+      : null;
+
   const debts = calculateRepairDebt(building);
 
   const title = `${building?.location_street_address}${
@@ -70,7 +77,6 @@ export const Building = () => {
               </DataList>
             </Card>
 
-            <Fucker category="Energy efficiency" kpi="33%" />
             <AdvancedFucker
               title="Pipe repair debt"
               value={debts.pipes}
@@ -86,7 +92,14 @@ export const Building = () => {
               value={debts.roof}
               thresholds={debts.thresholds.roof}
             />
-            <Fucker category="Improvement potential" kpi="69%" />
+            {improvable && (
+              <AdvancedFucker
+                title="Electric improvement potential"
+                value={improvable}
+                thresholds={{ low: 0, high: 30 }}
+                unit="%"
+              />
+            )}
 
             {building?.Renovation && (
               <HistoryWrapper>
