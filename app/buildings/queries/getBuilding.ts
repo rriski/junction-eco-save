@@ -10,12 +10,11 @@ type energy_data = {
   electricity: number;
 };
 
-type ApiBuilding =
-  | (Building & {
-      energy_consumption?: energy_data;
-      Renovation?: Renovation[];
-      image_url?: string;
-    });
+type ApiBuilding = Building & {
+  energy_consumption?: energy_data;
+  Renovation?: Renovation[];
+  image_url?: string;
+};
 
 type energy_consumption_options = {
   [key: string]: energy_data;
@@ -90,22 +89,19 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
   });
 
   if (building && (building?.area_living || building?.area_floors)) {
-    const energy = (
-      building.category === "Omakotitalo" ?
-      energy_consumption_omakotitalo :
-      energy_consumption
-    )[
+    const energy =
+      (building.category === 'Omakotitalo' ? energy_consumption_omakotitalo : energy_consumption)[
         Math.floor(building?.construction_date.getFullYear() / 10).toString()
-    ] || (
-      building.category === "Omakotitalo" ?
-      {
-        heating: 286,
-        electricity: 8,
-      } : {
-        heating: 130,
-        electricity: 12,
-      }
-    )
+      ] ||
+      (building.category === 'Omakotitalo'
+        ? {
+            heating: 286,
+            electricity: 8,
+          }
+        : {
+            heating: 130,
+            electricity: 12,
+          });
     const area = building?.area_living || building?.area_floors;
     if (energy && area) {
       building.energy_consumption = {
@@ -131,6 +127,5 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
     "roof": 35
   }
   */
-  console.log(building)
   return building;
 }

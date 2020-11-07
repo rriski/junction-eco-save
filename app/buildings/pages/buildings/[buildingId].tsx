@@ -1,13 +1,14 @@
 import React, { Suspense } from 'react';
 
-import { useQuery, useParam, BlitzPage } from 'blitz';
+import { useQuery, useParam, BlitzPage, NotFoundError } from 'blitz';
 import styled from 'styled-components';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
-import { calculateRepairDebt } from 'app/utils/buildingScores';
-import Fucker, { AdvancedFucker } from 'components/Fucker';
+import { calculateRepairDebt, getImprovable } from 'app/utils/buildingScores';
+import { AdvancedFucker } from 'components/Fucker';
+import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
 import FacadeIcon from 'static/svg/julkisivu.svg';
 import RoofIcon from 'static/svg/kattoremppa.svg';
@@ -23,14 +24,11 @@ const getIconFromCategory = (category: 'pipes' | 'facade' | 'roof' | undefined) 
 export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
+  if (!building) throw NotFoundError;
 
-  const improvable =
-    building?.energy_consumption && building.photovoltaic_potential
-      ? Math.floor(
-          (building.photovoltaic_potential / building.energy_consumption.electricity) * 1000
-        ) / 10
-      : null;
+  console.log(building);
 
+  const improvable = getImprovable(building);
   const debts = calculateRepairDebt(building);
 
   const title = `${building?.location_street_address}${
@@ -101,11 +99,11 @@ export const Building = () => {
               />
             )}
 
-            {building?.Renovation && (
+            {building?.Renovation?.length !== 0 && (
               <HistoryWrapper>
                 <SubTitle>History</SubTitle>
                 <RenovationList>
-                  {building.Renovation.sort((a, b) => b.end_year - a.end_year).map((reno) => {
+                  {building.Renovation?.sort((a, b) => b.end_year - a.end_year).map((reno) => {
                     const renoYears = `${reno.start_year}${
                       reno.end_year && reno.start_year != reno.end_year ? ` - ${reno.end_year}` : ''
                     }`;
@@ -283,18 +281,18 @@ const RenovationTitle = styled.h3`
   font-size: 1.5rem;
 
   & > svg {
-    width: 4rem;
-    height: 4rem;
     position: absolute;
     top: -1.25rem;
     left: -4.25rem;
-    background-color: ${(p) => p.theme.colors.white};
+    width: 4rem;
+    height: 4rem;
     border: 0.5rem solid ${(p) => p.theme.colors.white};
+    background-color: ${(p) => p.theme.colors.white};
   }
 `;
 
 const ShowBuildingPage: BlitzPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
     <Building />
   </Suspense>
 );

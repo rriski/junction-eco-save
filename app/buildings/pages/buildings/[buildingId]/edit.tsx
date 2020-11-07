@@ -1,9 +1,12 @@
-import React, { Suspense } from 'react';
-import Layout from 'app/layouts/Layout';
-import { Link, useRouter, useQuery, useMutation, useParam, BlitzPage } from 'blitz';
-import getBuilding from 'app/buildings/queries/getBuilding';
-import updateBuilding from 'app/buildings/mutations/updateBuilding';
+import { Suspense } from 'react';
+
+import { BlitzPage, Link, useMutation, useParam, useQuery, useRouter } from 'blitz';
+
 import BuildingForm from 'app/buildings/components/BuildingForm';
+import updateBuilding from 'app/buildings/mutations/updateBuilding';
+import getBuilding from 'app/buildings/queries/getBuilding';
+import Layout from 'app/layouts/Layout';
+import { DotsLoadingText } from 'components/Loaders/Dots';
 
 export const EditBuilding = () => {
   const router = useRouter();
@@ -40,7 +43,7 @@ export const EditBuilding = () => {
 const EditBuildingPage: BlitzPage = () => {
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
         <EditBuilding />
       </Suspense>
 

@@ -60,8 +60,8 @@ const SearchContainer = styled.div`
   border-radius: 999px;
   box-shadow: ${(p) => p.theme.shadow.default};
   color: ${(p) => p.theme.colors.grey};
-  transition-property: opacity, filter, box-shadow;
   transition-duration: 0.2s;
+  transition-property: opacity, filter, box-shadow;
   transition-timing-function: ease-in-out;
 
   &:hover {

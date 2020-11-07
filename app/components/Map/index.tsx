@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { GeoJSON, WFS } from 'ol/format';
-import { equalTo, like as likeFilter } from 'ol/format/filter';
+import { equalTo } from 'ol/format/filter';
 import OLVectorLayer from 'ol/layer/Vector';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
@@ -12,7 +12,6 @@ import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
 import mapStyles from 'app/components/Map/MapStyles';
 import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
-import { Building } from 'db';
 
 interface Props {
   setBuildingId: (buildingId?: string) => void;
@@ -69,8 +68,6 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
-        console.log(value);
-
         if (value && value.length) {
           setBuildingId(value[0].values_.c_kiinteistotunnus);
         } else {

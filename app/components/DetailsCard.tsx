@@ -1,50 +1,48 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { useQuery } from 'blitz';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
+import { calculateRepairDebt, getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
 import { formatBuildingId } from 'app/utils/format';
-import {
-  getSavedBuildings,
-  addBuildingToLocalStorage,
-  removeBuildingFromLocalStorage,
-} from 'app/utils/localStorage';
-import Fucker from 'components/Fucker';
+import { addBuildingToLocalStorage, removeBuildingFromLocalStorage } from 'app/utils/localStorage';
+import Fucker, { AdvancedFucker } from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
-import { Card, DetailGrid, ButtonLink } from 'styles/index';
+import { ButtonLink, Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
   buildingId: string | undefined;
+  savedBuildings: Building[];
+  setSavedBuildings: (buildings: Building[]) => void;
 }
 
-const DetailsCard = ({ buildingId }: Props) => {
-  const [properties, setProperties] = useState<Building[]>([]);
-  const isSaved = properties.some((b) => b.building_id === buildingId);
+const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) => {
   const [building] = useQuery(getBuilding, {
     where: { building_id: formatBuildingId(buildingId) },
   });
+  const isSaved = savedBuildings.some((b) => b.building_id === buildingId);
 
-  useEffect(() => {
-    const savedProperties = getSavedBuildings();
-    if (savedProperties) {
-      setProperties(savedProperties);
-    }
-  }, []);
+  const improvable = getImprovable(building);
+  const latestRenovation = Math.min(getLatestRenovation(building), new Date().getFullYear());
 
-  const onSave = useCallback(() => {
+  console.log(building);
+
+  const onSaveClick = useCallback(() => {
     if (building) {
-      if (isSaved) {
-        addBuildingToLocalStorage(building);
+      if (!isSaved) {
+        const newSavedBuildings = addBuildingToLocalStorage(building);
+        setSavedBuildings(newSavedBuildings);
       } else {
-        removeBuildingFromLocalStorage(building);
+        const newSavedBuildings = removeBuildingFromLocalStorage(building);
+        setSavedBuildings(newSavedBuildings);
       }
     }
-  }, [buildingId]);
+  }, [building, isSaved]);
 
   return (
     <Wrapper>
@@ -56,7 +54,7 @@ const DetailsCard = ({ buildingId }: Props) => {
                 {building.location_street_address} {building.location_street_number}
               </Subtitle>
 
-              <SaveButton onClick={onSave} selected={isSaved} />
+              <SaveButton onClick={onSaveClick} selected={isSaved} />
             </Stack>
 
             <Text>Helsinki, {building.location_post_number}</Text>
@@ -64,20 +62,36 @@ const DetailsCard = ({ buildingId }: Props) => {
             <Spacer size="small" />
 
             <DetailGrid>
-              <Text>Potential</Text>
-              <Text weight="bold" align="right">
-                {building.ecosave} %
-              </Text>
+              {improvable && (
+                <>
+                  <Text>Potential</Text>
+                  <Text weight="bold" align="right">
+                    {improvable} %
+                  </Text>
+                </>
+              )}
 
-              <Text>Renovated</Text>
-              <Text weight="bold" align="right">
-                {building.lastRenovation}
-              </Text>
+              {latestRenovation !== 0 && (
+                <>
+                  <Text>Renovated</Text>
+                  <Text weight="bold" align="right">
+                    {latestRenovation}
+                  </Text>
+                </>
+              )}
             </DetailGrid>
           </Card>
         )}
 
-        {building && <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />}
+        {building?.energy_consumption && (
+          <AdvancedFucker
+            title="Energy consumption"
+            value={building.energy_consumption.electricity + building.energy_consumption.heating}
+            thresholds={{ low: 5000, high: 100000 }}
+            inverse
+            unit="kW"
+          />
+        )}
 
         {building && <ButtonLink href={`/buildings/${building.id}`}>Read more</ButtonLink>}
       </Perkele>

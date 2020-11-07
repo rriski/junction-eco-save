@@ -47,12 +47,27 @@ type FuckerProps = {
   value: number;
   thresholds: { low: number; high: number };
   unit?: string;
+  inverse?: boolean;
 };
 
-export const AdvancedFucker = ({ title, value, thresholds, unit }: FuckerProps) => {
+export const AdvancedFucker = ({ title, value, thresholds, unit, inverse }: FuckerProps) => {
   return (
     <PillBadge>
-      <Indicator what={value < thresholds.low ? 'bad' : value < thresholds.high ? 'ok' : 'good'} />
+      <Indicator
+        what={
+          inverse
+            ? value > thresholds.high
+              ? 'bad'
+              : value > thresholds.low
+              ? 'ok'
+              : 'good'
+            : value < thresholds.low
+            ? 'bad'
+            : value < thresholds.high
+            ? 'ok'
+            : 'good'
+        }
+      />
 
       <Text>{title}</Text>
 

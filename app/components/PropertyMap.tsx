@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import DetailsCard from 'components/DetailsCard';
 import MapLoader from 'components/Map/MapLoader';
 import Search from 'components/Search';
+import { Building } from 'db';
 import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
@@ -13,7 +14,12 @@ const MapComponent = dynamic(() => import('components/Map'), {
   ssr: false,
 });
 
-const PropertyMap = () => {
+interface Props {
+  savedBuildings: Building[];
+  setSavedBuildings: (buildings: Building[]) => void;
+}
+
+const PropertyMap = (props: Props) => {
   const [buildingId, setBuildingId] = useState<string>();
 
   return (
@@ -25,7 +31,7 @@ const PropertyMap = () => {
 
         <Suspense fallback="">
           <Details>
-            <DetailsCard buildingId={buildingId} />
+            <DetailsCard buildingId={buildingId} {...props} />
           </Details>
         </Suspense>
       </Wrapper>

@@ -79,19 +79,19 @@ const HeaderBar = styled.div`
 
 const HeroTitle = styled(Title).attrs({ as: 'h1' })`
   max-width: ${(p) => p.theme.rem(600)};
+  color: ${(p) => p.theme.colors.white};
   font-size: 2.4rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
   line-height: 1.3;
-  text-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
-  color: ${(p) => p.theme.colors.white};
   text-align: center;
+  text-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
 `;
 
 const HeroContent = styled(Text)`
-  font-size: ${(p) => p.theme.rem(20)};
-  color: ${(p) => p.theme.colors.white};
   max-width: ${(p) => p.theme.rem(600)};
+  color: ${(p) => p.theme.colors.white};
+  font-size: ${(p) => p.theme.rem(20)};
   font-weight: 600;
   text-align: center;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
