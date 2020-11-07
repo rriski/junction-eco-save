@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link, useQuery } from 'blitz';
 import styled from 'styled-components';
 
