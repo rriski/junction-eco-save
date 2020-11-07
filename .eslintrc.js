@@ -26,6 +26,8 @@ module.exports = {
   ],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'import/export': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'prettier/prettier': 'error',
     'import/no-anonymous-default-export': 'error',
     'import/no-webpack-loader-syntax': 'off',
