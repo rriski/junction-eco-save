@@ -10,7 +10,8 @@
     "stylelint": "stylelint app",
     "stylelint:fix": "stylelint app --fix",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "nuke": "rm -rf .blitz && rm -rf node_modules"
   },
   "browserslist": [
     "defaults"

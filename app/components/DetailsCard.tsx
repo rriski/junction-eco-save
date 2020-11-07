@@ -4,38 +4,38 @@ import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import Fucker from 'components/Fucker';
+import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
 import { Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
-import { Property } from 'types/index';
 
-const DetailsCard = (property: Property) => {
+const DetailsCard = (building: Building) => {
   const [saved, toggleSaved] = useState(false);
 
   return (
     <Wrapper>
       <Card spacing="medium">
         <Stack axis="x" justify="space-between" align="center">
-          <Subtitle>{property.address}</Subtitle>
+          <Subtitle>
+            {building.location_street_address} {building.location_street_number}
+          </Subtitle>
 
           <SaveButton onClick={() => toggleSaved((x) => !x)} selected={saved} />
         </Stack>
 
-        <Text>
-          {property.postalCode}, {property.city}
-        </Text>
+        <Text>Helsinki, {building.location_post_number}</Text>
 
         <Spacer size="small" />
 
         <DetailGrid>
           <Text>Potential</Text>
           <Text weight="bold" align="right">
-            {property.ecosave} %
+            {building.ecosave} %
           </Text>
 
           <Text>Renovated</Text>
           <Text weight="bold" align="right">
-            {property.lastRenovation}
+            {building.lastRenovation}
           </Text>
         </DetailGrid>
       </Card>

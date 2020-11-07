@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { useQuery } from 'blitz';
+import { Feature } from 'ol';
 import { GeoJSON, WFS } from 'ol/format';
 import { like as likeFilter } from 'ol/format/filter';
+import Geometry from 'ol/geom/Geometry';
+import OLVectorLayer from 'ol/layer/Vector';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
@@ -16,22 +19,16 @@ import MapComponent from 'components/Map/MapComponent';
 import { Building } from 'db';
 
 interface Props {
-  onSelect: (building: Building) => void;
+  setBuildingId: (buildingId: string) => void;
 }
 
-const Map = ({ onSelect }: Props) => {
-  const [center, setCenter] = useState([24.945831, 60.192059]);
-  const [zoom, setZoom] = useState(9);
+const Map = ({ setBuildingId }: Props) => {
+  const [center, setCenter] = useState([24.946, 60.166]);
+  const [zoom, setZoom] = useState(16);
   const [showLayer1, setShowLayer1] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource | undefined>(undefined);
 
-  const vectorLayerRef = useRef(null);
-
-  const [selection, setSelection] = useState<Building>();
-
-  const [building] = useQuery(getBuilding, {
-    where: { location_street_address: selection?.location_street_address },
-  });
+  const vectorLayerRef = useRef<OLVectorLayer>(null);
 
   useEffect(() => {
     const vectorSource = new VectorSource();
@@ -57,16 +54,12 @@ const Map = ({ onSelect }: Props) => {
     setShowLayer1(true);
   }, []);
 
-  useEffect(() => {
-    if (building) {
-      console.log(selection, building);
-    }
-  }, [building, selection]);
-
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
-      vectorLayerRef.current.getFeatures(pixel).then((building: Building) => {
-        setSelection(building);
+      vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
+        if (value) {
+          setBuildingId(value[0].values_.kiinteisto);
+        }
       });
     }
   };

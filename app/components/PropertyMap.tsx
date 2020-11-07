@@ -1,7 +1,11 @@
+import { useState } from 'react';
+
+import { useQuery } from 'blitz';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
-import { dummieProperty } from 'app/utils/dummies';
+import getBuilding from 'app/buildings/queries/getBuilding';
+import { formatBuildingId } from 'app/utils/format';
 import DetailsCard from 'components/DetailsCard';
 import MapLoader from 'components/Map/MapLoader';
 import { Content } from 'styles/index';
@@ -11,13 +15,17 @@ const MapComponent = dynamic(() => import('components/Map'), {
 });
 
 const PropertyMap = () => {
+  const [buildingId, setBuildingId] = useState<string>();
+
+  const [building] = useQuery(getBuilding, {
+    where: { building_id: buildingId ? formatBuildingId(buildingId) : '' },
+  });
+
   return (
     <Wrapper>
-      <Map />
+      <Map setBuildingId={setBuildingId} />
 
-      <Details>
-        <DetailsCard {...dummieProperty} />
-      </Details>
+      <Details>{buildingId && <DetailsCard {...building} />}</Details>
     </Wrapper>
   );
 };
