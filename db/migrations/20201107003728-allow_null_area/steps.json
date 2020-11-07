@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "UpdateField",
+      "model": "Building",
+      "field": "area_living",
+      "arity": "Optional"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "Building",
+      "field": "area_floors",
+      "arity": "Optional"
+    }
+  ]
+}

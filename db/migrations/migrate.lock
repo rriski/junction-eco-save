@@ -2,3 +2,14 @@
 
 20201106174044
 20201106220834-create_building_renovation
+20201107000951-add_building_data
+20201107003026-building_add_type
+20201107003153-id_string_unique
+20201107003427-remove_fields
+20201107003728-allow_null_area
+20201107003911-street_number_string
+20201107003958-date_not_necessary
+20201107004035-street_number_null
+20201107004739-floors_null
+20201107005130-street_address_null
+20201107005508-more_null

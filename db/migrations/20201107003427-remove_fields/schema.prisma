@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -15,16 +15,16 @@ generator client {
 model Building {
   id                      Int       @default(autoincrement()) @id
   building_id             String    @unique
-  construction_date       DateTime?
+  construction_date       DateTime
   heating_category        String
   fuel_category           String
   construction_material   String
-  area_living             Float?
-  area_floors             Float?
-  floors                  Int?
-  location_street_address String?
-  location_street_number  String?
-  location_post_number    String?
+  area_living             Float
+  area_floors             Float
+  floors                  Int
+  location_street_address String
+  location_street_number  Int
+  location_post_number    String
   type                    String
 }
 
