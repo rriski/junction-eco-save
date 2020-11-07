@@ -24,7 +24,7 @@ module.exports = {
     'prettier/react',
     'plugin:jsx-a11y/recommended',
   ],
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'react-hooks'],
   rules: {
     'import/export': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

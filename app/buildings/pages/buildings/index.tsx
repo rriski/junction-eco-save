@@ -1,9 +1,10 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
-import { Link, usePaginatedQuery, useRouter, BlitzPage } from 'blitz';
+import { BlitzPage, Link, usePaginatedQuery, useRouter } from 'blitz';
 
 import getBuildings from 'app/buildings/queries/getBuildings';
 import Layout from 'app/layouts/Layout';
+import { DotsLoadingText } from 'components/Loaders/Dots';
 
 const ITEMS_PER_PAGE = 100;
 
@@ -50,7 +51,7 @@ const BuildingsPage: BlitzPage = () => {
         </Link>
       </p>
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
         <BuildingsList />
       </Suspense>
     </div>

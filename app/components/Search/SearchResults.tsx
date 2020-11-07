@@ -45,17 +45,17 @@ const SearchMarker = styled.div`
 
 const Results = styled.ul`
   position: absolute;
+  z-index: 10;
   top: 100%;
   right: 0;
   left: 0;
+  overflow: hidden;
   padding: 0;
-  border-radius: ${(p) => p.theme.borderRadius.default};
   margin: ${(p) => p.theme.spacing.xsmall} 0 0;
   background-color: ${(p) => p.theme.colors.white};
+  border-radius: ${(p) => p.theme.borderRadius.default};
   box-shadow: ${(p) => p.theme.shadow.default};
   list-style: none;
-  overflow: hidden;
-  z-index: 10;
 `;
 
 const SearchResult = styled.li`
