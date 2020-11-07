@@ -12,6 +12,7 @@ import { Map } from 'components/PropertyMap';
 export const Building = () => {
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
+  console.log(building);
 
   const title = `${building?.location_street_address}${
     building?.location_street_number ? ' ' + building.location_street_number : ''
@@ -54,7 +55,6 @@ export const Building = () => {
                 <DataItem>Source of heat: {building?.fuel_category}</DataItem>
                 <DataItem>Building material: {building?.construction_material}</DataItem>
                 <DataItem>Living area: {building?.area_living} m2</DataItem>
-                <pre>{JSON.stringify(building, null, 2)}</pre>
               </DataList>
             </Card>
 
@@ -63,6 +63,28 @@ export const Building = () => {
             <Fucker category="Repair debt" kpi="12%" />
 
             <Fucker category="Improvement potential" kpi="69%" />
+
+            {building?.Renovation && (
+              <HistoryWrapper>
+                <SubTitle>History</SubTitle>
+                <RenovationList>
+                  {building.Renovation.sort((a, b) => b.end_year - a.end_year).map((reno) => {
+                    const renoYears = `${reno.start_year}${
+                      reno.end_year && reno.start_year != reno.end_year ? ` - ${reno.end_year}` : ''
+                    }`;
+                    return (
+                      <RenovationItem key={reno.id}>
+                        <RenovationTitle>
+                          <RenovationYears>{renoYears}</RenovationYears>
+                          {reno.category}
+                        </RenovationTitle>
+                        {reno.description}
+                      </RenovationItem>
+                    );
+                  })}
+                </RenovationList>
+              </HistoryWrapper>
+            )}
           </Column>
         </ContentWrapper>
       </Content>
@@ -176,6 +198,51 @@ const BuildingImage = styled.img`
   object-fit: cover;
   box-shadow: ${(p) => p.theme.shadow.default};
   border-radius: ${(p) => p.theme.borderRadius.default};
+`;
+
+const HistoryWrapper = styled.section`
+  margin-top: 2rem;
+  padding: 1rem;
+`;
+
+const RenovationList = styled.ul`
+  list-style: none;
+  padding-left: 2rem;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  border-left: 0.5rem solid ${(p) => p.theme.colors['grey-light']};
+  position: relative;
+`;
+
+const RenovationItem = styled.li`
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    position: absolute;
+    left: -1.5rem;
+    margin-top: -0.6rem;
+    border-radius: 999px;
+    background-color: ${(p) => p.theme.colors.white};
+    border: 0.5rem solid ${(p) => p.theme.colors['grey-light']};
+  }
+
+  & + & {
+    margin-top: 3rem;
+  }
+`;
+
+const RenovationYears = styled.div`
+  color: ${(p) => p.theme.colors['grey-dark']};
+  font-size: 1rem;
+  font-weight: bold;
+`;
+
+const RenovationTitle = styled.h3`
+  color: #000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 `;
 
 const ShowBuildingPage: BlitzPage = () => (

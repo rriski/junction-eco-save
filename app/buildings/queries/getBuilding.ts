@@ -1,6 +1,6 @@
 import { Ctx } from 'blitz';
 
-import db, { FindFirstBuildingArgs, Building } from 'db';
+import db, { FindFirstBuildingArgs, Building, Renovation } from 'db';
 
 type GetBuildingInput = Pick<FindFirstBuildingArgs, 'where'>;
 
@@ -12,6 +12,7 @@ type energy_data = {
 type ApiBuilding =
   | (Building & {
       energy_consumption?: energy_data;
+      Renovation?: Renovation[];
     })
   | null;
 
@@ -19,6 +20,33 @@ type energy_consumption_options = {
   [key: string]: energy_data;
 };
 
+// from https://www.hel.fi/hel2/tietokeskus/data/dokumentit/data_atlas.pdf
+const energy_consumption_omakotitalo: energy_consumption_options = {
+  '201': {
+    heating: 116,
+    electricity: 12,
+  },
+  '200': {
+    heating: 116,
+    electricity: 12,
+  },
+  '199': {
+    heating: 172,
+    electricity: 10,
+  },
+  '198': {
+    heating: 172,
+    electricity: 10,
+  },
+  '197': {
+    heating: 228,
+    electricity: 8,
+  },
+  '196': {
+    heating: 228,
+    electricity: 8,
+  },
+}
 const energy_consumption: energy_consumption_options = {
   '201': {
     heating: 82,
@@ -61,7 +89,14 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
   });
 
   if (building?.construction_date && (building.area_living || building.area_floors)) {
-    const energy = energy_consumption[
+    const energy = building.category === "Omakotitalo" ?
+    energy_consumption_omakotitalo[
+      Math.floor(building.construction_date.getFullYear() / 10).toString()
+    ] || {
+      heating: 286,
+      electricity: 8,
+    }
+    : energy_consumption[
       Math.floor(building.construction_date.getFullYear() / 10).toString()
     ] || {
       heating: 130,
