@@ -22,6 +22,9 @@
     ]
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.32",
+    "@fortawesome/free-solid-svg-icons": "5.15.1",
+    "@fortawesome/react-fontawesome": "0.1.12",
     "@prisma/cli": "2.10.2",
     "@prisma/client": "2.10.2",
     "blitz": "0.24.3",

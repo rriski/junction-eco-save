@@ -96,3 +96,11 @@ export const Card = styled.div<{ spacing?: Spacing }>`
   background-color: ${p => p.theme.colors.white};
   box-shadow: ${p => p.theme.shadow.default};
 `
+
+export const DetailGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: ${p => p.theme.spacing.xxsmall} ${p => p.theme.spacing.default};
+  align-items: center;
+  line-height: 1;
+`

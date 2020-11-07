@@ -1,39 +1,58 @@
+import { useState } from 'react';
+
+import { faBookmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styled from 'styled-components';
-import { Stack } from 'styled-layout';
+import { Spacer, Stack } from 'styled-layout';
 
 import Fucker from 'components/Fucker'
-import { Card } from 'styles/index'
+import { Card, DetailGrid } from 'styles/index'
 import { Subtitle, Text } from 'styles/typography'
 import { Property } from 'types/index';
 
-const DetailsCard = (property: Property) => (
-  <Wrapper>
-    <Card spacing="medium">
-      <Subtitle>{property.address}, {property.postalCode}, {property.city}</Subtitle>
+const DetailsCard = (property: Property) => {
+  const [saved, toggleSaved] = useState(false);
 
-      <table>
-        <tbody>
-          <tr>
-            <td><Text>EcoSave potential</Text></td>
-            <td><Text weight="bold">{property.ecosave} %</Text></td>
-          </tr>
+  return (
+    <Wrapper>
+      <Card spacing="medium">
+        <Stack axis="x" justify="space-between" align="center">
+          <Subtitle>{property.address}</Subtitle>
 
-          <tr>
-            <td><Text>Last renovation</Text></td>
-            <td><Text weight="bold">{property.lastRenovation}</Text></td>
-          </tr>
-        </tbody>
-      </table>
-    </Card>
+          <SaveButton onClick={() => toggleSaved(x => !x)} icon={faBookmark} selected={saved} />
+        </Stack>
 
-    <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
+        <Text>{property.postalCode}, {property.city}</Text>
 
-    <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
-  </Wrapper>
-)
+        <Spacer size="small" />
+
+        <DetailGrid>
+          <Text>Potential</Text>
+          <Text weight="bold" align="right">{property.ecosave} %</Text>
+
+          <Text>Renovated</Text>
+          <Text weight="bold" align="right">{property.lastRenovation}</Text>
+        </DetailGrid>
+      </Card>
+
+      <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
+
+      <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />
+    </Wrapper>
+  )}
 
 const Wrapper = styled(Stack)`
+  width: ${p => p.theme.rem(450)};
   padding: ${p => p.theme.spacing.default};
+`
+
+const SaveButton = styled.div<{ selected: boolean}>`
+  padding: ${p => p.theme.spacing.default};
+  background-color: red;
+  max-width: 10px;
+  color: ${p => p.theme.colors[p.selected ? 'red' : 'grey']};
+  cursor: pointer;
+  transition: color 0.1s;
 `
 
 export default DetailsCard;
