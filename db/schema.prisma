@@ -22,6 +22,7 @@ model Building {
   type                    String
   id                      Int          @id @default(autoincrement())
   photovoltaic_potential  Float?
+  category                String?
   Renovation              Renovation[]
 }
 
