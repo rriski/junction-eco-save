@@ -34,6 +34,14 @@ const theme = {
     xxxlarge: '4rem',
   },
   typography: {
+    hero: css`
+      font-family: 'Open Sans', sans-serif;
+      font-size: 5rem;
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+      line-height: 1.3;
+      text-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
+    `,
     title: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 2.5rem;

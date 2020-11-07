@@ -42,6 +42,7 @@
     "secure-password": "4.0.0",
     "styled-components": "5.2.1",
     "styled-layout": "0.4.0",
+    "transform-coordinates": "1.0.0",
     "zod": "1.11.10"
   },
   "devDependencies": {
