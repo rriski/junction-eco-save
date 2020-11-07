@@ -11,8 +11,8 @@ body {
 }
 
 body {
-  font-size: 1em;
   color: #555;
+  font-size: 1em;
 }
 
 a {
@@ -29,6 +29,6 @@ a {
 
 button {
   border: none;
-  outline: none;
   cursor: pointer;
+  outline: none;
 }

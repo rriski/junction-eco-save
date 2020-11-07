@@ -25,12 +25,12 @@ const Wrapper = styled(Content)`
 `;
 
 const Map = styled(MapComponent)`
+  overflow: hidden;
   width: 100%;
   height: ${(p) => p.theme.rem(600)};
   background-color: ${(p) => p.theme.colors['grey-light']};
   border-radius: ${(p) => p.theme.borderRadius.large};
   box-shadow: ${(p) => p.theme.shadow.default};
-  overflow: hidden;
 `;
 
 const Details = styled.div`

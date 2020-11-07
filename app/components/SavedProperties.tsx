@@ -24,8 +24,8 @@ const SavedProperties = () => {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(${(p) => p.theme.rem(200)}, 1fr));
   gap: ${(p) => p.theme.spacing.default};
+  grid-template-columns: repeat(auto-fit, minmax(${(p) => p.theme.rem(200)}, 1fr));
 `;
 
 export default SavedProperties;

@@ -49,12 +49,12 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
 };
 
 const MapContainer = styled.div`
-  height: 600px;
-  width: 100%;
-  border-radius: ${(p) => p.theme.borderRadius.large};
   overflow: hidden;
-  box-shadow: ${(p) => p.theme.shadow.default};
+  width: 100%;
+  height: 600px;
   background-color: ${(p) => p.theme.colors['grey-light']};
+  border-radius: ${(p) => p.theme.borderRadius.large};
+  box-shadow: ${(p) => p.theme.shadow.default};
 `;
 
 export default MapComponent;
