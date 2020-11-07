@@ -14,7 +14,7 @@ import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
 
 interface Props {
-  setBuildingId: (buildingId?: string) => void;
+  setBuildingId: (buildingId: string) => void;
 }
 
 const Map = ({ setBuildingId }: Props) => {

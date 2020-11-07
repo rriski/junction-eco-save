@@ -1,14 +1,11 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
-import { useQuery, dynamic } from 'blitz';
+import { dynamic } from 'blitz';
 import styled from 'styled-components';
 
-import getBuilding from 'app/buildings/queries/getBuilding';
-import { formatBuildingId } from 'app/utils/format';
 import DetailsCard from 'components/DetailsCard';
 import MapLoader from 'components/Map/MapLoader';
 import Search from 'components/Search';
-import { Building } from 'db';
 import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
@@ -17,34 +14,28 @@ const MapComponent = dynamic(() => import('components/Map'), {
 });
 
 const PropertyMap = () => {
-  const [buildingId, setBuildingId] = useState<string>();
-
-  const [building] = useQuery(getBuilding, {
-    where: { building_id: buildingId ? formatBuildingId(buildingId) : '' },
-  });
-
-  const onSelect = (building: Building) => {
-    setBuildingId(building.building_id);
-  };
+  const [buildingId, setBuildingId] = useState<string>('');
 
   return (
     <Content>
-      <Search onSelect={onSelect} />
+      <Search setBuildingId={setBuildingId} />
 
       <Wrapper>
         <Map setBuildingId={setBuildingId} />
 
-        <Details>
-          <DetailsCard building={building} />
-        </Details>
+        <Suspense fallback="">
+          <Details>
+            <DetailsCard buildingId={buildingId} />
+          </Details>
+        </Suspense>
       </Wrapper>
     </Content>
   );
 };
 
 const Wrapper = styled(Content)`
-  padding-right: ${(p) => p.theme.spacing.large};
   z-index: -1;
+  padding-right: ${(p) => p.theme.spacing.large};
 `;
 
 export const Map = styled(MapComponent)`

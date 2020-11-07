@@ -15,15 +15,11 @@ const Perkele: FC = ({ children }) => {
     config: { duration: 300, easing: easings.easeCubic },
   });
 
-  return (
-    <>
-      {transitions.map(({ item, props, key }) => (
-        <animated.div key={key} style={props}>
-          {item}
-        </animated.div>
-      ))}
-    </>
-  );
+  return transitions.map(({ item, props, key }) => (
+    <animated.div key={key} style={props}>
+      {item}
+    </animated.div>
+  ));
 };
 
 export default Perkele;

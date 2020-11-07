@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, Suspense } from 'react';
+import { useCallback, useRef, useState, Suspense, SetStateAction, Dispatch } from 'react';
 
 import styled from 'styled-components';
 
@@ -9,10 +9,10 @@ import { Building } from 'db';
 import { Content } from 'styles/index';
 
 interface Props {
-  onSelect: (building: Building) => void;
+  setBuildingId: (buildingId: string) => void;
 }
 
-const Search = ({ onSelect }: Props) => {
+const Search = ({ setBuildingId }: Props) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(false);
@@ -26,7 +26,7 @@ const Search = ({ onSelect }: Props) => {
     setQuery(
       `${building.location_street_address} ${building.location_street_number}, ${building.location_post_number} Helsinki`
     );
-    onSelect(building);
+    setBuildingId(building.building_id);
   };
 
   return (
