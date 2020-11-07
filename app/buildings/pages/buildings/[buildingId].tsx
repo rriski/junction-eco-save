@@ -134,8 +134,10 @@ const MainLayout = styled.main`
 `;
 
 const Header = styled.header`
+  display: grid;
   min-height: ${(p) => p.theme.rem(300)};
   max-height: ${(p) => p.theme.rem(400)};
+  align-items: center;
   background-image: linear-gradient(
       to bottom,
       ${(p) => `${p.theme.colors.turquoise}cc`},
@@ -143,10 +145,7 @@ const Header = styled.header`
     ),
     url('https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70');
   background-size: cover;
-
-  display: grid;
   grid-template-columns: 1fr min(${(p) => p.theme.rem(1000)}, 100%) 1fr;
-  align-items: center;
 
   & > * {
     grid-column: 2;
@@ -161,12 +160,12 @@ const Title = styled.h1`
 
 const Content = styled.section`
   display: grid;
+  align-items: center;
+  margin-top: -${(p) => p.theme.rem(48)};
   grid-template-columns:
     1fr
     min(${(p) => p.theme.rem(1000)}, 100%)
     1fr;
-  align-items: center;
-  margin-top: -${(p) => p.theme.rem(48)};
   & > * {
     grid-column: 2;
   }
@@ -174,8 +173,8 @@ const Content = styled.section`
 
 const ContentWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: ${(p) => p.theme.rem(48)};
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Column = styled.section`
@@ -195,18 +194,18 @@ const Card = styled(OriginalCard)`
 `;
 
 const SubTitle = styled.h2`
+  margin-bottom: 1rem;
   color: #000;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
   line-height: 1.3;
-  margin-bottom: 1rem;
 `;
 
 const DataList = styled.ul`
-  list-style: none;
   padding: 0;
+  list-style: none;
 `;
 
 const DataItem = styled.li`
@@ -217,13 +216,13 @@ const DataItem = styled.li`
 
 const ImageRow = styled.ul`
   display: flex;
-  list-style: none;
   padding: 0;
+  list-style: none;
 `;
 
 const RowItem = styled.li`
-  height: ${(p) => p.theme.rem(150)};
   width: 100%;
+  height: ${(p) => p.theme.rem(150)};
   & + & {
     margin-left: 1rem;
   }
@@ -232,38 +231,39 @@ const RowItem = styled.li`
 const BuildingImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  box-shadow: ${(p) => p.theme.shadow.default};
   border-radius: ${(p) => p.theme.borderRadius.default};
+  box-shadow: ${(p) => p.theme.shadow.default};
+  object-fit: cover;
 `;
 
 const HistoryWrapper = styled.section`
-  margin-top: 2rem;
   padding: 1rem;
+  margin-top: 2rem;
 `;
 
 const RenovationList = styled.ul`
-  list-style: none;
+  position: relative;
   padding-left: 2rem;
-  margin-left: 1rem;
-  margin-top: 2rem;
   border-left: 0.5rem solid ${(p) => p.theme.colors['grey-light']};
+  margin-top: 2rem;
+  margin-left: 1rem;
+  list-style: none;
 `;
 
 const RenovationItem = styled.li`
   position: relative;
 
   &:before {
-    content: '';
+    position: absolute;
+    left: -1.5rem;
     display: inline-block;
     width: 2.5rem;
     height: 2.5rem;
-    position: absolute;
-    left: -3.5rem;
-    margin-top: -0.6rem;
-    border-radius: 999px;
-    background-color: ${(p) => p.theme.colors.white};
     border: 0.5rem solid ${(p) => p.theme.colors['grey-light']};
+    margin-top: -0.6rem;
+    background-color: ${(p) => p.theme.colors.white};
+    border-radius: 999px;
+    content: '';
   }
 
   & + & {
@@ -278,19 +278,9 @@ const RenovationYears = styled.div`
 `;
 
 const RenovationTitle = styled.h3`
+  margin-bottom: 1rem;
   color: #000;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-
-  & > svg {
-    width: 4rem;
-    height: 4rem;
-    position: absolute;
-    top: -1.25rem;
-    left: -4.25rem;
-    background-color: ${(p) => p.theme.colors.white};
-    border: 0.5rem solid ${(p) => p.theme.colors.white};
-  }
 `;
 
 const ShowBuildingPage: BlitzPage = () => (

@@ -1,18 +1,9 @@
-import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
+import { Fill, Stroke, Style } from 'ol/style';
 
 import theme from 'styles/theme';
 
 const styles = {
-  Point: new Style({
-    image: new CircleStyle({
-      radius: 10,
-      fill: undefined,
-      stroke: new Stroke({
-        color: theme.colors.magenta,
-      }),
-    }),
-  }),
-  Polygon: new Style({
+  Buildings: new Style({
     stroke: new Stroke({
       color: theme.colors.teal,
       lineDash: [1],
@@ -22,13 +13,14 @@ const styles = {
       color: 'rgba(0, 0, 255, 0.15)',
     }),
   }),
-  MultiPolygon: new Style({
+  HighlightedBuilding: new Style({
     stroke: new Stroke({
       color: theme.colors.red,
+      lineDash: [1],
       width: 1,
     }),
     fill: new Fill({
-      color: 'rgba(0, 0, 255, 0.15)',
+      color: 'rgba(255, 200, 0, 0.15)',
     }),
   }),
 };

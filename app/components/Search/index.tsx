@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, Suspense, SetStateAction, Dispatch } from 'react';
+import { useCallback, useRef, useState, Suspense } from 'react';
 
 import styled from 'styled-components';
 
@@ -6,7 +6,6 @@ import SearchResults from './SearchResults';
 
 import OutsideEventCatcher from 'components/OutsideEventCatcher';
 import { Building } from 'db';
-import { Content } from 'styles/index';
 
 interface Props {
   setBuildingId: (buildingId: string) => void;
