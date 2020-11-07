@@ -21,7 +21,7 @@
       "layouts/*": ["./app/layouts/*"],
       "public/*": ["./public/*"],
       "types/*": ["./app/types/*"],
-      "svg/*": ["./public/static/svg/*"],
+      "static/*": ["./public/static/*"],
     }
   },
   "exclude": ["node_modules"],

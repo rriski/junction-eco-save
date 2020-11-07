@@ -1,14 +1,13 @@
-import Head from 'components/Head';
+import { BlitzPage } from 'blitz';
+
 import Hero from 'components/Hero';
 import PropertyMap from 'components/PropertyMap';
 import SavedProperties from 'components/SavedProperties';
-import { Page } from 'styles/index';
+import Layout from 'layouts/Layout';
 
-const Index = () => {
+const Index: BlitzPage = () => {
   return (
-    <Page>
-      <Head title="Main page" />
-
+    <Layout title="Boi :D">
       <Hero
         title="Turtuli"
         image="https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70"
@@ -17,7 +16,7 @@ const Index = () => {
       <PropertyMap />
 
       <SavedProperties />
-    </Page>
+    </Layout>
   );
 };
 

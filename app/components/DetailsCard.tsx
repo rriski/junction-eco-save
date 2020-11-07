@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
+import SaveIcon from 'static/svg/save.svg';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import Fucker from 'components/Fucker';
 import { Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
-import SaveIcon from 'svg/save.svg';
 import { Property } from 'types/index';
 
 const DetailsCard = (property: Property) => {
