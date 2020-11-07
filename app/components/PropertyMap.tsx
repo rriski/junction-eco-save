@@ -47,7 +47,7 @@ const Wrapper = styled(Content)`
   z-index: -1;
 `;
 
-const Map = styled(MapComponent)`
+export const Map = styled(MapComponent)`
   overflow: hidden;
   width: 100%;
   height: ${(p) => p.theme.rem(600)};

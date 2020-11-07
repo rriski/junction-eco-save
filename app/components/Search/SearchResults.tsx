@@ -50,7 +50,7 @@ const Results = styled.ul`
   left: 0;
   padding: 0;
   border-radius: ${(p) => p.theme.borderRadius.default};
-  margin: 9px 0 0;
+  margin: ${(p) => p.theme.spacing.xsmall} 0 0;
   background-color: ${(p) => p.theme.colors.white};
   box-shadow: ${(p) => p.theme.shadow.default};
   list-style: none;

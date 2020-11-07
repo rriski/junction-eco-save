@@ -89,6 +89,7 @@ const theme = {
     light: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.1)',
     default: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.2)',
     strong: '0 0.125rem 0.5rem rgba(0, 0, 0, 0.5)',
+    text: '0 0.25rem 0.25rem rgba(0, 0, 0, 0.5)',
   },
   borderRadius: {
     small: pxToRem(5),
