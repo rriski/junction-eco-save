@@ -5,10 +5,10 @@ export type Property = {
   built: number;
   ecosave: number;
   lastRenovation: string;
-}
+};
 
 export type KPI = {
   indicator: number;
   category: string;
   kpi: number | string;
-}
+};

@@ -19,7 +19,7 @@ const theme = {
     teel: '#017E8A',
     'light-green': '#CFEB99',
     'light-pink': '#FEEAE4',
-    turquoise: '#1FD8AB'
+    turquoise: '#1FD8AB',
   },
   spacing: {
     none: '0rem',
@@ -86,7 +86,7 @@ const theme = {
     small: pxToRem(5),
     default: pxToRem(15),
     large: pxToRem(30),
-  }
+  },
 };
 
 export type Theme = typeof theme;
