@@ -21,6 +21,7 @@ model Building {
   location_post_number    String?
   type                    String
   id                      Int          @id @default(autoincrement())
+  photovoltaic_potential  Float?
   Renovation              Renovation[]
 }
 

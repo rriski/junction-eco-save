@@ -8,9 +8,10 @@ interface Props {
   title: string;
   image?: string;
   color?: Color;
+  icon?: boolean;
 }
 
-const Hero = ({ title, image, color }: Props) => {
+const Hero = ({ title, image, color, icon }: Props) => {
   return (
     <Wrapper>
       <Background>
@@ -20,7 +21,7 @@ const Hero = ({ title, image, color }: Props) => {
 
       <TitleWrapper>
         <Title>{title}</Title>
-        <SaveIcon />
+        {icon && <SaveIcon />}
       </TitleWrapper>
     </Wrapper>
   );
@@ -37,10 +38,10 @@ const TitleWrapper = styled(Content)`
 `;
 
 const BackgroundOverlay = styled.div<{ color: Color }>`
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
-  background-color: ${(p) => `${p.theme.colors[p.color]}cc`};
+  background-color: ${(p) => `${p.theme.colors[p.color]}`};
 `;
 
 const Background = styled.div`
@@ -61,8 +62,8 @@ const BackgroundImage = styled.img`
 
 const Title = styled.h1`
   ${(p) => p.theme.typography.hero};
-  color: ${(p) => p.theme.colors.white};
   margin-right: 2rem;
+  color: ${(p) => p.theme.colors.white};
 `;
 
 export default Hero;
