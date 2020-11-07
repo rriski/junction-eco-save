@@ -4,6 +4,12 @@ type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
 type Building = ThenArg<ReturnType<typeof getBuilding>>;
 type Category = 'pipes' | 'facade' | 'roof';
 
+export function getLatestRenovation(building: Building) {
+  return (
+    building?.Renovation?.reduce((max, curr) => (curr.end_year > max ? curr.end_year : max), 0) || 0
+  );
+}
+
 export function calculateRepairDebt(building: Building) {
   const getLatest = (category: Category) =>
     building!.Renovation?.reduce(
@@ -51,4 +57,14 @@ export function calculateRepairDebt(building: Building) {
       roof: { low: (weights.roof / 2) * -1, high: weights.roof / 2 },
     },
   };
+}
+
+export function getImprovable(building: Building) {
+  return building?.energy_consumption && building.photovoltaic_potential
+    ? Math.floor(
+        (building.photovoltaic_potential /
+          (building.energy_consumption.electricity + building.energy_consumption.heating)) *
+          1000
+      ) / 10
+    : null;
 }

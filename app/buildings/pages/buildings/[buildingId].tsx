@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
-import { calculateRepairDebt } from 'app/utils/buildingScores';
+import { calculateRepairDebt, getImprovable } from 'app/utils/buildingScores';
 import { AdvancedFucker } from 'components/Fucker';
 import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
@@ -26,13 +26,9 @@ export const Building = () => {
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
   if (!building) throw NotFoundError;
 
-  const improvable =
-    building?.energy_consumption && building.photovoltaic_potential
-      ? Math.floor(
-          (building.photovoltaic_potential / building.energy_consumption.electricity) * 1000
-        ) / 10
-      : null;
+  console.log(building);
 
+  const improvable = getImprovable(building);
   const debts = calculateRepairDebt(building);
 
   const title = `${building?.location_street_address}${

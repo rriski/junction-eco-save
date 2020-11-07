@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
+import { calculateRepairDebt, getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
 import { formatBuildingId } from 'app/utils/format';
 import { addBuildingToLocalStorage, removeBuildingFromLocalStorage } from 'app/utils/localStorage';
-import Fucker from 'components/Fucker';
+import Fucker, { AdvancedFucker } from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
@@ -25,6 +26,11 @@ const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) =
     where: { building_id: formatBuildingId(buildingId) },
   });
   const isSaved = savedBuildings.some((b) => b.building_id === buildingId);
+
+  const improvable = getImprovable(building);
+  const latestRenovation = Math.min(getLatestRenovation(building), new Date().getFullYear());
+
+  console.log(building);
 
   const onSaveClick = useCallback(() => {
     if (building) {
@@ -56,20 +62,36 @@ const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) =
             <Spacer size="small" />
 
             <DetailGrid>
-              <Text>Potential</Text>
-              <Text weight="bold" align="right">
-                {building.ecosave} %
-              </Text>
+              {improvable && (
+                <>
+                  <Text>Potential</Text>
+                  <Text weight="bold" align="right">
+                    {improvable} %
+                  </Text>
+                </>
+              )}
 
-              <Text>Renovated</Text>
-              <Text weight="bold" align="right">
-                {building.lastRenovation}
-              </Text>
+              {latestRenovation !== 0 && (
+                <>
+                  <Text>Renovated</Text>
+                  <Text weight="bold" align="right">
+                    {latestRenovation}
+                  </Text>
+                </>
+              )}
             </DetailGrid>
           </Card>
         )}
 
-        {building && <Fucker indicator={20} category="Energy consumption" kpi="2000 kW" />}
+        {building?.energy_consumption && (
+          <AdvancedFucker
+            title="Energy consumption"
+            value={building.energy_consumption.electricity + building.energy_consumption.heating}
+            thresholds={{ low: 5000, high: 100000 }}
+            inverse
+            unit="kW"
+          />
+        )}
 
         {building && <ButtonLink href={`/buildings/${building.id}`}>Read more</ButtonLink>}
       </Perkele>
