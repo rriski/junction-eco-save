@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Color } from 'styles/theme';
+import { Color } from './theme';
 
 const BaseText = styled.span<{ color?: Color, weight?: 'normal' | 'bold' | 'light', lineHeight?: number, align?: 'left' | 'center' | 'right' }>`
   margin: 0;
@@ -11,20 +11,16 @@ const BaseText = styled.span<{ color?: Color, weight?: 'normal' | 'bold' | 'ligh
   text-align: ${p => p.align || 'inherit'};
 `;
 
-export const Title = styled(BaseText).attrs({as: 'h2'})`
+export const Title = styled(BaseText).attrs({ as: 'h2' })`
   ${(p) => p.theme.typography.title}
 `;
 
-export const Title2 = styled(BaseText).attrs({ as: 'h3' })`
-  ${(p) => p.theme.typography['title-2']}
-`;
-
-export const Subtitle = styled(BaseText).attrs({ as: 'h4' })`
+export const Subtitle = styled(BaseText).attrs({ as: 'h3' })`
   ${(p) => p.theme.typography.subtitle}
   font-weight: 800;
 `;
 
-export const Text = styled(BaseText).attrs({as: 'p'})`
+export const Text = styled(BaseText).attrs({ as: 'p' })`
   ${(p) => p.theme.typography.body}
 `;
 

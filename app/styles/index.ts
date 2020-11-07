@@ -2,26 +2,30 @@ import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
 import { CONTENT_WIDTH } from 'app/utils/constants';
+<<<<<<< HEAD
 import { Color, Spacing } from 'styles/theme';
+=======
+import { Color } from 'styles/theme';
+>>>>>>> 7936303... Stuff
 
 export const Page = styled.main`
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-`
+`;
 
 export const Content = styled(Stack)`
   position: relative;
   width: 100%;
   max-width: ${CONTENT_WIDTH};
-  padding: ${p => p.theme.spacing.default};
+  padding: ${(p) => p.theme.spacing.default};
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   z-index: 1;
-`
+`;
 
-export const Button = styled.button.attrs({type: 'button'})<{
+export const Button = styled.button.attrs({ type: 'button' })<{
   color?: Color;
 }>`
   position: relative;
@@ -32,8 +36,9 @@ export const Button = styled.button.attrs({type: 'button'})<{
   transition: color 0.2s 0.1s;
   color: ${(p) => p.theme.colors[p.color || 'primary']};
 
-  &:before, &:after {
-    content: "";
+  &:before,
+  &:after {
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -90,9 +95,17 @@ export const Divider = styled.div`
   margin: ${(p) => p.theme.spacing.large} auto;
 `;
 
+<<<<<<< HEAD
 export const Card = styled.div<{ spacing?: Spacing }>`
   padding: ${p => p.theme.spacing[p.spacing || 'default']};
   border-radius: ${p => p.theme.borderRadius.default};
   background-color: ${p => p.theme.colors.white};
   box-shadow: ${p => p.theme.shadow.default};
 `
+=======
+export const Card = styled.div`
+  padding: ${(p) => p.theme.spacing.default};
+  border-radius: ${(p) => p.theme.borderRadius.default};
+  background-color: ${(p) => p.theme.colors.white};
+`;
+>>>>>>> 7936303... Stuff

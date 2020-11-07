@@ -1,11 +1,11 @@
-import {useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 
-import {FullScreen} from 'ol/control';
+import { FullScreen } from 'ol/control';
 
 import MapContext from '../MapContext';
 
 const FullScreenControl = () => {
-  const {map} = useContext(MapContext);
+  const { map } = useContext(MapContext);
 
   useEffect(() => {
     if (!map) return;

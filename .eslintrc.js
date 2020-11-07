@@ -1,25 +1,28 @@
 module.exports = {
-  env: {
-    es2020: true,
-  },
+  parser: '@typescript-eslint/parser',
   settings: {
     react: {
       version: 'detect',
-    },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
       typescript: {},
     },
   },
-  parser: '@typescript-eslint/parser',
+  env: {
+    browser: true,
+    node: true,
+    es2020: true,
+  },
   extends: [
-    'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
+<<<<<<< HEAD
 <<<<<<< HEAD
     'plugin:react/recommended',
 =======
@@ -57,6 +60,19 @@ module.exports = {
     'import/no-anonymous-default-export': 'error',
     'import/no-webpack-loader-syntax': 'off',
     'import/prefer-default-export': 'off',
+=======
+    'plugin:jsx-a11y/recommended',
+  ],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
+  rules: {
+    'prettier/prettier': 'error',
+    'import/no-anonymous-default-export': 'error',
+    'import/no-webpack-loader-syntax': 'off',
+    'react/react-in-jsx-scope': 'off', // React is always in scope with Blitz
+    'jsx-a11y/anchor-is-valid': 'off', // Doesn't play well with Blitz/Next <Link> usage
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/prop-types': 0,
+>>>>>>> 7936303... Stuff
     'import/order': [
       'error',
       {
