@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -22,9 +22,9 @@ model Building {
   area_living             Float?
   area_floors             Float?
   floors                  Int?
-  location_street_address String?
+  location_street_address String
   location_street_number  String?
-  location_post_number    String?
+  location_post_number    String
   type                    String
 }
 
