@@ -8,8 +8,8 @@ const BaseText = styled.span<{
   lineHeight?: number;
   align?: 'left' | 'center' | 'right';
 }>`
-  margin: 0;
   padding: 0;
+  margin: 0;
   color: ${(p) => (p.color ? p.theme.colors[p.color] : 'inherit')};
   font-weight: ${(p) => p.weight || 'inherit'};
   line-height: ${(p) => p.lineHeight || 'inherit'};

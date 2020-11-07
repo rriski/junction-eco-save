@@ -5,8 +5,10 @@
     "start": "blitz start",
     "studio": "blitz db studio",
     "build": "blitz build",
-    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
-    "lint:fix": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx . --fix",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx . && stylelint app",
+    "lint:fix": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx . --fix && stylelint app --fix",
+    "stylelint": "stylelint app",
+    "stylelint:fix": "stylelint app --fix",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -18,7 +20,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix && stylelint --fix"
     ]
   },
   "dependencies": {
@@ -32,6 +34,7 @@
     "next-transpile-modules": "4.1.0",
     "ol": "6.4.3",
     "react": "0.0.0-experimental-7f28234f8",
+    "react-content-loader": "5.1.4",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.2",
     "react-final-form": "6.5.2",

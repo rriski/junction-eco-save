@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import SaveIcon from 'static/svg/save.svg';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import Fucker from 'components/Fucker';
+import SaveIcon from 'static/svg/save.svg';
 import { Card, DetailGrid } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 import { Property } from 'types/index';
@@ -53,9 +53,9 @@ const Wrapper = styled(Stack)`
 `;
 
 const SaveButton = styled(SaveIcon)<{ selected: boolean }>`
-  fill: ${(p) => (p.selected ? p.theme.colors.red : 'transparent')};
   color: ${(p) => p.theme.colors[p.selected ? 'red' : 'grey']};
   cursor: pointer;
+  fill: ${(p) => (p.selected ? p.theme.colors.red : 'transparent')};
   transition: color 0.1s, fill 0.1s;
 `;
 

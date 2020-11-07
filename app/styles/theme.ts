@@ -16,7 +16,7 @@ const theme = {
     primary: '#27AF81',
     magenta: '#E1034F',
     red: '#F94F59',
-    teel: '#017E8A',
+    teal: '#017E8A',
     'light-green': '#CFEB99',
     'light-pink': '#FEEAE4',
     turquoise: '#1FD8AB',
@@ -38,22 +38,22 @@ const theme = {
       font-family: 'Open Sans', sans-serif;
       font-size: 2.5rem;
       font-weight: bold;
-      line-height: 1.3;
       letter-spacing: 0.1rem;
+      line-height: 1.3;
     `,
     'title-2': css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1.8rem;
       font-weight: bold;
-      line-height: 1.3;
       letter-spacing: 0.1rem;
+      line-height: 1.3;
     `,
     subtitle: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1.4rem;
       font-weight: semibold;
-      line-height: 1.5;
       letter-spacing: 0.1rem;
+      line-height: 1.5;
     `,
     body: css`
       font-family: 'Open Sans', sans-serif;
@@ -73,8 +73,8 @@ const theme = {
     action: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
-      line-height: 1.4;
       letter-spacing: 0.2rem;
+      line-height: 1.4;
     `,
   },
   shadow: {

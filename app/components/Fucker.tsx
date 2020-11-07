@@ -16,20 +16,20 @@ const Fucker = ({ category, kpi }: KPI) => {
 };
 const PillBadge = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: ${(p) => p.theme.spacing.default};
   align-items: center;
   padding: ${(p) => p.theme.spacing.default} ${(p) => p.theme.spacing.medium};
-  border-radius: 999px;
   background-color: ${(p) => p.theme.colors.white};
+  border-radius: 999px;
   box-shadow: ${(p) => p.theme.shadow.default};
+  gap: ${(p) => p.theme.spacing.default};
+  grid-template-columns: auto 1fr auto;
 `;
 
 const Indicator = styled.div`
   width: ${(p) => p.theme.rem(15)};
   height: ${(p) => p.theme.rem(15)};
-  border-radius: 999px;
   background-color: ${(p) => p.theme.colors.primary};
+  border-radius: 999px;
 `;
 
 export default Fucker;

@@ -29,18 +29,18 @@ const Wrapper = styled.section`
 
 const Background = styled.div<{ color?: Color }>`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  min-height: ${(p) => p.theme.rem(300)};
   z-index: -1;
+  top: 0;
+  right: 0;
+  left: 0;
+  min-height: ${(p) => p.theme.rem(300)};
   background-color: ${(p) => p.theme.colors[p.color || 'grey-light']};
 `;
 
 const BackgroundImage = styled.img`
-  height: 100%;
-  width: 100%;
   position: absolute;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 

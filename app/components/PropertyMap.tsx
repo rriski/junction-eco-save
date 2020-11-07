@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 import { dummieProperty } from 'app/utils/dummies';
 import DetailsCard from 'components/DetailsCard';
+import MapLoader from 'components/Map/MapLoader';
 import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
-  ssr: false,
+  loading: () => <MapLoader />,
 });
 
 const PropertyMap = () => {
@@ -25,12 +26,12 @@ const Wrapper = styled(Content)`
 `;
 
 const Map = styled(MapComponent)`
+  overflow: hidden;
   width: 100%;
   height: ${(p) => p.theme.rem(600)};
   background-color: ${(p) => p.theme.colors['grey-light']};
   border-radius: ${(p) => p.theme.borderRadius.large};
   box-shadow: ${(p) => p.theme.shadow.default};
-  overflow: hidden;
 `;
 
 const Details = styled.div`

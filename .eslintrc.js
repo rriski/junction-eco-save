@@ -37,6 +37,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/display-name': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     'import/order': [
       'error',
       {
