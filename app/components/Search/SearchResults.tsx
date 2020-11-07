@@ -39,7 +39,6 @@ const SearchMarker = styled.div`
   align-items: center;
   justify-content: flex-end;
   color: ${(p) => p.theme.colors['grey-dark']};
-  font-size: 22px;
   pointer-events: none;
 `;
 
@@ -51,7 +50,7 @@ const Results = styled.ul`
   left: 0;
   overflow: hidden;
   padding: 0;
-  margin: 9px 0 0;
+  margin: ${(p) => p.theme.spacing.xsmall} 0 0;
   background-color: ${(p) => p.theme.colors.white};
   box-shadow: ${(p) => p.theme.shadow.default};
   list-style: none;

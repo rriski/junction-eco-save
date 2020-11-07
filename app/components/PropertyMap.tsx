@@ -7,7 +7,6 @@ import getBuilding from 'app/buildings/queries/getBuilding';
 import { formatBuildingId } from 'app/utils/format';
 import DetailsCard from 'components/DetailsCard';
 import MapLoader from 'components/Map/MapLoader';
-import { Building } from 'db';
 import { Content } from 'styles/index';
 
 const MapComponent = dynamic(() => import('components/Map'), {
@@ -26,7 +25,9 @@ const PropertyMap = () => {
     <Wrapper>
       <Map setBuildingId={setBuildingId} />
 
-      <Details>{buildingId && <DetailsCard {...(building as Building)} />}</Details>
+      <Details>
+        <DetailsCard building={building} />
+      </Details>
     </Wrapper>
   );
 };

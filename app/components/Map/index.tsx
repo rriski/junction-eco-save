@@ -14,7 +14,7 @@ import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
 
 interface Props {
-  setBuildingId: (buildingId: string) => void;
+  setBuildingId: (buildingId?: string) => void;
 }
 
 const Map = ({ setBuildingId }: Props) => {
@@ -52,8 +52,10 @@ const Map = ({ setBuildingId }: Props) => {
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
-        if (value) {
+        if (value && value.length) {
           setBuildingId(value[0].values_.kiinteisto);
+        } else {
+          setBuildingId(undefined);
         }
       });
     }

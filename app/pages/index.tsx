@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { BlitzPage, useRouter } from 'blitz';
+import { BlitzPage } from 'blitz';
 
 import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
