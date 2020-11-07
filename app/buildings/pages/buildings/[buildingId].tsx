@@ -14,7 +14,7 @@ export const Building = () => {
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
 
   const title = `${building?.location_street_address}${
-    building?.location_street_number ? building.location_street_number + ' ' : ''
+    building?.location_street_number ? ' ' + building.location_street_number : ''
   }, ${building?.location_post_number}`;
 
   return (
@@ -51,6 +51,7 @@ export const Building = () => {
                 <DataItem>Source of heat: {building?.fuel_category}</DataItem>
                 <DataItem>Building material: {building?.construction_material}</DataItem>
                 <DataItem>Living area: {building?.area_living} m2</DataItem>
+                <pre>{JSON.stringify(building, null, 2)}</pre>
               </DataList>
             </Card>
 
