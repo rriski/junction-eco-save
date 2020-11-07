@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { GeoJSON, WFS } from 'ol/format';
 import { like as likeFilter } from 'ol/format/filter';
@@ -14,46 +14,48 @@ import MapComponent from 'components/Map/MapComponent';
 const Map = () => {
   const [center, setCenter] = useState([24.945831, 60.192059]);
   const [zoom, setZoom] = useState(9);
-  const [showLayer1, setShowLayer1] = useState(true);
+  const [showLayer1, setShowLayer1] = useState(false);
+  const [vectorSource, setVectorSource] = useState<VectorSource | undefined>(undefined);
 
-  const vectorSource = new VectorSource();
+  useEffect(() => {
+    const vectorSource = new VectorSource();
 
-  // @ts-ignore
-  const featureRequest = new WFS().writeGetFeature({
-    srsName: 'EPSG:3857',
-    featureTypes: ['avoindata:Kiinteisto_alue'],
-    outputFormat: 'application/json',
-    filter: likeFilter('kiinteisto', '91-4-61*'),
-  });
-
-  fetch('https://kartta.hel.fi/ws/geoserver/avoindata/wfs', {
-    method: 'POST',
-    body: new XMLSerializer().serializeToString(featureRequest),
-  })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (json) {
-      const features = new GeoJSON().readFeatures(json);
-      vectorSource.addFeatures(features);
+    // @ts-ignore
+    const featureRequest = new WFS().writeGetFeature({
+      srsName: 'EPSG:3857',
+      featureTypes: ['avoindata:Kiinteisto_alue'],
+      outputFormat: 'application/json',
+      filter: likeFilter('kiinteisto', '91-4-61*'),
     });
 
+    fetch('https://kartta.hel.fi/ws/geoserver/avoindata/wfs', {
+      method: 'POST',
+      body: new XMLSerializer().serializeToString(featureRequest),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        const features = new GeoJSON().readFeatures(json);
+        vectorSource.addFeatures(features);
+      });
+
+    setVectorSource(vectorSource);
+    setShowLayer1(true);
+  }, []);
+
   return (
-    <Suspense fallback="Loading...">
-      <MapComponent center={fromLonLat(center)} zoom={zoom}>
-        <Layers>
-          <TileLayer source={OSMSource()} zIndex={0} />
+    <MapComponent center={fromLonLat(center)} zoom={zoom}>
+      <Layers>
+        <TileLayer source={OSMSource()} zIndex={0} />
 
-          {showLayer1 && <VectorLayer source={vectorSource} style={mapStyles.Polygon} />}
-        </Layers>
+        {showLayer1 && <VectorLayer source={vectorSource} style={mapStyles.Polygon} />}
+      </Layers>
 
-        <Controls />
-
-        <Controls>
-          <FullScreenControl />
-        </Controls>
-      </MapComponent>
-    </Suspense>
+      <Controls>
+        <FullScreenControl />
+      </Controls>
+    </MapComponent>
   );
 };
 

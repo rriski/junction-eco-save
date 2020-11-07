@@ -16,7 +16,7 @@ const theme = {
     primary: '#27AF81',
     magenta: '#E1034F',
     red: '#F94F59',
-    teel: '#017E8A',
+    teal: '#017E8A',
     'light-green': '#CFEB99',
     'light-pink': '#FEEAE4',
     turquoise: '#1FD8AB',

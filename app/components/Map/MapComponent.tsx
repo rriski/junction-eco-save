@@ -48,7 +48,7 @@ const MapComponent: React.FC<Props> = ({ children, zoom, center }) => {
   );
 };
 
-const MapContainer = styled.div`
+export const MapContainer = styled.div`
   overflow: hidden;
   width: 100%;
   height: 600px;
