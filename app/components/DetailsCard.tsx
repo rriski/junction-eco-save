@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { useQuery } from 'blitz';
 import styled from 'styled-components';
@@ -6,33 +6,45 @@ import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import { formatBuildingId } from 'app/utils/format';
-import { localStorageGetArray, localStorageSetArray } from 'app/utils/localStorage';
+import {
+  getSavedBuildings,
+  addBuildingToLocalStorage,
+  removeBuildingFromLocalStorage,
+} from 'app/utils/localStorage';
 import Fucker from 'components/Fucker';
 import Perkele from 'components/Perkele';
+import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
 import { Card, DetailGrid, ButtonLink } from 'styles/index';
 import { Subtitle, Text } from 'styles/typography';
 
 interface Props {
-  buildingId: string;
+  buildingId: string | undefined;
 }
 
 const DetailsCard = ({ buildingId }: Props) => {
+  const [properties, setProperties] = useState<Building[]>([]);
+  const isSaved = properties.some((b) => b.building_id === buildingId);
   const [building] = useQuery(getBuilding, {
     where: { building_id: formatBuildingId(buildingId) },
   });
-  let savedProperties = localStorageGetArray('savedProperties');
+
+  useEffect(() => {
+    const savedProperties = getSavedBuildings();
+    if (savedProperties) {
+      setProperties(savedProperties);
+    }
+  }, []);
 
   const onSave = useCallback(() => {
     if (building) {
-      if (!savedProperties) {
-        savedProperties = [];
+      if (isSaved) {
+        addBuildingToLocalStorage(building);
+      } else {
+        removeBuildingFromLocalStorage(building);
       }
-      localStorageSetArray('savedProperties', building);
     }
   }, [buildingId]);
-
-  console.log(savedProperties, building);
 
   return (
     <Wrapper>
@@ -44,10 +56,7 @@ const DetailsCard = ({ buildingId }: Props) => {
                 {building.location_street_address} {building.location_street_number}
               </Subtitle>
 
-              <SaveButton
-                onClick={onSave}
-                selected={savedProperties.some((b) => b.building_id === building.building_id)}
-              />
+              <SaveButton onClick={onSave} selected={isSaved} />
             </Stack>
 
             <Text>Helsinki, {building.location_post_number}</Text>

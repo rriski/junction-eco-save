@@ -45,7 +45,7 @@ const energy_consumption_omakotitalo: energy_consumption_options = {
     heating: 228,
     electricity: 8,
   },
-}
+};
 const energy_consumption: energy_consumption_options = {
   '201': {
     heating: 82,

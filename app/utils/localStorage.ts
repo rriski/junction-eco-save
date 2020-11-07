@@ -1,23 +1,37 @@
 import { Building } from 'db';
 
-export const localStorageSetArray = (key: string, value: Building) => {
+export const addBuildingToLocalStorage = (building: Building) => {
   let currentArray, newArray;
-  currentArray = localStorage.getItem(key);
+  currentArray = localStorage.getItem('savedProperties');
   if (currentArray) {
     currentArray = JSON.parse(currentArray);
-    newArray = [...currentArray, value];
+    if (!currentArray.some((b) => b.building_id === building.building_id)) {
+      newArray = [...currentArray, building];
+    } else {
+      newArray = currentArray;
+    }
   } else {
-    newArray = [value];
+    newArray = [building];
   }
-  localStorage.setItem(key, JSON.stringify(newArray));
+  localStorage.setItem('savedProperties', JSON.stringify(newArray));
 };
 
-export const localStorageGetArray = (key: string): Building[] => {
-  let array = localStorage.getItem(key);
-  if (array !== 'null') {
+export const removeBuildingFromLocalStorage = (building: Building) => {
+  let currentArray, newArray;
+  currentArray = localStorage.getItem('savedProperties');
+  if (currentArray) {
+    currentArray = JSON.parse(currentArray);
+    newArray = currentArray.filter((b) => b.building_id === building.building_id);
+  } else {
+    newArray = currentArray;
+  }
+  localStorage.setItem('savedProperties', JSON.stringify(newArray));
+};
+
+export const getSavedBuildings = (): Building[] | undefined => {
+  let array = localStorage.getItem('savedProperties');
+  if (array) {
     array = JSON.parse(array);
     return array;
-  } else {
-    return [];
   }
 };

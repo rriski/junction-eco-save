@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { localStorageGetArray } from 'app/utils/localStorage';
+import { getSavedBuildings } from 'app/utils/localStorage';
 import PropertyCard from 'components/PropertyCard';
 import { Building } from 'db';
 import { Content } from 'styles/index';
@@ -12,9 +12,8 @@ const SavedProperties = () => {
   const [properties, setProperties] = useState<Building[]>([]);
 
   useEffect(() => {
-    const savedProperties = localStorageGetArray('savedProperties');
+    const savedProperties = getSavedBuildings();
     if (savedProperties) {
-      console.log(savedProperties);
       setProperties(savedProperties);
     }
   }, []);

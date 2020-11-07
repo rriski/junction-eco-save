@@ -14,14 +14,14 @@ const MapComponent = dynamic(() => import('components/Map'), {
 });
 
 const PropertyMap = () => {
-  const [buildingId, setBuildingId] = useState<string>('');
+  const [buildingId, setBuildingId] = useState<string>();
 
   return (
     <Content>
       <Search setBuildingId={setBuildingId} />
 
       <Wrapper>
-        <Map setBuildingId={setBuildingId} />
+        <Map selectedBuildingId={buildingId} setBuildingId={setBuildingId} />
 
         <Suspense fallback="">
           <Details>

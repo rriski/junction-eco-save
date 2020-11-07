@@ -1,4 +1,4 @@
-export const formatBuildingId = (buildingId: string) => {
+export const formatBuildingId = (buildingId?: string) => {
   if (buildingId) {
     const splitted = buildingId.split('-');
     const prefixed = splitted.map((id: string, i: number) => {
