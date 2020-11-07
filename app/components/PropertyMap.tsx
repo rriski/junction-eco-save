@@ -35,7 +35,7 @@ const Wrapper = styled(Content)`
   padding-right: ${(p) => p.theme.spacing.large};
 `;
 
-const Map = styled(MapComponent)`
+export const Map = styled(MapComponent)`
   overflow: hidden;
   width: 100%;
   height: ${(p) => p.theme.rem(600)};
