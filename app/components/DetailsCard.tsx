@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 
-import { useQuery } from 'blitz';
+import { Link, useQuery } from 'blitz';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
-import { calculateRepairDebt, getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
+import { getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
 import { formatBuildingId } from 'app/utils/format';
 import { addBuildingToLocalStorage, removeBuildingFromLocalStorage } from 'app/utils/localStorage';
-import Fucker, { AdvancedFucker } from 'components/Fucker';
+import { AdvancedFucker } from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';
@@ -93,7 +93,13 @@ const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) =
           />
         )}
 
-        {building && <ButtonLink href={`/buildings/${building.id}`}>Read more</ButtonLink>}
+        {building && (
+          <Link href={`/buildings/${building.id}`}>
+            <ButtonLink>
+              <a>Read more</a>
+            </ButtonLink>
+          </Link>
+        )}
       </Perkele>
     </Wrapper>
   );

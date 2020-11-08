@@ -1,3 +1,4 @@
+import { Link } from 'blitz';
 import styled from 'styled-components';
 
 import Arrow from 'public/static/svg/arrow.svg';
@@ -24,9 +25,11 @@ const Hero: React.FC<Props> = ({ children, title, image, icon, goBack }) => {
       <HeaderBar>
         {icon && <Logo />}
         {goBack && (
-          <HeroLink href="/">
-            <Arrow />
-          </HeroLink>
+          <Link href="/">
+            <HeroLink>
+              <Arrow />
+            </HeroLink>
+          </Link>
         )}
       </HeaderBar>
 

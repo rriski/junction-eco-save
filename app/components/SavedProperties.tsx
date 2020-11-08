@@ -24,7 +24,7 @@ const SavedProperties = ({ savedBuildings }: Props) => (
 const Grid = styled.div`
   display: grid;
   gap: ${(p) => p.theme.spacing.default};
-  grid-template-columns: repeat(auto-fit, minmax(${(p) => p.theme.rem(200)}, 1fr));
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export default SavedProperties;
