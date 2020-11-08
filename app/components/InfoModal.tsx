@@ -10,9 +10,10 @@ import { Text, Subtitle } from 'styles/typography';
 interface Props {
   title: string;
   content: string;
+  metric: string;
 }
 
-const NavInfo = ({ title, content }: Props) => {
+const NavInfo = ({ title, metric, content }: Props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,6 +22,7 @@ const NavInfo = ({ title, content }: Props) => {
         <RiQuestionLine size={30} />
       </CircleButton>
       <Modal title={title} open={modalIsOpen} setIsOpen={setIsOpen}>
+        <Subtitle>Metric: {metric}</Subtitle>
         <Subtitle>Explanation</Subtitle>
         <Text>{content}</Text>
       </Modal>

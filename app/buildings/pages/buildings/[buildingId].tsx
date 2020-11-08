@@ -132,10 +132,12 @@ export const BuildingPage = () => {
             )}
             {offers && (
               <AdvancedFucker
+                type="solar"
                 title="Investing in solar panels would pay the investment back in"
-                value={offers.payback_time}
+                value={offers.paybackTime}
                 thresholds={{ low: 0, high: 30 }}
                 unit="years"
+                includeInfo
               />
             )}
 

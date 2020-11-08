@@ -4,7 +4,7 @@ import InfoModal from 'components/InfoModal';
 import { Text } from 'styles/typography';
 
 type FuckerProps = {
-  type: 'pipe' | 'facade' | 'roof' | 'electric';
+  type: 'pipe' | 'facade' | 'roof' | 'electric' | 'solar';
   title: string;
   value: number;
   thresholds: { low: number; high: number };
@@ -29,6 +29,9 @@ const modalContents = {
   electric: {
     content:
       'Electric improvement potential indicates how much of the buildings electrical needs could be covered via photovoltaic energy (solar panels).',
+  },
+  solar: {
+    content: 'The estimate is based on current technology and electricity prices.',
   },
 };
 
@@ -65,7 +68,13 @@ export const AdvancedFucker = ({
         {value}
         {unit ? ' ' + unit : ''}
       </Text>
-      {includeInfo && <InfoModal title={title} content={modalContents[type]?.content} />}
+      {includeInfo && (
+        <InfoModal
+          metric={`${value} ${unit ? ' ' + unit : ''}`}
+          title={title}
+          content={modalContents[type]?.content}
+        />
+      )}
     </PillBadge>
   );
 };
