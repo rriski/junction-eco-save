@@ -62,10 +62,10 @@ export const ButtonLink = styled.a`
   border-radius: 999px;
   box-shadow: ${(p) => p.theme.shadow.default};
   color: ${(p) => p.theme.colors.white};
+  cursor: pointer;
   font-weight: 600;
   text-align: center;
   transition: all 0.1s;
-  cursor: pointer;
 
   &:hover {
     background-color: ${(p) => p.theme.colors.teal};

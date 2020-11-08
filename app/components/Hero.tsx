@@ -46,6 +46,7 @@ const Wrapper = styled.section`
 
 const Background = styled.div<{ src: string }>`
   position: absolute;
+  z-index: -1;
   top: 0;
   right: 0;
   left: 0;
@@ -59,14 +60,13 @@ const Background = styled.div<{ src: string }>`
     url(${(p) => `${p.src}`});
   background-position: center center;
   background-size: cover;
-  z-index: -1;
 `;
 
 const HeaderBar = styled(Content)`
+  z-index: 10;
   display: flex;
   width: 100vw;
   color: ${(p) => p.theme.colors.white};
-  z-index: 10;
 `;
 
 const HeroLink = styled.a`
@@ -80,6 +80,7 @@ const HeroLink = styled.a`
 
 const HeroTitle = styled(Title).attrs({ as: 'h1' })`
   max-width: ${(p) => p.theme.rem(600)};
+  margin: 0;
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(48)};
   word-break: break-word;
@@ -87,15 +88,18 @@ const HeroTitle = styled(Title).attrs({ as: 'h1' })`
   letter-spacing: 0.1rem;
   line-height: 1.3;
   text-align: center;
-  margin: 0;
   text-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.5);
+
+  @media only screen and (max-width: 600px) {
+    font-size: ${(p) => p.theme.rem(32)};
+  }
 `;
 
 const HeroContent = styled(Text)`
+  max-width: ${(p) => p.theme.rem(600)};
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(20)};
   font-weight: 600;
-  max-width: ${(p) => p.theme.rem(600)};
   text-align: center;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 `;

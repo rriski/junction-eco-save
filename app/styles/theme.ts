@@ -41,6 +41,10 @@ const theme = {
       font-weight: bold;
       letter-spacing: 0.1rem;
       line-height: 1.3;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 2rem;
+      }
     `,
     'title-2': css`
       font-family: 'Open Sans', sans-serif;
@@ -48,6 +52,10 @@ const theme = {
       font-weight: bold;
       letter-spacing: 0.1rem;
       line-height: 1.3;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 1.5rem;
+      }
     `,
     subtitle: css`
       font-family: 'Open Sans', sans-serif;
@@ -55,27 +63,47 @@ const theme = {
       font-weight: semibold;
       letter-spacing: 0.1rem;
       line-height: 1.5;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 1.2rem;
+      }
     `,
     body: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
       line-height: 1.8;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 0.9rem;
+      }
     `,
     detail: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 0.9rem;
       line-height: 1.2;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 0.7rem;
+      }
     `,
     small: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 0.7rem;
       line-height: 1.2;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 0.5rem;
+      }
     `,
     action: css`
       font-family: 'Open Sans', sans-serif;
       font-size: 1rem;
       letter-spacing: 0.1rem;
       line-height: 1.4;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 0.8rem;
+      }
     `,
   },
   shadow: {

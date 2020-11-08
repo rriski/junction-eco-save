@@ -88,6 +88,11 @@ const PillBadge = styled.div`
   box-shadow: ${(p) => p.theme.shadow.default};
   gap: ${(p) => p.theme.spacing.default};
   grid-template-columns: auto 1fr auto auto;
+
+  @media only screen and (max-width: 600px) {
+    padding: ${(p) => p.theme.spacing.medium};
+    grid-template-columns: auto 2fr auto auto;
+  }
 `;
 
 const Indicator = styled.div<{ what?: 'good' | 'ok' | 'bad' }>`

@@ -55,7 +55,7 @@ export const MapContainer = styled.div`
   box-shadow: ${(p) => p.theme.shadow.default};
 
   @media only screen and (max-width: 600px) {
-    max-height: 80vh;
+    max-height: 50vh;
     border-radius: ${(p) => p.theme.borderRadius.default};
   }
 `;
