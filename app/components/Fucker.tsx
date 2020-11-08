@@ -78,7 +78,7 @@ const PillBadge = styled.div`
   border-radius: 999px;
   box-shadow: ${(p) => p.theme.shadow.default};
   gap: ${(p) => p.theme.spacing.default};
-  grid-template-columns: auto 1fr auto 2.5rem;
+  grid-template-columns: auto 1fr auto auto;
 `;
 
 const Indicator = styled.div<{ what?: 'good' | 'ok' | 'bad' }>`
