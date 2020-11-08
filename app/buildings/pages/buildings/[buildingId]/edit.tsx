@@ -16,7 +16,7 @@ export const EditBuilding = () => {
 
   return (
     <div>
-      <h1>Edit Building {building.id}</h1>
+      <h1>Edit Building {(building as any).id}</h1>
       <pre>{JSON.stringify(building)}</pre>
 
       <BuildingForm
@@ -24,8 +24,8 @@ export const EditBuilding = () => {
         onSubmit={async () => {
           try {
             const updated = await updateBuildingMutation({
-              where: { id: building.id },
-              data: { name: 'MyNewName' },
+              where: { id: building!.id },
+              data: { name: 'MyNewName' } as any,
             });
             await mutate(updated);
             alert('Success!' + JSON.stringify(updated));

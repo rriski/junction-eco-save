@@ -111,7 +111,7 @@ export const Building = () => {
                       <RenovationItem key={reno.id}>
                         <RenovationTitle>
                           <RenovationYears>{renoYears}</RenovationYears>
-                          {getIconFromCategory(reno.category)}
+                          {getIconFromCategory(reno.category as any)}
                         </RenovationTitle>
                         {reno.description}
                       </RenovationItem>

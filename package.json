@@ -5,7 +5,7 @@
     "start": "blitz start",
     "studio": "blitz db studio",
     "version": "blitz -v",
-    "build": "blitz build",
+    "build": "NODE_ENV=production blitz db migrate && blitz build",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx . && stylelint app",
     "lint:fix": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx . --fix && stylelint app --fix",
     "stylelint": "stylelint app",
@@ -81,7 +81,8 @@
     "stylelint-config-idiomatic-order": "8.1.0",
     "stylelint-order": "4.1.0",
     "ts-jest": "26.4.3",
-    "typescript": "4.0.5"
+    "typescript": "4.0.5",
+    "vercel": "20.1.2"
   },
   "private": true
 }

@@ -89,7 +89,7 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
   if (building && (building?.area_living || building?.area_floors)) {
     const energy =
       (building.category === 'Omakotitalo' ? energy_consumption_omakotitalo : energy_consumption)[
-        Math.floor(building?.construction_date.getFullYear() / 10).toString()
+        Math.floor(building?.construction_date?.getFullYear() || 1970 / 10).toString()
       ] ||
       (building.category === 'Omakotitalo'
         ? {

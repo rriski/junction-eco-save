@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
-import { calculateRepairDebt, getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
+import { getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
 import { formatBuildingId } from 'app/utils/format';
 import { addBuildingToLocalStorage, removeBuildingFromLocalStorage } from 'app/utils/localStorage';
-import Fucker, { AdvancedFucker } from 'components/Fucker';
+import { AdvancedFucker } from 'components/Fucker';
 import Perkele from 'components/Perkele';
 import { Building } from 'db';
 import SaveIcon from 'static/svg/save.svg';

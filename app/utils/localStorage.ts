@@ -5,7 +5,7 @@ export const addBuildingToLocalStorage = (building: Building) => {
   currentArray = localStorage.getItem('savedProperties');
   if (currentArray) {
     currentArray = JSON.parse(currentArray);
-    if (!currentArray.some((b) => b.building_id === building.building_id)) {
+    if (!currentArray.some((b: any) => b.building_id === building.building_id)) {
       newArray = [...currentArray, building];
     } else {
       newArray = currentArray;
@@ -22,7 +22,7 @@ export const removeBuildingFromLocalStorage = (building: Building) => {
   currentArray = localStorage.getItem('savedProperties');
   if (currentArray) {
     currentArray = JSON.parse(currentArray);
-    newArray = currentArray.filter((b) => b.building_id !== building.building_id);
+    newArray = currentArray.filter((b: any) => b.building_id !== building.building_id);
   } else {
     newArray = currentArray;
   }
@@ -34,6 +34,6 @@ export const getSavedBuildings = (): Building[] | undefined => {
   let array = localStorage.getItem('savedProperties');
   if (array) {
     array = JSON.parse(array);
-    return array;
+    return array as any;
   }
 };

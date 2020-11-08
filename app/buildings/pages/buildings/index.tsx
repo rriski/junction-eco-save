@@ -26,7 +26,7 @@ export const BuildingsList = () => {
         {buildings.map((building) => (
           <li key={building.id}>
             <Link href="/buildings/[buildingId]" as={`/buildings/${building.id}`}>
-              <a>{building.name}</a>
+              <a>{building.id}</a>
             </Link>
           </li>
         ))}

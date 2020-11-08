@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const MapContext = new createContext(undefined);
+const MapContext = createContext<any>(undefined);
 
 export default MapContext;

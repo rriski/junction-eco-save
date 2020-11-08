@@ -17,6 +17,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         // data any time you reset the error boundary
         queryCache.resetErrorBoundaries();
       }}
+      onError={(err) => console.log(err)}
     >
       <Component {...pageProps} />
     </ErrorBoundary>
