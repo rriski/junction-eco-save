@@ -45,9 +45,13 @@ const PropertyMap = (props: Props) => {
   );
 };
 
-const Wrapper = styled(Content)`
+const Wrapper = styled.div`
   z-index: -1;
   padding-right: ${(p) => p.theme.spacing.large};
+
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+  }
 `;
 
 export const Map = styled(MapComponent)`
@@ -63,7 +67,18 @@ const Details = styled.div`
   position: absolute;
   right: 0;
   bottom: ${(p) => p.theme.spacing.large};
+  display: flex;
+  overflow: hidden;
+  width: 100%;
   max-width: ${(p) => p.theme.rem(500)};
+  flex-direction: column;
+  align-items: flex-end;
+
+  @media only screen and (max-width: 600px) {
+    position: relative;
+    padding: ${(p) => p.theme.spacing.default};
+    margin-top: -${(p) => p.theme.spacing.large};
+  }
 `;
 
 export default PropertyMap;

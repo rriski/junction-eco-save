@@ -175,6 +175,7 @@ export const BuildingPage = () => {
 const Content = styled.section`
   display: grid;
   align-items: center;
+  padding: ${(p) => p.theme.spacing.default};
   grid-template-columns:
     1fr
     min(${(p) => p.theme.rem(1000)}, 100%)
@@ -188,6 +189,10 @@ const ContentWrapper = styled.div`
   display: grid;
   gap: ${(p) => p.theme.rem(48)};
   grid-template-columns: 1fr 1fr;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Column = styled.section`

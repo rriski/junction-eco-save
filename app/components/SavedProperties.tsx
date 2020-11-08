@@ -25,6 +25,10 @@ const Grid = styled.div`
   display: grid;
   gap: ${(p) => p.theme.spacing.default};
   grid-template-columns: repeat(3, 1fr);
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default SavedProperties;

@@ -53,6 +53,11 @@ export const MapContainer = styled.div`
   background-color: ${(p) => p.theme.colors['grey-light']};
   border-radius: ${(p) => p.theme.borderRadius.large};
   box-shadow: ${(p) => p.theme.shadow.default};
+
+  @media only screen and (max-width: 600px) {
+    max-height: 80vh;
+    border-radius: ${(p) => p.theme.borderRadius.default};
+  }
 `;
 
 export default MapComponent;

@@ -88,7 +88,7 @@ const DetailsCard = (props: Props) => {
 
 const Wrapper = styled(Stack)`
   width: ${(p) => p.theme.rem(450)};
-  padding: ${(p) => p.theme.spacing.default};
+  max-width: 100%;
 `;
 
 export default DetailsCard;

@@ -71,6 +71,10 @@ export const ButtonLink = styled.a`
   &:hover {
     background-color: ${(p) => p.theme.colors.teal};
   }
+
+  @media only screen and (max-width: 600px) {
+    margin: 0 auto;
+  }
 `;
 
 interface CircleButtonProps {
