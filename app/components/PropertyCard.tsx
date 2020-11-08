@@ -1,6 +1,7 @@
+import { Link } from 'blitz';
 import styled from 'styled-components';
 
-import { Building } from 'db';
+import { Building, Renovation } from 'db';
 import { Card, DetailGrid } from 'styles/index';
 import { Text, Subtitle, Detail } from 'styles/typography';
 
@@ -8,23 +9,41 @@ interface Props {
   building: Building;
 }
 
-const PropertyCard = ({ building }: Props) => (
-  <Card>
-    <Subtitle>{building.location_street_address}</Subtitle>
+function getLatestRenovation(renovations: Renovation[]) {
+  if (renovations.length > 0) {
+    return renovations.reduce((a, b) => {
+      return a.end_year > b.end_year && a.end_year < new Date().getFullYear() ? a : b;
+    });
+  }
+}
 
-    <Detail>Helsinki, {building.location_post_number}</Detail>
+const PropertyCard = ({ building }: Props) => {
+  const latestRenovation = getLatestRenovation(building.Renovation);
 
-    <Divider />
+  return (
+    <Card>
+      <Subtitle>
+        <Link href={`/buildings/${building.id}`}>
+          <a>
+            {building.location_street_address} {building.location_street_number}
+          </a>
+        </Link>
+      </Subtitle>
 
-    <DetailGrid>
-      <Detail>Potential</Detail>
-      <Text align="right">10 %</Text>
+      <Detail>Helsinki, {building.location_post_number}</Detail>
 
-      <Detail>Renovated</Detail>
-      <Text align="right">2001</Text>
-    </DetailGrid>
-  </Card>
-);
+      <Divider />
+
+      <DetailGrid>
+        <Detail>Potential</Detail>
+        <Text align="right">10 %</Text>
+
+        <Detail>Renovated</Detail>
+        {latestRenovation && <Text align="right">{latestRenovation.end_year}</Text>}
+      </DetailGrid>
+    </Card>
+  );
+};
 
 const Divider = styled.div`
   width: 80%;

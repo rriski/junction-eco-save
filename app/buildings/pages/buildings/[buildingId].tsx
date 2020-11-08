@@ -149,7 +149,7 @@ const Header = styled.header`
   }
 `;
 
-const Title = styled.p`
+const Title = styled.span`
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(48)};
   text-shadow: ${(p) => p.theme.shadow.text};

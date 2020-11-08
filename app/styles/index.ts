@@ -1,3 +1,4 @@
+import { Link } from 'blitz';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
