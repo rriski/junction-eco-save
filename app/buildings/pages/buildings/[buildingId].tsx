@@ -48,6 +48,9 @@ export const BuildingPage = () => {
     building?.location_street_number ? ' ' + building.location_street_number : ''
   }, ${building?.location_post_number} Helsinki`;
 
+  const coordinates =
+    building.latitude && building.longitude ? [building.latitude, building.longitude] : undefined;
+
   return (
     <Layout>
       <Hero title={title} image={building.image_url} goBack />
@@ -55,7 +58,7 @@ export const BuildingPage = () => {
       <Content>
         <ContentWrapper>
           <Column className="map-column">
-            <Map selectedBuildingId={building.building_id} coordinates={[building.latitude, building.longitude]} />
+            <Map selectedBuildingId={building.building_id} coordinates={coordinates} />
 
             <ImageRow>
               <RowItem>

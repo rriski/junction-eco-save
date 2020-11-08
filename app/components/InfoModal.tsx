@@ -30,13 +30,4 @@ const NavInfo = ({ title, metric, content }: Props) => {
   );
 };
 
-const H3 = styled.h3`
-  margin: 0;
-`;
-
-const Ul = styled.ul`
-  padding-left: 20px;
-  vertical-align: middle;
-`;
-
 export default NavInfo;

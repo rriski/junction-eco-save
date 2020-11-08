@@ -28,7 +28,12 @@ const PropertyMap = (props: Props) => {
       <Search setBuildingId={setBuildingId} />
 
       <Wrapper>
-        <Map selectedBuildingId={buildingId} setBuildingId={setBuildingId} coordinates={props.coordinates} showData />
+        <Map
+          selectedBuildingId={buildingId}
+          setBuildingId={setBuildingId}
+          coordinates={props.coordinates}
+          showData
+        />
 
         <Suspense fallback="">
           <Details>
