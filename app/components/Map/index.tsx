@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { GeoJSON, WFS } from 'ol/format';
 import { equalTo } from 'ol/format/filter';
-import OLVectorLayer from 'ol/layer/Vector';
+import Geometry from 'ol/geom/Geometry';
 import { bbox } from 'ol/loadingstrategy';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
@@ -10,7 +10,6 @@ import VectorSource from 'ol/source/Vector';
 
 import { ForwardRefProps } from './Layers/VectorLayer';
 
-import { Controls, FullScreenControl } from 'app/components/Map/Controls';
 import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
 import mapStyles from 'app/components/Map/MapStyles';
 import { OSMSource } from 'app/components/Map/Source';
@@ -19,10 +18,10 @@ import MapComponent from 'components/Map/MapComponent';
 interface Props {
   setBuildingId: (buildingId?: string) => void;
   selectedBuildingId?: string;
+  showData?: boolean;
 }
 
 const drawData = async (vector: VectorSource, buildingId?: string) => {
-  /*
   // @ts-ignore
   const featureRequest = new WFS().writeGetFeature({
     srsName: 'EPSG:3857',
@@ -40,10 +39,9 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
     vector.clear(true);
     vector.addFeatures(features);
   });
-*/
 };
 
-const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
+const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => {
   const [drawBuildings, toggleDrawBuildings] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource>();
   const [selectedVectorSource, setSelectedVectorSource] = useState<VectorSource>();
@@ -67,40 +65,41 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
       strategy: bbox,
     });
     setVectorSource(vectorSource);
-    drawData(vectorSource).then(() => toggleDrawBuildings(true));
   }, []);
 
   useEffect(() => {
-    if (selectedBuildingId) {
-      const vector = new VectorSource({
-        format: new GeoJSON(),
-        url: function (extent) {
-          return (
-            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
-            'outputFormat=application/json&' +
-            'bbox=' +
-            extent.join(',') +
-            ',EPSG:3857'
-          );
-        },
-        strategy: bbox,
-      });
-      setSelectedVectorSource(vector);
-      drawData(vector, selectedBuildingId);
+    if (vectorSource?.getState() === 'ready') {
+      toggleDrawBuildings(true);
     }
-  }, [selectedBuildingId]);
+  }, [vectorSource?.getState()]);
+
+  useEffect(() => {
+    if (selectedBuildingId) {
+      const source = new VectorSource();
+      drawData(source, selectedBuildingId).then(() => {
+        setSelectedVectorSource(source);
+
+        if (
+          source.getFeatures() &&
+          source.getFeatures()[0] &&
+          source.getFeatures()[0].getGeometry()
+        ) {
+          vectorLayerRef.current?.fitToMap(source.getFeatures()[0].getGeometry() as Geometry);
+        }
+      });
+    }
+  }, [selectedBuildingId, vectorLayerRef]);
 
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
         if (value && value.length) {
           setBuildingId(value[0].values_.c_kiinteistotunnus);
-          vectorLayerRef.current?.getFeatures(pixel).then((e) => {
-            const boi = (e as any)[0].getGeometry();
-            if (boi) {
-              vectorLayerRef.current?.fitToMap(boi);
-            }
-          });
+
+          const boi = value[0].getGeometry();
+          if (boi) {
+            vectorLayerRef.current?.fitToMap(boi);
+          }
         } else {
           setBuildingId(undefined);
         }
@@ -122,7 +121,7 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
           />
         )}
 
-        {drawBuildings && (
+        {drawBuildings && showData && (
           <VectorLayer ref={vectorLayerRef} source={vectorSource} style={mapStyles.Buildings} />
         )}
       </Layers>
