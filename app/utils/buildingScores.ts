@@ -10,6 +10,30 @@ export function getLatestRenovation(building: Building) {
   );
 }
 
+export function getOffers(building: Building) {
+  const price_per_kwh = {
+    'Suora sähkölämmitys': 0.11,
+    'Ilmakeskuslämmitys': 0.10,
+    'Vesikeskuslämmitys': 0.08,
+    'Muu': 0.15,
+  }[building.heating_category] || 0.15;
+
+  if (
+    !building?.photovoltaic_potential ||
+    !building?.energy_consumption
+  ) return;
+  const energy_consumption = (building.energy_consumption.electricity + building.energy_consumption.heating)
+  const improvement = 0.3 * building.photovoltaic_potential / energy_consumption
+ 
+  const installation_cost = 50000;
+  return {
+    'price': price_per_kwh,
+    'payback_time': Math.floor(
+      installation_cost / (improvement*price_per_kwh*energy_consumption)
+    )
+  }
+}
+
 export function calculateRepairDebt(building: Building) {
   const getLatest = (category: Category) =>
     building!.Renovation?.reduce(

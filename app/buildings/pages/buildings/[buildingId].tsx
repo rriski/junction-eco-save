@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
-import { calculateRepairDebt, getImprovable } from 'app/utils/buildingScores';
+import { calculateRepairDebt, getImprovable, getOffers } from 'app/utils/buildingScores';
 import { AdvancedFucker } from 'components/Fucker';
 import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
@@ -29,6 +29,7 @@ export const Building = () => {
 
   const improvable = getImprovable(building);
   const debts = calculateRepairDebt(building);
+  const offers = getOffers(building);
 
   const title = `${building?.location_street_address}${
     building?.location_street_number ? ' ' + building.location_street_number : ''
@@ -95,6 +96,14 @@ export const Building = () => {
                 value={improvable}
                 thresholds={{ low: 0, high: 30 }}
                 unit="%"
+              />
+            )}
+            {offers && (
+              <AdvancedFucker
+                title="Investing in solar panels would pay the investment back in"
+                value={offers.payback_time}
+                thresholds={{ low: 0, high: 30 }}
+                unit="years"
               />
             )}
 
