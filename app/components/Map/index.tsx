@@ -6,6 +6,7 @@ import OLVectorLayer from 'ol/layer/Vector';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
+import {bbox} from 'ol/loadingstrategy';
 
 import { ForwardRefProps } from './Layers/VectorLayer';
 
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const drawData = async (vector: VectorSource, buildingId?: string) => {
+  /*
   // @ts-ignore
   const featureRequest = new WFS().writeGetFeature({
     srsName: 'EPSG:3857',
@@ -38,7 +40,9 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
     vector.clear(true);
     vector.addFeatures(features);
   });
+*/
 };
+
 
 const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   const [drawBuildings, toggleDrawBuildings] = useState(false);
@@ -49,14 +53,39 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   const selectedLayerRef = useRef<ForwardRefProps>(null);
 
   useEffect(() => {
-    const vectorSource = new VectorSource();
+    const vectorSource = new VectorSource({
+        format: new GeoJSON(),
+        url: function (extent) {
+          return (
+            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
+            'request=GetFeature&typename=avoindata:Rakennukset_alue_rekisteritiedot&' +
+            'outputFormat=application/json&srsname=EPSG:3857&' +
+            'bbox=' +
+            extent.join(',') +
+            ',EPSG:3857'
+          );
+        },
+        strategy: bbox,
+      });
     setVectorSource(vectorSource);
     drawData(vectorSource).then(() => toggleDrawBuildings(true));
   }, []);
 
   useEffect(() => {
     if (selectedBuildingId) {
-      const vector = new VectorSource();
+      const vector = new VectorSource({
+        format: new GeoJSON(),
+        url: function (extent) {
+          return (
+            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
+            'outputFormat=application/json&' +
+            'bbox=' +
+            extent.join(',') +
+            ',EPSG:3857'
+          );
+        },
+        strategy: bbox,
+      });
       setSelectedVectorSource(vector);
       drawData(vector, selectedBuildingId);
     }
