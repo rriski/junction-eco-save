@@ -43,7 +43,7 @@ export const Building = () => {
       <Content>
         <ContentWrapper>
           <Column className="map-column">
-            <Map setBuildingId={() => undefined} />
+            <Map selectedBuildingId={building.building_id} />
 
             <ImageRow>
               <RowItem>

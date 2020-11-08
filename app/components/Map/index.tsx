@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { GeoJSON, WFS } from 'ol/format';
 import { equalTo } from 'ol/format/filter';
+import Geometry from 'ol/geom/Geometry';
 import { bbox } from 'ol/loadingstrategy';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
@@ -17,6 +18,7 @@ import MapComponent from 'components/Map/MapComponent';
 interface Props {
   setBuildingId: (buildingId?: string) => void;
   selectedBuildingId?: string;
+  showData?: boolean;
 }
 
 const drawData = async (vector: VectorSource, buildingId?: string) => {
@@ -39,7 +41,7 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
   });
 };
 
-const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
+const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => {
   const [drawBuildings, toggleDrawBuildings] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource>();
   const [selectedVectorSource, setSelectedVectorSource] = useState<VectorSource>();
@@ -74,10 +76,19 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   useEffect(() => {
     if (selectedBuildingId) {
       const source = new VectorSource();
-      drawData(source, selectedBuildingId);
-      setSelectedVectorSource(source);
+      drawData(source, selectedBuildingId).then(() => {
+        setSelectedVectorSource(source);
+
+        if (
+          source.getFeatures() &&
+          source.getFeatures()[0] &&
+          source.getFeatures()[0].getGeometry()
+        ) {
+          vectorLayerRef.current?.fitToMap(source.getFeatures()[0].getGeometry() as Geometry);
+        }
+      });
     }
-  }, [selectedBuildingId]);
+  }, [selectedBuildingId, vectorLayerRef]);
 
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
@@ -110,7 +121,7 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
           />
         )}
 
-        {drawBuildings && (
+        {drawBuildings && showData && (
           <VectorLayer ref={vectorLayerRef} source={vectorSource} style={mapStyles.Buildings} />
         )}
       </Layers>
