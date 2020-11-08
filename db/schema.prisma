@@ -53,3 +53,8 @@ model spatial_ref_sys {
   // geom        geometry?
   // building_id String?
 // }
+
+model picture {
+  id  Int     @id
+  url String?
+}

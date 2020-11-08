@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useQuery } from 'blitz';
+import { Link, useQuery } from 'blitz';
 import styled from 'styled-components';
 import { Spacer, Stack } from 'styled-layout';
 
@@ -93,7 +93,13 @@ const DetailsCard = ({ buildingId, savedBuildings, setSavedBuildings }: Props) =
           />
         )}
 
-        {building && <ButtonLink href={`/buildings/${building.id}`}>Read more</ButtonLink>}
+        {building && (
+          <Link href={`/buildings/${building.id}`}>
+            <ButtonLink>
+              <a>Read more</a>
+            </ButtonLink>
+          </Link>
+        )}
       </Perkele>
     </Wrapper>
   );

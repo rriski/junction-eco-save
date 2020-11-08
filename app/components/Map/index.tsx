@@ -6,6 +6,9 @@ import OLVectorLayer from 'ol/layer/Vector';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
+import {bbox} from 'ol/loadingstrategy';
+
+import { ForwardRefProps } from './Layers/VectorLayer';
 
 import { Controls, FullScreenControl } from 'app/components/Map/Controls';
 import { Layers, TileLayer, VectorLayer } from 'app/components/Map/Layers';
@@ -19,6 +22,7 @@ interface Props {
 }
 
 const drawData = async (vector: VectorSource, buildingId?: string) => {
+  /*
   // @ts-ignore
   const featureRequest = new WFS().writeGetFeature({
     srsName: 'EPSG:3857',
@@ -33,43 +37,71 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
   }).then(async (response) => {
     const json = await response.json();
     const features = new GeoJSON().readFeatures(json);
+    vector.clear(true);
     vector.addFeatures(features);
   });
+*/
 };
 
+
 const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
-  const [center, setCenter] = useState([24.946, 60.166]);
-  const [zoom, setZoom] = useState(16);
   const [drawBuildings, toggleDrawBuildings] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource>();
   const [selectedVectorSource, setSelectedVectorSource] = useState<VectorSource>();
 
-  const vectorLayerRef = useRef<OLVectorLayer>(null);
+  const vectorLayerRef = useRef<ForwardRefProps>(null);
+  const selectedLayerRef = useRef<ForwardRefProps>(null);
 
   useEffect(() => {
-    const vectorSource = new VectorSource();
+    const vectorSource = new VectorSource({
+        format: new GeoJSON(),
+        url: function (extent) {
+          return (
+            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
+            'request=GetFeature&typename=avoindata:Rakennukset_alue_rekisteritiedot&' +
+            'outputFormat=application/json&srsname=EPSG:3857&' +
+            'bbox=' +
+            extent.join(',') +
+            ',EPSG:3857'
+          );
+        },
+        strategy: bbox,
+      });
     setVectorSource(vectorSource);
     drawData(vectorSource).then(() => toggleDrawBuildings(true));
   }, []);
 
   useEffect(() => {
     if (selectedBuildingId) {
-      const vector = new VectorSource();
+      const vector = new VectorSource({
+        format: new GeoJSON(),
+        url: function (extent) {
+          return (
+            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
+            'outputFormat=application/json&' +
+            'bbox=' +
+            extent.join(',') +
+            ',EPSG:3857'
+          );
+        },
+        strategy: bbox,
+      });
       setSelectedVectorSource(vector);
+      drawData(vector, selectedBuildingId);
     }
   }, [selectedBuildingId]);
-
-  useEffect(() => {
-    if (selectedVectorSource) {
-      drawData(selectedVectorSource, selectedBuildingId);
-    }
-  }, [selectedVectorSource]);
 
   const handleSelect = (pixel: Pixel) => {
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
         if (value && value.length) {
           setBuildingId(value[0].values_.c_kiinteistotunnus);
+          vectorLayerRef.current?.getFeatures(pixel).then((e) => {
+            const boi = e[0].getGeometry();
+            if (boi) {
+              vectorLayerRef.current?.fitToMap(boi);
+            }
+          });
         } else {
           setBuildingId(undefined);
         }
@@ -78,22 +110,23 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   };
 
   return (
-    <MapComponent onClick={handleSelect} center={fromLonLat(center)} zoom={zoom}>
+    <MapComponent onClick={handleSelect} center={fromLonLat([24.946, 60.166])} zoom={16}>
       <Layers>
         <TileLayer source={OSMSource()} zIndex={0} />
 
         {selectedVectorSource && (
-          <VectorLayer source={selectedVectorSource} style={mapStyles.HighlightedBuilding} />
+          <VectorLayer
+            ref={selectedLayerRef}
+            source={selectedVectorSource}
+            style={mapStyles.HighlightedBuilding}
+            centerOnChange
+          />
         )}
 
         {drawBuildings && (
           <VectorLayer ref={vectorLayerRef} source={vectorSource} style={mapStyles.Buildings} />
         )}
       </Layers>
-
-      <Controls>
-        <FullScreenControl />
-      </Controls>
     </MapComponent>
   );
 };

@@ -1,29 +1,36 @@
-import { FC } from 'react';
-
+import { Link } from 'blitz';
 import styled from 'styled-components';
 
-import Logo from 'public/logo.svg';
+import Arrow from 'public/static/svg/arrow.svg';
+import Logo from 'public/static/svg/hero-logo.svg';
 import { Content } from 'styles/index';
-import { Color } from 'styles/theme';
-import { Title, Text } from 'styles/typography';
+import { Text, Title } from 'styles/typography';
 
 interface Props {
   title?: string;
   image?: string;
-  color?: Color;
   icon?: boolean;
+  goBack?: boolean;
 }
 
-const Hero: FC<Props> = ({ children, title, image, color }) => {
+const Hero: React.FC<Props> = ({ children, title, image, icon, goBack }) => {
   return (
     <Wrapper>
-      <Background>
-        {image && <BackgroundImage src={image} />}
-        {color && <BackgroundOverlay color={color} />}
-      </Background>
+      {image && (
+        <Background>
+          <BackgroundOverlay src={image} />
+        </Background>
+      )}
 
       <HeaderBar>
-        <Logo size={20} />
+        {icon && <Logo />}
+        {goBack && (
+          <Link href="/">
+            <HeroLink>
+              <Arrow />
+            </HeroLink>
+          </Link>
+        )}
       </HeaderBar>
 
       <Content align="center">
@@ -38,19 +45,20 @@ const Hero: FC<Props> = ({ children, title, image, color }) => {
 const Wrapper = styled.section`
   position: relative;
   width: 100vw;
-  padding-bottom: ${(p) => p.theme.spacing.default};
+  padding: ${(p) => p.theme.spacing.large} 0;
 `;
 
-const BackgroundOverlay = styled.div<{ color: Color }>`
+const BackgroundOverlay = styled.div<{ src: string }>`
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: ${(p) => p.theme.rem(300)};
+  max-height: ${(p) => p.theme.rem(400)};
   background-image: linear-gradient(
       to bottom,
       ${(p) => `${p.theme.colors.turquoise}cc`},
       ${(p) => `${p.theme.colors.turquoise}cc`}
     ),
-    url('https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70');
+    url(${(p) => `${p.src}`});
   background-size: cover;
 `;
 
@@ -63,24 +71,28 @@ const Background = styled.div`
   min-height: ${(p) => p.theme.rem(400)};
 `;
 
-const BackgroundImage = styled.img`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`;
-
 const HeaderBar = styled.div`
+  position: absolute;
+  top: ${(p) => p.theme.spacing.small};
+  left: ${(p) => p.theme.spacing.default};
+  display: flex;
   width: 100vw;
   height: 4rem;
-  padding: ${(p) => p.theme.spacing.default};
+  align-items: center;
   color: ${(p) => p.theme.colors.white};
+`;
+
+const HeroLink = styled.a`
+  transition: all 0.1s;
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const HeroTitle = styled(Title).attrs({ as: 'h1' })`
   max-width: ${(p) => p.theme.rem(600)};
   color: ${(p) => p.theme.colors.white};
-  font-size: 2.4rem;
+  font-size: 1.2rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
   line-height: 1.3;
@@ -89,7 +101,7 @@ const HeroTitle = styled(Title).attrs({ as: 'h1' })`
 `;
 
 const HeroContent = styled(Text)`
-  max-width: ${(p) => p.theme.rem(600)};
+  margin: ${(p) => p.theme.spacing.xlarge} 0;
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(20)};
   font-weight: 600;

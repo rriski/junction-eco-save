@@ -1,4 +1,5 @@
 import { Ctx } from 'blitz';
+import prisma from 'prisma';
 
 import db, { FindFirstBuildingArgs, Building, Renovation } from 'db';
 
@@ -12,6 +13,7 @@ type energy_data = {
 type ApiBuilding = Building & {
   energy_consumption?: energy_data;
   Renovation?: Renovation[];
+  image_url?: string;
 };
 
 type energy_consumption_options = {
@@ -107,6 +109,11 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
         heating: energy.heating * area,
       };
     }
+  }
+  if (building) {
+    building.image_url = (
+      await db.$queryRaw('SELECT url FROM picture ORDER BY random() LIMIT 1;')
+    )[0].url;
   }
   /*
   {
