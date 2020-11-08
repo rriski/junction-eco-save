@@ -68,7 +68,6 @@ const Details = styled.div`
   right: 0;
   bottom: ${(p) => p.theme.spacing.large};
   display: flex;
-  overflow: hidden;
   width: 100%;
   max-width: ${(p) => p.theme.rem(500)};
   flex-direction: column;
