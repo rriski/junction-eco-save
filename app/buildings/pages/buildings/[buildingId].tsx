@@ -44,7 +44,7 @@ export const Building = () => {
       <Content>
         <ContentWrapper>
           <Column className="map-column">
-            <Map selectedBuildingId={building.building_id} />
+            <Map selectedBuildingId={building.building_id} coordinates={[building.latitude, building.longitude]} />
 
             <ImageRow>
               <RowItem>

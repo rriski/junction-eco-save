@@ -19,6 +19,7 @@ interface Props {
   setBuildingId: (buildingId?: string) => void;
   selectedBuildingId?: string;
   showData?: boolean;
+  coordinates?: number[];
 }
 
 const drawData = async (vector: VectorSource, buildingId?: string) => {
@@ -41,7 +42,7 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
   });
 };
 
-const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => {
+const Map = ({ setBuildingId, selectedBuildingId, coordinates, showData = false }: Props) => {
   const [drawBuildings, toggleDrawBuildings] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource>();
   const [selectedVectorSource, setSelectedVectorSource] = useState<VectorSource>();
@@ -107,8 +108,9 @@ const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => 
     }
   };
 
+  console.log(coordinates, fromLonLat([24.946, 60.166]))
   return (
-    <MapComponent onClick={handleSelect} center={fromLonLat([24.946, 60.166])} zoom={16}>
+    <MapComponent onClick={handleSelect} center={coordinates || fromLonLat([24.946, 60.166])} zoom={16}>
       <Layers>
         <TileLayer source={OSMSource()} zIndex={0} />
 

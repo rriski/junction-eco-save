@@ -17,6 +17,7 @@ const MapComponent = dynamic(() => import('components/Map'), {
 interface Props {
   savedBuildings: Building[];
   setSavedBuildings: (buildings: Building[]) => void;
+  coordinates?: number[];
 }
 
 const PropertyMap = (props: Props) => {
@@ -27,7 +28,7 @@ const PropertyMap = (props: Props) => {
       <Search setBuildingId={setBuildingId} />
 
       <Wrapper>
-        <Map selectedBuildingId={buildingId} setBuildingId={setBuildingId} showData />
+        <Map selectedBuildingId={buildingId} setBuildingId={setBuildingId} coordinates={props.coordinates} showData />
 
         <Suspense fallback="">
           <Details>
