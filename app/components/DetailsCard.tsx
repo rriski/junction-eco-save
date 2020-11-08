@@ -78,9 +78,7 @@ const DetailsCard = (props: Props) => {
 
         {building && (
           <Link href={`/buildings/${building.id}`}>
-            <ButtonLink>
-              <a>Read more</a>
-            </ButtonLink>
+            <ButtonLink>Read more</ButtonLink>
           </Link>
         )}
       </Perkele>

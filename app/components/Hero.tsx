@@ -49,8 +49,8 @@ const Background = styled.div<{ src: string }>`
   top: 0;
   right: 0;
   left: 0;
-  min-height: ${(p) => p.theme.rem(300)};
-  max-height: ${(p) => p.theme.rem(400)};
+  min-height: ${(p) => p.theme.rem(400)};
+  max-height: ${(p) => p.theme.rem(500)};
   background-image: linear-gradient(
       to bottom,
       ${(p) => `${p.theme.colors.turquoise}cc`},
@@ -70,6 +70,7 @@ const HeaderBar = styled(Content)`
 `;
 
 const HeroLink = styled.a`
+  cursor: pointer;
   transition: all 0.1s;
 
   &:hover {
@@ -90,10 +91,10 @@ const HeroTitle = styled(Title).attrs({ as: 'h1' })`
 `;
 
 const HeroContent = styled(Text)`
-  margin: ${(p) => p.theme.spacing.xlarge} 0;
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(20)};
   font-weight: 600;
+  max-width: ${(p) => p.theme.rem(600)};
   text-align: center;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 `;

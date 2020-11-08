@@ -33,7 +33,7 @@ const Modal: React.FC<Props> = ({ children, title, open, setIsOpen }) => {
     setTimeout(() => {
       setIsClosing(false);
       setIsOpen(false);
-    }, 200);
+    }, 500);
   }, [setIsOpen, setIsClosing]);
 
   const handleUserKeyPress = useCallback(
@@ -149,7 +149,7 @@ const ModalBackground = styled.div<StyledModalProps>`
   height: 100%;
   animation: ${({ open, isClosing }) =>
       isClosing ? hideBackground : open ? showBackground : hideBackground}
-    0.2s ease-out;
+    0.5s;
   background-color: rgba(0, 0, 0, 0.7);
 `;
 
@@ -163,7 +163,7 @@ const ModalContainer = styled.div<StyledModalProps>`
   height: 100%;
   animation: ${({ open, isClosing }) =>
       isClosing ? hideContainer : open ? showContainer : hideContainer}
-    0.2s cubic-bezier(0.2, 0.87, 0.76, 0.98);
+    0.5s ease-in-out;
 `;
 
 const ModalMain = styled.div`

@@ -1,3 +1,4 @@
+import { Link } from 'blitz';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
@@ -65,6 +66,7 @@ export const ButtonLink = styled.a`
   font-weight: 600;
   text-align: center;
   transition: all 0.1s;
+  cursor: pointer;
 
   &:hover {
     background-color: ${(p) => p.theme.colors.teal};
