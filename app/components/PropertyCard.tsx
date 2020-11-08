@@ -1,7 +1,8 @@
 import { Link } from 'blitz';
 import styled from 'styled-components';
 
-import { Building, Renovation } from 'db';
+import { getImprovable, getLatestRenovation } from 'app/utils/buildingScores';
+import { Building } from 'db';
 import { Card, DetailGrid } from 'styles/index';
 import { Text, Subtitle, Detail } from 'styles/typography';
 
@@ -9,16 +10,9 @@ interface Props {
   building: Building;
 }
 
-function getLatestRenovation(renovations: Renovation[]) {
-  if (renovations.length > 0) {
-    return renovations.reduce((a, b) => {
-      return a.end_year > b.end_year && a.end_year < new Date().getFullYear() ? a : b;
-    });
-  }
-}
-
 const PropertyCard = ({ building }: Props) => {
-  const latestRenovation = getLatestRenovation((building as any).Renovation);
+  const improvable = getImprovable(building);
+  const latestRenovation = Math.min(getLatestRenovation(building), new Date().getFullYear());
 
   return (
     <Card>
@@ -35,11 +29,19 @@ const PropertyCard = ({ building }: Props) => {
       <Divider />
 
       <DetailGrid>
-        <Detail>Potential</Detail>
-        <Text align="right">10 %</Text>
+        {improvable && (
+          <>
+            <Detail>Potential</Detail>
+            <Text align="right">{improvable} %</Text>
+          </>
+        )}
 
-        <Detail>Renovated</Detail>
-        {latestRenovation && <Text align="right">{latestRenovation.end_year}</Text>}
+        {latestRenovation !== 0 && (
+          <>
+            <Detail>Renovated</Detail>
+            <Text align="right">{latestRenovation}</Text>
+          </>
+        )}
       </DetailGrid>
     </Card>
   );
