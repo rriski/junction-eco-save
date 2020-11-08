@@ -108,7 +108,7 @@ const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => 
   };
 
   return (
-    <MapComponent onClick={handleSelect} center={fromLonLat([24.946, 60.166])} zoom={16}>
+    <MapComponent onClick={handleSelect} center={fromLonLat([24.946, 60.166])} zoom={14}>
       <Layers>
         <TileLayer source={OSMSource()} zIndex={0} />
 
