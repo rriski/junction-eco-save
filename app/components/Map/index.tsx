@@ -16,7 +16,7 @@ import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
 
 interface Props {
-  setBuildingId: (buildingId?: string) => void;
+  setBuildingId?: (buildingId?: string) => void;
   selectedBuildingId?: string;
   showData?: boolean;
   coordinates?: number[];
@@ -95,14 +95,14 @@ const Map = ({ setBuildingId, selectedBuildingId, coordinates, showData = false 
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
         if (value && value.length) {
-          setBuildingId(value[0].values_.c_kiinteistotunnus);
+          if (setBuildingId) setBuildingId(value[0].values_.c_kiinteistotunnus);
 
           const boi = value[0].getGeometry();
           if (boi) {
             vectorLayerRef.current?.fitToMap(boi);
           }
         } else {
-          setBuildingId(undefined);
+          if (setBuildingId) setBuildingId(undefined);
         }
       });
     }
@@ -110,7 +110,7 @@ const Map = ({ setBuildingId, selectedBuildingId, coordinates, showData = false 
 
   console.log(coordinates, fromLonLat([24.946, 60.166]))
   return (
-    <MapComponent onClick={handleSelect} center={coordinates || fromLonLat([24.946, 60.166])} zoom={16}>
+    <MapComponent onClick={handleSelect} center={coordinates || fromLonLat([24.946, 60.166])} zoom={14}>
       <Layers>
         <TileLayer source={OSMSource()} zIndex={0} />
 

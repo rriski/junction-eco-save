@@ -19,7 +19,7 @@ const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
 
   useEffect(() => {
     const options = {
-      view: new View({ zoom, center, minZoom: 15, maxZoom: 19 }),
+      view: new View({ zoom, center, minZoom: 15, maxZoom: 18 }),
       layers: [],
       controls: [],
       overlays: [],

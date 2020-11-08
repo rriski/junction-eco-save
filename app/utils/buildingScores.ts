@@ -10,28 +10,29 @@ export function getLatestRenovation(building: Building) {
   );
 }
 
-export function getOffers(building: Building) {
-  const price_per_kwh = {
-    'Suora sähkölämmitys': 0.11,
-    'Ilmakeskuslämmitys': 0.10,
-    'Vesikeskuslämmitys': 0.08,
-    'Muu': 0.15,
-  }[building.heating_category] || 0.15;
+const kwhPrices = {
+  'Suora sähkölämmitys': 0.11,
+  Ilmakeskuslämmitys: 0.1,
+  Vesikeskuslämmitys: 0.08,
+  Muu: 0.15,
+};
 
-  if (
-    !building?.photovoltaic_potential ||
-    !building?.energy_consumption
-  ) return;
-  const energy_consumption = (building.energy_consumption.electricity + building.energy_consumption.heating)
-  const improvement = 0.3 * building.photovoltaic_potential / energy_consumption
- 
-  const installation_cost = 50000;
+export function getOffers(building: Building) {
+  // @ts-ignore
+  const pricePerwh = kwhPrices[building.heating_category] || 0.15;
+
+  if (!building?.photovoltaic_potential || !building?.energy_consumption) return;
+
+  const { energy_consumption: buildingConsumption } = building;
+
+  const energyConsumption = buildingConsumption.electricity + buildingConsumption.heating;
+  const improvement = (0.3 * building.photovoltaic_potential) / energyConsumption;
+
+  const installationCost = 50000;
   return {
-    'price': price_per_kwh,
-    'payback_time': Math.floor(
-      installation_cost / (improvement*price_per_kwh*energy_consumption)
-    )
-  }
+    price: pricePerwh,
+    paybackTime: Math.floor(installationCost / (improvement * pricePerwh * energyConsumption)),
+  };
 }
 
 export function calculateRepairDebt(building: Building) {
@@ -84,10 +85,16 @@ export function calculateRepairDebt(building: Building) {
 }
 
 export function getImprovable(building: Building) {
-  return building?.energy_consumption && building.photovoltaic_potential
+  if (!building?.photovoltaic_potential || !building?.energy_consumption) return;
+
+  const {
+    energy_consumption: buildingConsumption,
+    photovoltaic_potential: photovoltaicPotential,
+  } = building;
+
+  return buildingConsumption && photovoltaicPotential
     ? Math.floor(
-        (building.photovoltaic_potential /
-          (building.energy_consumption.electricity + building.energy_consumption.heating)) *
+        (photovoltaicPotential / (buildingConsumption.electricity + buildingConsumption.heating)) *
           1000
       ) / 10
     : null;

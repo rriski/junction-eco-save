@@ -1,16 +1,20 @@
-import React, { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
-import { useQuery, useParam, BlitzPage, NotFoundError } from 'blitz';
+import { BlitzPage, NotFoundError, useParam, useQuery } from 'blitz';
 import styled from 'styled-components';
+import { Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
 import { calculateRepairDebt, getImprovable, getOffers } from 'app/utils/buildingScores';
+import { getSavedBuildings } from 'app/utils/localStorage';
 import { AdvancedFucker } from 'components/Fucker';
 import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
+import SaveBuilding from 'components/SaveBuilding';
+import { Building } from 'db';
 import FacadeIcon from 'static/svg/julkisivu.svg';
 import RoofIcon from 'static/svg/kattoremppa.svg';
 import PipesIcon from 'static/svg/putki.svg';
@@ -22,7 +26,16 @@ const getIconFromCategory = (category: 'pipes' | 'facade' | 'roof' | undefined) 
   else return null;
 };
 
-export const Building = () => {
+export const BuildingPage = () => {
+  const [savedBuildings, setSavedBuildings] = useState<Building[]>([]);
+
+  useEffect(() => {
+    const saved = getSavedBuildings();
+    if (saved) {
+      setSavedBuildings(saved);
+    }
+  }, []);
+
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
   if (!building) throw NotFoundError;
@@ -36,10 +49,8 @@ export const Building = () => {
   }, ${building?.location_post_number} Helsinki`;
 
   return (
-    <MainLayout>
-      <Hero image={building.image_url} icon goBack>
-        <Title>{title}</Title>
-      </Hero>
+    <Layout>
+      <Hero title={title} image={building.image_url} goBack />
 
       <Content>
         <ContentWrapper>
@@ -62,48 +73,71 @@ export const Building = () => {
           </Column>
 
           <Column>
-            <Card>
-              <SubTitle>General info</SubTitle>
+            <Card spacing="medium">
+              <Stack axis="x" justify="space-between">
+                <SubTitle>General info</SubTitle>
+
+                <SaveBuilding
+                  building={building}
+                  savedBuildings={savedBuildings}
+                  setSavedBuildings={setSavedBuildings}
+                />
+              </Stack>
+
               <DataList>
                 <DataItem>
                   Year of construction: {building?.construction_date?.getFullYear()}
                 </DataItem>
+
                 <DataItem>Heating: {building?.heating_category}</DataItem>
+
                 <DataItem>Source of heat: {building?.fuel_category}</DataItem>
+
                 <DataItem>Building material: {building?.construction_material}</DataItem>
+
                 <DataItem>Living area: {building?.area_living} m2</DataItem>
               </DataList>
             </Card>
 
             <AdvancedFucker
+              type="pipe"
               title="Pipe repair debt"
               value={debts.pipes}
               thresholds={debts.thresholds.pipes}
+              includeInfo
             />
             <AdvancedFucker
+              type="facade"
               title="Facade repair debt"
               value={debts.facade}
               thresholds={debts.thresholds.facade}
+              includeInfo
             />
             <AdvancedFucker
+              type="roof"
               title="Roof repair debt"
               value={debts.roof}
               thresholds={debts.thresholds.roof}
+              includeInfo
             />
             {improvable && (
               <AdvancedFucker
+                type="electric"
                 title="Electric improvement potential"
                 value={improvable}
                 thresholds={{ low: 0, high: 30 }}
                 unit="%"
+                includeInfo
               />
             )}
             {offers && (
               <AdvancedFucker
+                type="solar"
                 title="Investing in solar panels would pay the investment back in"
-                value={offers.payback_time}
+                value={offers.paybackTime}
                 thresholds={{ low: 0, high: 30 }}
                 unit="years"
+                includeInfo
               />
             )}
 
@@ -131,43 +165,13 @@ export const Building = () => {
           </Column>
         </ContentWrapper>
       </Content>
-    </MainLayout>
+    </Layout>
   );
 };
-
-const MainLayout = styled.main`
-  min-height: 100vh;
-`;
-
-const Header = styled.header`
-  display: grid;
-  min-height: ${(p) => p.theme.rem(300)};
-  max-height: ${(p) => p.theme.rem(400)};
-  align-items: center;
-  background-image: linear-gradient(
-      to bottom,
-      ${(p) => `${p.theme.colors.turquoise}cc`},
-      ${(p) => `${p.theme.colors.turquoise}cc`}
-    ),
-    url('https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70');
-  background-size: cover;
-  grid-template-columns: 1fr min(${(p) => p.theme.rem(1000)}, 100%) 1fr;
-
-  & > * {
-    grid-column: 2;
-  }
-`;
-
-const Title = styled.span`
-  color: ${(p) => p.theme.colors.white};
-  font-size: ${(p) => p.theme.rem(48)};
-  text-shadow: ${(p) => p.theme.shadow.text};
-`;
 
 const Content = styled.section`
   display: grid;
   align-items: center;
-  margin-top: -${(p) => p.theme.rem(48)};
   grid-template-columns:
     1fr
     min(${(p) => p.theme.rem(1000)}, 100%)
@@ -301,7 +305,7 @@ const RenovationTitle = styled.h3`
 
 const ShowBuildingPage: BlitzPage = () => (
   <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
-    <Building />
+    <BuildingPage />
   </Suspense>
 );
 
