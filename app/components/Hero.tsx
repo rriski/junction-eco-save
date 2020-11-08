@@ -82,6 +82,7 @@ const HeroTitle = styled(Title).attrs({ as: 'h1' })`
   max-width: ${(p) => p.theme.rem(600)};
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(48)};
+  word-break: break-word;
   font-weight: bold;
   letter-spacing: 0.1rem;
   line-height: 1.3;

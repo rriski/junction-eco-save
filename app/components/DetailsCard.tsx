@@ -32,9 +32,9 @@ const DetailsCard = (props: Props) => {
         {building && (
           <Card spacing="medium">
             <Stack axis="x" justify="space-between" align="center">
-              <Subtitle>
+              <NiceHeading>
                 {building.location_street_address} {building.location_street_number}
-              </Subtitle>
+              </NiceHeading>
 
               <SaveBuilding building={building} {...props} />
             </Stack>
@@ -85,6 +85,14 @@ const DetailsCard = (props: Props) => {
     </Wrapper>
   );
 };
+
+const NiceHeading = styled(Subtitle)`
+  word-break: break-word;
+
+  & ~ svg {
+    min-width: 1.7rem;
+  }
+`;
 
 const Wrapper = styled(Stack)`
   width: ${(p) => p.theme.rem(450)};
