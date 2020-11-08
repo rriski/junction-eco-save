@@ -179,6 +179,10 @@ const ModalMain = styled.div`
   border-radius: 8px;
   overflow-y: auto;
   transform: translate(-50%, -50%);
+
+  @media only screen and (max-width: 600px) {
+    width: 95vw;
+  }
 `;
 
 const ModalHeader = styled.h2`
