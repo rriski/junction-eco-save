@@ -12,7 +12,7 @@ interface Props {
 }
 
 const SearchResults = ({ query, onSelect }: Props) => {
-  const [buildings, { isLoading }] = useQuery(getBuildings, {
+  const [buildings] = useQuery(getBuildings, {
     where: { location_street_address: { contains: query, mode: 'insensitive' } },
     take: 5,
   });

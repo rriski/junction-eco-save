@@ -1,10 +1,10 @@
 //@ts-nocheck
-import { FC, Children } from 'react';
+import { Children } from 'react';
 
 import * as easings from 'd3-ease';
 import { useTransition, animated } from 'react-spring';
 
-const Perkele: FC = ({ children }) => {
+const Perkele: React.FC = ({ children }) => {
   const items = Children.toArray(children);
 
   const transitions = useTransition(items, (item) => item.key, {

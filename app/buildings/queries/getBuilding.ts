@@ -111,7 +111,9 @@ export default async function getBuilding({ where }: GetBuildingInput, ctx: Ctx)
     }
   }
   if (building) {
-    building.image_url = (await db.$queryRaw("SELECT url FROM picture ORDER BY random() LIMIT 1;"))[0].url
+    building.image_url = (
+      await db.$queryRaw('SELECT url FROM picture ORDER BY random() LIMIT 1;')
+    )[0].url;
   }
   /*
   {

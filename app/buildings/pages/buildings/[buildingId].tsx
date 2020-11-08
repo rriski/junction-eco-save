@@ -8,6 +8,7 @@ import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
 import { calculateRepairDebt, getImprovable } from 'app/utils/buildingScores';
 import { AdvancedFucker } from 'components/Fucker';
+import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
 import FacadeIcon from 'static/svg/julkisivu.svg';
@@ -26,8 +27,6 @@ export const Building = () => {
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
   if (!building) throw NotFoundError;
 
-  console.log(building);
-
   const improvable = getImprovable(building);
   const debts = calculateRepairDebt(building);
 
@@ -37,9 +36,9 @@ export const Building = () => {
 
   return (
     <MainLayout>
-      <Header>
+      <Hero image={building.image_url} icon goBack>
         <Title>{title}</Title>
-      </Header>
+      </Hero>
 
       <Content>
         <ContentWrapper>
@@ -150,7 +149,7 @@ const Header = styled.header`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.p`
   color: ${(p) => p.theme.colors.white};
   font-size: ${(p) => p.theme.rem(48)};
   text-shadow: ${(p) => p.theme.shadow.text};

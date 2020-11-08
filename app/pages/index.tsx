@@ -25,11 +25,9 @@ const Index: BlitzPage = () => {
       <Layout title="Eco Save">
         <Hero
           image="https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70"
-          color="turquoise"
           icon
-        >
-          Katselmoi energiasäästösi kestävillä uusiutuvan energian kiinteistöratkaisuilla
-        </Hero>
+          title="Katselmoi energiasäästösi kestävillä uusiutuvan energian kiinteistöratkaisuilla"
+        />
 
         <PropertyMap savedBuildings={savedBuildings} setSavedBuildings={setSavedBuildings} />
 
