@@ -24,7 +24,6 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ children, title, open, setIsOpen }) => {
-  useLockBodyScroll();
   const modalRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
 
