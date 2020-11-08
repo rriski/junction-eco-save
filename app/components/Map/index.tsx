@@ -108,7 +108,6 @@ const Map = ({ setBuildingId, selectedBuildingId, coordinates, showData = false 
     }
   };
 
-  console.log(coordinates, fromLonLat([24.946, 60.166]));
   return (
     <MapComponent
       onClick={handleSelect}

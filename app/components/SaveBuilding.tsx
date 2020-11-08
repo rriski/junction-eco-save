@@ -14,7 +14,6 @@ const SaveBuilding = ({ building, savedBuildings, setSavedBuildings }: Props) =>
   const isSaved = savedBuildings.some((b) => b.building_id === building.building_id);
 
   const onSaveClick = useCallback(() => {
-    console.log('here', building);
     if (building) {
       if (!isSaved) {
         const newSavedBuildings = addBuildingToLocalStorage(building);
