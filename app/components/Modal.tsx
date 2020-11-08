@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import styled, { keyframes } from 'styled-components';
+import { Stack } from 'styled-layout';
 
 function useLockBodyScroll() {
   useLayoutEffect(() => {
@@ -72,16 +73,19 @@ const Modal: React.FC<Props> = ({ children, title, open, setIsOpen }) => {
 
   return (
     <>
+      <ModalBackground open={open} isClosing={isClosing} />
+
       <ModalContainer ref={modalRef} open={open} isClosing={isClosing}>
         <ModalMain>
           <ModalHeader>
             <ModalToggle onClick={hideModal} />
+
             {title}
           </ModalHeader>
+
           <ModalBody>{children}</ModalBody>
         </ModalMain>
       </ModalContainer>
-      <ModalBackground open={open} isClosing={isClosing} />
     </>
   );
 };
@@ -170,6 +174,7 @@ const ModalMain = styled.div`
   width: 50vw;
   max-height: 95vh;
   flex-direction: column;
+  padding: ${(p) => p.theme.spacing.large} ${(p) => p.theme.spacing.medium};
   margin: 0 auto;
   background: white;
   border-radius: 8px;
@@ -178,13 +183,13 @@ const ModalMain = styled.div`
 `;
 
 const ModalHeader = styled.h2`
-  padding: 15px 0;
+  padding: 15px 0 40px;
   margin: 0;
   font-size: 1.8em;
   text-align: center;
 `;
 
-const ModalBody = styled.div`
+const ModalBody = styled(Stack)`
   padding: 0 1rem;
   font-weight: 300;
 `;
@@ -206,7 +211,7 @@ const ModalToggle = styled.div`
     height: 3px;
     margin-top: -1.5px;
     margin-left: -15px;
-    background-color: black;
+    background-color: ${(p) => p.theme.colors.grey};
     border-radius: 3px;
     content: '';
     transform: rotate(-45deg);

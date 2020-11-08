@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState } from 'react';
 
 import { BlitzPage, NotFoundError, useParam, useQuery } from 'blitz';
 import styled from 'styled-components';
+import { Stack } from 'styled-layout';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
@@ -72,22 +73,28 @@ export const BuildingPage = () => {
           </Column>
 
           <Column>
-            <Card>
-              <TitleContainer>
+            <Card spacing="medium">
+              <Stack axis="x" justify="space-between">
                 <SubTitle>General info</SubTitle>
+
                 <SaveBuilding
                   building={building}
                   savedBuildings={savedBuildings}
                   setSavedBuildings={setSavedBuildings}
                 />
-              </TitleContainer>
+              </Stack>
+
               <DataList>
                 <DataItem>
                   Year of construction: {building?.construction_date?.getFullYear()}
                 </DataItem>
+
                 <DataItem>Heating: {building?.heating_category}</DataItem>
+
                 <DataItem>Source of heat: {building?.fuel_category}</DataItem>
+
                 <DataItem>Building material: {building?.construction_material}</DataItem>
+
                 <DataItem>Living area: {building?.area_living} m2</DataItem>
               </DataList>
             </Card>
