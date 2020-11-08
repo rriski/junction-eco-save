@@ -18,7 +18,7 @@ function getLatestRenovation(renovations: Renovation[]) {
 }
 
 const PropertyCard = ({ building }: Props) => {
-  const latestRenovation = getLatestRenovation(building.Renovation);
+  const latestRenovation = getLatestRenovation((building as any).Renovation);
 
   return (
     <Card>

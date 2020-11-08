@@ -1,5 +1,4 @@
 import { Ctx } from 'blitz';
-import prisma from 'prisma';
 
 import db, { FindFirstBuildingArgs, Building, Renovation } from 'db';
 

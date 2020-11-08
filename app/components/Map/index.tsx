@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { GeoJSON, WFS } from 'ol/format';
 import { equalTo } from 'ol/format/filter';
 import OLVectorLayer from 'ol/layer/Vector';
+import { bbox } from 'ol/loadingstrategy';
 import { Pixel } from 'ol/pixel';
 import { fromLonLat } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
-import {bbox} from 'ol/loadingstrategy';
 
 import { ForwardRefProps } from './Layers/VectorLayer';
 
@@ -43,7 +43,6 @@ const drawData = async (vector: VectorSource, buildingId?: string) => {
 */
 };
 
-
 const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
   const [drawBuildings, toggleDrawBuildings] = useState(false);
   const [vectorSource, setVectorSource] = useState<VectorSource>();
@@ -54,19 +53,19 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
 
   useEffect(() => {
     const vectorSource = new VectorSource({
-        format: new GeoJSON(),
-        url: function (extent) {
-          return (
-            'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
-            'request=GetFeature&typename=avoindata:Rakennukset_alue_rekisteritiedot&' +
-            'outputFormat=application/json&srsname=EPSG:3857&' +
-            'bbox=' +
-            extent.join(',') +
-            ',EPSG:3857'
-          );
-        },
-        strategy: bbox,
-      });
+      format: new GeoJSON(),
+      url: function (extent) {
+        return (
+          'https://kartta.hel.fi/ws/geoserver/avoindata/wfs?' +
+          'request=GetFeature&typename=avoindata:Rakennukset_alue_rekisteritiedot&' +
+          'outputFormat=application/json&srsname=EPSG:3857&' +
+          'bbox=' +
+          extent.join(',') +
+          ',EPSG:3857'
+        );
+      },
+      strategy: bbox,
+    });
     setVectorSource(vectorSource);
     drawData(vectorSource).then(() => toggleDrawBuildings(true));
   }, []);
@@ -97,7 +96,7 @@ const Map = ({ setBuildingId, selectedBuildingId }: Props) => {
         if (value && value.length) {
           setBuildingId(value[0].values_.c_kiinteistotunnus);
           vectorLayerRef.current?.getFeatures(pixel).then((e) => {
-            const boi = e[0].getGeometry();
+            const boi = (e as any)[0].getGeometry();
             if (boi) {
               vectorLayerRef.current?.fitToMap(boi);
             }
