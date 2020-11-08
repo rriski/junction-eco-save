@@ -19,7 +19,7 @@ const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
 
   useEffect(() => {
     const options = {
-      view: new View({ zoom, center }),
+      view: new View({ zoom, center, minZoom: 13, maxZoom: 19 }),
       layers: [],
       controls: [],
       overlays: [],
@@ -29,8 +29,6 @@ const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
 
     mapObject.on('click', function (e) {
       onClick(e.pixel);
-      const coordinates = map?.getCoordinateFromPixelInternal(e.pixel);
-      map?.getView().setCenter(coordinates);
     });
 
     if (mapRef.current) {
@@ -40,14 +38,6 @@ const MapComponent: React.FC<Props> = ({ children, onClick, zoom, center }) => {
 
     return () => mapObject.setTarget(undefined);
   }, []);
-
-  useEffect(() => {
-    map?.getView()?.setZoom(zoom);
-  }, [map, zoom]);
-
-  useEffect(() => {
-    map?.getView()?.setCenter(center);
-  }, [map, center]);
 
   return (
     <MapContext.Provider value={{ map }}>
