@@ -80,6 +80,7 @@ const HeaderBar = styled.div`
   height: 4rem;
   align-items: center;
   color: ${(p) => p.theme.colors.white};
+  z-index:1000000;
 `;
 
 const HeroLink = styled.a`
