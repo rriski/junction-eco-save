@@ -22,7 +22,7 @@ const Index: BlitzPage = () => {
 
   return (
     <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
-      <Layout title="Eco Save">
+      <Layout title="EcoSave">
         <Hero
           image="https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70"
           icon

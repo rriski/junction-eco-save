@@ -16,7 +16,7 @@ import { OSMSource } from 'app/components/Map/Source';
 import MapComponent from 'components/Map/MapComponent';
 
 interface Props {
-  setBuildingId: (buildingId?: string) => void;
+  setBuildingId?: (buildingId?: string) => void;
   selectedBuildingId?: string;
   showData?: boolean;
 }
@@ -94,14 +94,14 @@ const Map = ({ setBuildingId, selectedBuildingId, showData = false }: Props) => 
     if (vectorLayerRef.current) {
       vectorLayerRef.current.getFeatures(pixel).then((value: any) => {
         if (value && value.length) {
-          setBuildingId(value[0].values_.c_kiinteistotunnus);
+          if (setBuildingId) setBuildingId(value[0].values_.c_kiinteistotunnus);
 
           const boi = value[0].getGeometry();
           if (boi) {
             vectorLayerRef.current?.fitToMap(boi);
           }
         } else {
-          setBuildingId(undefined);
+          if (setBuildingId) setBuildingId(undefined);
         }
       });
     }

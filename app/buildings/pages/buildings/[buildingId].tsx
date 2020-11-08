@@ -36,10 +36,8 @@ export const Building = () => {
   }, ${building?.location_post_number} Helsinki`;
 
   return (
-    <MainLayout>
-      <Hero image={building.image_url} icon goBack>
-        <Title>{title}</Title>
-      </Hero>
+    <Layout>
+      <Hero title={title} image={building.image_url} goBack />
 
       <Content>
         <ContentWrapper>
@@ -131,7 +129,7 @@ export const Building = () => {
           </Column>
         </ContentWrapper>
       </Content>
-    </MainLayout>
+    </Layout>
   );
 };
 
@@ -139,35 +137,9 @@ const MainLayout = styled.main`
   min-height: 100vh;
 `;
 
-const Header = styled.header`
-  display: grid;
-  min-height: ${(p) => p.theme.rem(300)};
-  max-height: ${(p) => p.theme.rem(400)};
-  align-items: center;
-  background-image: linear-gradient(
-      to bottom,
-      ${(p) => `${p.theme.colors.turquoise}cc`},
-      ${(p) => `${p.theme.colors.turquoise}cc`}
-    ),
-    url('https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70');
-  background-size: cover;
-  grid-template-columns: 1fr min(${(p) => p.theme.rem(1000)}, 100%) 1fr;
-
-  & > * {
-    grid-column: 2;
-  }
-`;
-
-const Title = styled.span`
-  color: ${(p) => p.theme.colors.white};
-  font-size: ${(p) => p.theme.rem(48)};
-  text-shadow: ${(p) => p.theme.shadow.text};
-`;
-
 const Content = styled.section`
   display: grid;
   align-items: center;
-  margin-top: -${(p) => p.theme.rem(48)};
   grid-template-columns:
     1fr
     min(${(p) => p.theme.rem(1000)}, 100%)
