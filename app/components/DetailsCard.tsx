@@ -67,7 +67,7 @@ const DetailsCard = (props: Props) => {
 
         {building?.energy_consumption && (
           <AdvancedFucker
-            type="energy"
+            type="electric"
             title="Energy consumption"
             value={building.energy_consumption.electricity + building.energy_consumption.heating}
             thresholds={{ low: 5000, high: 100000 }}
