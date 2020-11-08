@@ -9,7 +9,7 @@ const Footer = () => {
       <Content align="center" spacing="large">
         <Logo />
 
-        <a href="https://github.com/rriski/junction2020-winners">Check out on GitHub</a>
+        <a href="https://github.com/rriski/junction2020-winners">Check us out on GitHub ✌️</a>
       </Content>
     </StyledFooter>
   );

@@ -21,13 +21,13 @@ const Index: BlitzPage = () => {
   }, []);
 
   return (
-    <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
+    <Suspense fallback={<DotsLoadingText>Loading...</DotsLoadingText>}>
       <Layout title="EcoSave">
         <Hero
           image="https://www.alvsbytalo.fi/globalassets/houses/lasse/finland/lasse_alvsbytalo_talopaketti_harmaa_1600x900_200619.jpg?w=1920&h=888&mode=crop&scale=both&quality=70"
           icon
         >
-          Katselmoi energiasäästösi kestävillä uusiutuvan energian kiinteistöratkaisuilla
+          Review the condition of your estates at a glance
         </Hero>
 
         <PropertyMap savedBuildings={savedBuildings} setSavedBuildings={setSavedBuildings} />

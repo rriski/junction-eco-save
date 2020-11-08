@@ -312,7 +312,7 @@ const RenovationTitle = styled.h3`
 `;
 
 const ShowBuildingPage: BlitzPage = () => (
-  <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
+  <Suspense fallback={<DotsLoadingText>Loading...</DotsLoadingText>}>
     <BuildingPage />
   </Suspense>
 );
