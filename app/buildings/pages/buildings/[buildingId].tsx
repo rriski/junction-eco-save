@@ -1,16 +1,19 @@
-import React, { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
-import { useQuery, useParam, BlitzPage, NotFoundError } from 'blitz';
+import { BlitzPage, NotFoundError, useParam, useQuery } from 'blitz';
 import styled from 'styled-components';
 
 import getBuilding from 'app/buildings/queries/getBuilding';
 import Layout from 'app/layouts/Layout';
 import { Card as OriginalCard } from 'app/styles';
 import { calculateRepairDebt, getImprovable, getOffers } from 'app/utils/buildingScores';
+import { getSavedBuildings } from 'app/utils/localStorage';
 import { AdvancedFucker } from 'components/Fucker';
 import Hero from 'components/Hero';
 import { DotsLoadingText } from 'components/Loaders/Dots';
 import { Map } from 'components/PropertyMap';
+import SaveBuilding from 'components/SaveBuilding';
+import { Building } from 'db';
 import FacadeIcon from 'static/svg/julkisivu.svg';
 import RoofIcon from 'static/svg/kattoremppa.svg';
 import PipesIcon from 'static/svg/putki.svg';
@@ -22,7 +25,16 @@ const getIconFromCategory = (category: 'pipes' | 'facade' | 'roof' | undefined) 
   else return null;
 };
 
-export const Building = () => {
+export const BuildingPage = () => {
+  const [savedBuildings, setSavedBuildings] = useState<Building[]>([]);
+
+  useEffect(() => {
+    const saved = getSavedBuildings();
+    if (saved) {
+      setSavedBuildings(saved);
+    }
+  }, []);
+
   const buildingId = useParam('buildingId', 'number');
   const [building] = useQuery(getBuilding, { where: { id: buildingId } });
   if (!building) throw NotFoundError;
@@ -61,7 +73,14 @@ export const Building = () => {
 
           <Column>
             <Card>
-              <SubTitle>General info</SubTitle>
+              <TitleContainer>
+                <SubTitle>General info</SubTitle>
+                <SaveBuilding
+                  building={building}
+                  savedBuildings={savedBuildings}
+                  setSavedBuildings={setSavedBuildings}
+                />
+              </TitleContainer>
               <DataList>
                 <DataItem>
                   Year of construction: {building?.construction_date?.getFullYear()}
@@ -74,26 +93,34 @@ export const Building = () => {
             </Card>
 
             <AdvancedFucker
+              type="pipe"
               title="Pipe repair debt"
               value={debts.pipes}
               thresholds={debts.thresholds.pipes}
+              includeInfo
             />
             <AdvancedFucker
+              type="facade"
               title="Facade repair debt"
               value={debts.facade}
               thresholds={debts.thresholds.facade}
+              includeInfo
             />
             <AdvancedFucker
+              type="roof"
               title="Roof repair debt"
               value={debts.roof}
               thresholds={debts.thresholds.roof}
+              includeInfo
             />
             {improvable && (
               <AdvancedFucker
+                type="electric"
                 title="Electric improvement potential"
                 value={improvable}
                 thresholds={{ low: 0, high: 30 }}
                 unit="%"
+                includeInfo
               />
             )}
             {offers && (
@@ -132,10 +159,6 @@ export const Building = () => {
     </Layout>
   );
 };
-
-const MainLayout = styled.main`
-  min-height: 100vh;
-`;
 
 const Content = styled.section`
   display: grid;
@@ -273,7 +296,7 @@ const RenovationTitle = styled.h3`
 
 const ShowBuildingPage: BlitzPage = () => (
   <Suspense fallback={<DotsLoadingText>Ladataan...</DotsLoadingText>}>
-    <Building />
+    <BuildingPage />
   </Suspense>
 );
 

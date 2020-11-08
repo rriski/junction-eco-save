@@ -66,6 +66,7 @@ const HeaderBar = styled(Content)`
   display: flex;
   width: 100vw;
   color: ${(p) => p.theme.colors.white};
+  z-index:1000000;
 `;
 
 const HeroLink = styled.a`
