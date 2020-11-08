@@ -21,6 +21,7 @@ const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   padding: ${(p) => p.theme.spacing.small};
+  margin-top: ${(p) => p.theme.spacing.large};
   background-color: ${(p) => p.theme.colors.primary}; ;
 `;
 

@@ -1,8 +1,8 @@
-import { Link } from 'blitz';
 import styled from 'styled-components';
 import { Stack } from 'styled-layout';
 
 import { CONTENT_WIDTH } from 'app/utils/constants';
+import SaveIcon from 'static/svg/save.svg';
 import { Spacing } from 'styles/theme';
 
 export const Page = styled.main`
@@ -69,4 +69,41 @@ export const ButtonLink = styled.a`
   &:hover {
     background-color: ${(p) => p.theme.colors.teal};
   }
+`;
+
+interface CircleButtonProps {
+  readonly small?: boolean;
+}
+
+export const CircleButton = styled.button<CircleButtonProps>`
+  display: flex;
+  width: ${(p) => (p.small ? p.theme.rem(40) : p.theme.rem(50))};
+  height: ${(p) => (p.small ? p.theme.rem(40) : p.theme.rem(50))};
+  align-items: center;
+  justify-content: center;
+
+  padding: ${(p) => p.theme.spacing.small};
+
+  border: 0;
+  background-color: white;
+
+  border-radius: 50%;
+  color: ${(p) => p.theme.colors.grey};
+
+  cursor: pointer;
+  text-align: center;
+  transition-duration: 250ms;
+  transition-property: transform;
+  transition-timing-function: ease;
+
+  :focus {
+    outline: none;
+  }
+`;
+
+export const SaveButton = styled(SaveIcon)<{ selected: boolean }>`
+  color: ${(p) => p.theme.colors[p.selected ? 'red' : 'grey']};
+  cursor: pointer;
+  fill: ${(p) => (p.selected ? p.theme.colors.red : 'transparent')};
+  transition: color 0.1s, fill 0.1s;
 `;
